@@ -1,2 +1,2 @@
-animated-bear
+GoldMiner
 =============
