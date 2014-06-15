@@ -51,6 +51,7 @@ void Game::init() {
 
 	//Path is only valid when program is executed in Eclipse
 	//When executing directly, add "../" in front of path!
+	test_sprite_.setDimensions(200,200);
 	bool succes = test_sprite_.loadFromPPM("assets/graphics/mario.ppm", Sprite::RGBA);
 	if(!succes){
 		cerr << "Error while loading sprite" << endl;

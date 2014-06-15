@@ -22,14 +22,14 @@ bool Sprite::loadFromPPM(const string& filename, Type type){
 	string s;
 	float bitsPerPixel;
 	getline(datei,s);
-	datei >> width_;
-	datei >> height_;
+	datei >> image_width_;
+	datei >> image_height_;
 	datei >> bitsPerPixel;
 
 
 	float* buffer_temp;
-	buffer_temp = new float[width_*height_*type_];
-	for(unsigned int i=0; i< width_*height_; i++){
+	buffer_temp = new float[image_width_*image_height_*type_];
+	for(unsigned int i=0; i< image_width_*image_height_; i++){
 		float r;
 		float g;
 		float b;
@@ -58,6 +58,11 @@ bool Sprite::loadFromPPM(const string& filename, Type type){
 	return true;
 }
 
+
+void Sprite::setDimensions(unsigned int width, unsigned int height){
+	width_ = width;
+	height_ = height;
+}
 
 unsigned int Sprite::getImageWidth() const{
 	return image_width_;
@@ -98,18 +103,18 @@ void Sprite::draw(float x, float y) const{
 	glGenTextures(1, &texHandle);
 	glBindTexture(GL_TEXTURE_2D, texHandle);
 	int glMode = (type_== RGBA) ? GL_RGBA : GL_RGB;
-	glTexImage2D(GL_TEXTURE_2D, 0, glMode, width_, height_, 0, GL_RGBA, GL_FLOAT, buffer_);
+	glTexImage2D(GL_TEXTURE_2D, 0, glMode, image_width_, image_height_, 0, GL_RGBA, GL_FLOAT, buffer_);
 	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 
 	glBegin(GL_QUADS);
 		glTexCoord2f(1.0f, 0.0f);
-		glVertex2f( 100.0,  100.0);
+		glVertex2f( width_,  height_);
 		glTexCoord2f(0.0f, 0.0f);
-		glVertex2f(0.0, 100.0);
+		glVertex2f(0.0, height_);
 		glTexCoord2f(0.0f, 1.0f);
 		glVertex2f( 0.0,0.0);
 		glTexCoord2f(1.0f, 1.0f);
-		glVertex2f( 100.0, 0.0);
+		glVertex2f( width_, 0);
 	glEnd();
 }

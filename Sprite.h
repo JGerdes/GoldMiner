@@ -15,10 +15,10 @@ public:
 	enum Type{RGB = 3, RGBA = 4};
 
 
-	Sprite(Type type = RGB):
+	Sprite(unsigned int width = 0, unsigned int height = 0, Type type = RGB):
 		type_(type),
-		width_(0),
-		height_(0),
+		width_(width),
+		height_(height),
 		image_width_(0),
 		image_height_(0),
 		buffer_(new float[0]){
@@ -31,6 +31,8 @@ public:
 	bool loadFromPPM(const std::string& filename, Type type);
 
 	void draw(float x, float y) const;
+
+	void setDimensions(unsigned int width, unsigned int height);
 
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;
