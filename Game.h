@@ -10,6 +10,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Sprite.h"
+
 
 class Game {
 public:
@@ -25,6 +27,9 @@ private:
 	void run();
 
 	void render();
+
+	//TODO: only for test purposes!
+	Sprite test_sprite_;
 
 
 };

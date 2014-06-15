@@ -49,6 +49,13 @@ void Game::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
+	//Path is only valid when program is executed in Eclipse
+	//When executing directly, add "../" in front of path!
+	bool succes = test_sprite_.loadFromPPM("assets/graphics/mario.ppm", Sprite::RGBA);
+	if(!succes){
+		cerr << "Error while loading sprite" << endl;
+	}
+
 }
 
 
@@ -75,5 +82,10 @@ void Game::render() {
 	glOrtho(0, window_width_, 0, window_height_, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//TODO: render here
+
+	//Only for testing purposes!
+	static int x=0;
+	test_sprite_.draw(x,0);
+	x = ++x > window_width_ ? 0 : x;
+
 }
