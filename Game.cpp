@@ -67,14 +67,20 @@ void Game::init() {
 
 
 void Game::run() {
-
+	glfwSetTime(0);
+	static unsigned int i = 0;
 	cout << "run" << endl;
 	while (!glfwWindowShouldClose(window_)) {
 		glClearColor(1, 1, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		render();
-
+		i++;
+		if(glfwGetTime() > 1){
+			cout << "Zeit: " << glfwGetTime() << "frames: " << i << endl;
+			glfwSetTime(0);
+			i = 0;
+		}
 		glfwSwapBuffers(window_);
 		glfwPollEvents();
 	}
@@ -85,6 +91,10 @@ void Game::run() {
 
 
 void Game::render() {
+
+
+
+
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

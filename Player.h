@@ -22,6 +22,7 @@ public:
 			canMoveLeft(true),
 			canMoveRight(true),
 			canFall(true){
+		InputManager::getInstance().addKeyListener(this);
 
 	}
 	void onKeyUp(int key);
