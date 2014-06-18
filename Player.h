@@ -14,13 +14,16 @@
 class Player: public Entity {
 public:
 	Player(Sprite sprite, Vec2 position, Vec2 dimension) :
-			dimension_(dimension), position_(position), sprite_(sprite) {
-		inpMgr = InputManager::getInstance();
+			Entity(sprite, position, dimension) {
+
 	}
 
 	virtual ~Player();
+
+	virtual void tick();
+
 private:
-	InputManager inpMgr;
+
 };
 
 #endif /* PLAYER_H_ */

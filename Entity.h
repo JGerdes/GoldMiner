@@ -19,13 +19,14 @@ public:
 	virtual void draw() const;
 	virtual Entity& setDimension(Vec2 dim);
 	virtual Entity& setPosition(Vec2 pos);
-	virtual const Vec2& getPosition() const;
+	virtual Vec2 getPosition() const;
 	virtual const Vec2& getDimension() const;
 	virtual void tick();
 
-private:
+protected:
 	Vec2 dimension_;
 	Vec2 position_;
+	Vec2 destination_;
 	Sprite sprite_;
 
 };

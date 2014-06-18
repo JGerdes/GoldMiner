@@ -27,12 +27,12 @@ Entity& Entity::setDimension(Vec2 dim) {
 }
 
 Entity& Entity::setPosition(Vec2 pos) {
-	this->position_ = pos;
+	this->destination_ = pos;
 	return *this;
 }
 
-const Vec2& Entity::getPosition() const {
-	return this->position_;
+Vec2 Entity::getPosition() const {
+	return Vec2(position_);
 }
 
 const Vec2& Entity::getDimension() const {

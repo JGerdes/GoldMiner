@@ -25,6 +25,14 @@ public:
 	}
 	virtual ~Vec2(){}
 
+	double& getX() {
+		return x;
+	}
+
+	double& getY() {
+		return y;
+	}
+
 	double getX() const {
 		return x;
 	}
@@ -43,6 +51,10 @@ public:
 		x -= v.x;
 		y -= v.y;
 		return *this;
+	}
+
+	Vec2& operator-(const Vec2 &v){
+		return *(new Vec2(x-v.x, y-v.y));
 	}
 
 	Vec2& operator *=(double scalar) {

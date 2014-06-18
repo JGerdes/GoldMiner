@@ -78,7 +78,7 @@ string Sprite::getPath() const{
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 	glPushMatrix();
-	glTranslatef(position.getX(), position.getY(), 0);
+	glTranslated(position.getX(), position.getY(), 0);
 	GLuint texHandle = tex_handle_;
 	glGenTextures(1, &texHandle);
 	glBindTexture(GL_TEXTURE_2D, texHandle);
