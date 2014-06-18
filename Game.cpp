@@ -8,6 +8,7 @@
 #include "Game.h"
 #include <iostream>
 #include "Vec2.h"
+#include "InputManager.h"
 
 using namespace std;
 
@@ -49,6 +50,12 @@ void Game::init() {
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+
+	//Callbacks bei GLFW registrieren
+	glfwSetCursorPosCallback(window_, &InputManager::onMouseMove);
+	glfwSetMouseButtonCallback(window_, &InputManager::onButton);
+	glfwSetKeyCallback(window_, &InputManager::onKey);
+	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
 }
 
