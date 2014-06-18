@@ -3,20 +3,6 @@
 
 #include <vector>
 
-
-class Ground{
-	public:
-	Ground(int x, int y){};
-	int getHp(){};
-};
-
-class Player {
-public:
-	Player(){};
-	~Player(){};
-	void setPos(int x, int y){};
-};
-
 class World {
 public:
 	World();
