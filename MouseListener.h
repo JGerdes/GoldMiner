@@ -12,12 +12,12 @@
 
 class MouseListener {
 public:
-	MouseListener();
-	virtual ~MouseListener();
-	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta);
-	virtual void onButtonUp(int button, Vec2 screen_pos);
-	virtual void onButtonDown(int button , Vec2 screen_pos);
-	virtual void onScroll(Vec2 offset);
+	MouseListener(){};
+	virtual ~MouseListener(){}
+	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta)=0;
+	virtual void onButtonUp(int button, Vec2 screen_pos)=0;
+	virtual void onButtonDown(int button , Vec2 screen_pos)=0;
+	virtual void onScroll(Vec2 offset)=0;
 };
 
 #endif /* MOUSELISTENER_H_ */

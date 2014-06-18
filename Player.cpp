@@ -14,18 +14,18 @@ Player::~Player() {
 
 void Player::tick() {
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT)) {
-		this->destination_.getY() += 10;
+		this->destination_.getX() += 1;
 	}
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_LEFT)) {
-		this->destination_.getX() -= 10;
+		this->destination_.getX() -= 1;
 	}
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_UP)) {
-		this->destination_.getY() += 10;
+		this->destination_.getY() += 1;
 	}
 
 	//------GRAVTIY-------
 
-	this->destination_.getY() -= 5;
+//	this->destination_.getY() -= 5;
 
 	this->position_ += (this->destination_ - this->position_) /= 10.0;
 
@@ -33,8 +33,5 @@ void Player::tick() {
 
 	this->position_ += (this->destination_ - this->position_) /= 10.0;
 
-	//-----DRAW-----
-
-	this->draw();
 
 }

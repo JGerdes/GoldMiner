@@ -35,3 +35,7 @@ void Block::onButtonDown(int button , Vec2 screen_pos){
 void Block::onScroll(Vec2 offset){
 
 }
+
+void Block::tick(){
+	//TODO: do stuff
+}

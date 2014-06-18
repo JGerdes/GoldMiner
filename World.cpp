@@ -13,14 +13,14 @@
 
 using namespace std;
 
-World::World(SpriteManager spriteManager):
+World::World(SpriteManager* spriteManager):
 		sprite_manager_(spriteManager),
+		player(new Player(*sprite_manager_->getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(100,100))),
 		collisonRight(false),
 		collisionLeft(false),
 		collisionDown(false),
-		collisionUp(false),
-		player(new Player(*sprite_manager_.getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(100,100))){
-	map = createMap();
+		collisionUp(false){
+			map = createMap();
 }
 
 World::~World(){
@@ -50,7 +50,7 @@ vector<Block*> World::createMap() {
 		for(int i= 0; i< 20; i++) {
 			if(ch[i] == 'x') {
 				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::dirt ,Vec2(100*i,100*rowCount), sprite_manager_.getSprite("assets/graphics/dirt.ppm"));
+				Block* block = new Block(Block::dirt ,Vec2(100*i,100*rowCount), sprite_manager_->getSprite("assets/graphics/dirt.ppm"));
 				map.push_back(block);
 				cout << "new Ground " << 20*i << " " << 20*rowCount << endl;
 			}
@@ -73,8 +73,16 @@ void World::testBlockLife(){
 }
 
 void World::draw(){
-	for(auto block : map){
-		block->draw();
-	}
+
+//	cout << "draw blocks("<< map.size()<< ")" << endl;
+//	unsigned int i=0;
+//	for(auto block : map){
+//		cout << i << endl;
+//		block->draw();
+//		++i;
+//	}
+
+	player->tick();
+	cout << "draw player" << endl;
 	player->draw();
 }

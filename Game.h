@@ -26,7 +26,7 @@ private:
 	double window_width_;
 	double window_height_;
 
-	World* world_;
+
 
 	void init();
 	void run();
@@ -34,7 +34,8 @@ private:
 	void render();
 
 	//TODO: only for test purposes!
-	SpriteManager sprite_manager_;
+	SpriteManager* sprite_manager_;
+	World* world_;
 
 
 };

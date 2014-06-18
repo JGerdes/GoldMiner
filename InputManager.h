@@ -29,7 +29,6 @@ public:
 	static void onButton(GLFWwindow *window, int button, int action, int mods);
 	static void onScroll(GLFWwindow *window, double x_offset, double y_offset);
 
-	InputManager();
 
     void onMouseMoveImpl(GLFWwindow *window, double x, double y);
 	void onKeyImpl(GLFWwindow *window, int key, int scancode, int action, int mods);
@@ -45,6 +44,7 @@ public:
 	void operator=(InputManager const&);
 
 private:
+	InputManager();
     std::tr1::unordered_map<int, bool> keys_;
     std::tr1::unordered_map<int, bool> mouse_buttons_;
 

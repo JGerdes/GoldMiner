@@ -21,7 +21,7 @@ public:
 	virtual Entity& setPosition(Vec2 pos);
 	virtual Vec2 getPosition() const;
 	virtual const Vec2& getDimension() const;
-	virtual void tick();
+	virtual void tick() = 0;
 
 protected:
 	Vec2 dimension_;

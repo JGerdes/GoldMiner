@@ -16,13 +16,13 @@ SpriteManager::SpriteManager() {
 }
 
 SpriteManager::~SpriteManager() {
-	for(auto sprite : sprites_){
+	for(Sprite* sprite : sprites_){
 		delete sprite;
 	}
 }
 
 Sprite* SpriteManager::getSprite(string path){
-	for(auto sprite : sprites_){
+	for(Sprite* sprite : sprites_){
 		if(sprite->getPath() == path){
 			return sprite;
 		}

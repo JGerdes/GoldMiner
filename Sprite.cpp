@@ -77,6 +77,8 @@ string Sprite::getPath() const{
 
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
+
+	cout << "draw sprite :"<< path_ << endl;
 	glPushMatrix();
 	glTranslated(position.getX(), position.getY(), 0);
 	GLuint texHandle = tex_handle_;
@@ -88,13 +90,13 @@ void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
 
 	glBegin(GL_QUADS);
-		glTexCoord2f(1.0f, 0.0f);
-		glVertex2f( dimension.getX(),  dimension.getY());
-		glTexCoord2f(0.0f, 0.0f);
-		glVertex2f(0.0, dimension.getX());
-		glTexCoord2f(0.0f, 1.0f);
-		glVertex2f( 0.0,0.0);
-		glTexCoord2f(1.0f, 1.0f);
-		glVertex2f( dimension.getY(), 0);
+		glTexCoord2d(1.0f, 0.0f);
+		glVertex2d( 100,  100);
+		glTexCoord2d(0.0f, 0.0f);
+		glVertex2d(0.0, 100);
+		glTexCoord2d(0.0f, 1.0f);
+		glVertex2d( 0.0,0.0);
+		glTexCoord2d(1.0f, 1.0f);
+		glVertex2d( 100, 0);
 	glEnd();
 }

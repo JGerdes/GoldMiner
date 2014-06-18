@@ -6,6 +6,9 @@
  */
 
 #include "Entity.h"
+#include "iostream"
+
+using namespace std;
 
 Entity::Entity(Sprite sprite, Vec2 position, Vec2 dimension) :
 		dimension_(dimension),
@@ -18,6 +21,7 @@ Entity::~Entity(){
 }
 
 void Entity::draw() const {
+	cout << "draw entity" << endl;
 	sprite_.draw(position_, dimension_);
 }
 

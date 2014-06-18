@@ -16,7 +16,7 @@ public:
 	enum Type{RGB = 3, RGBA = 4};
 
 
-	Sprite(unsigned int tex_handle, Type type = RGB):
+	Sprite(unsigned int tex_handle, Type type = RGBA):
 		type_(type),
 		width_(0),
 		height_(0),

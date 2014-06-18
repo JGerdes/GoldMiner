@@ -11,7 +11,7 @@ class Block;
 
 class World {
 public:
-	World(SpriteManager spriteManager);
+	World(SpriteManager* spriteManager);
 	~World();
 	std::vector<Block*> createMap();
 	void update();
@@ -19,7 +19,7 @@ public:
 	void testBlockLife();
 	void testCollision();
 private:
-	SpriteManager sprite_manager_;
+	SpriteManager* sprite_manager_;
 	Player* player;
 	std::vector<Block*> map;
 	bool collisonRight, collisionLeft, collisionDown, collisionUp;
