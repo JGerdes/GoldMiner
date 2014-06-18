@@ -5,6 +5,7 @@
 #include "Block.h"
 #include "Player.h"
 #include "SpriteManager.h"
+#include <string>
 
 class Player;
 class Block;
@@ -13,7 +14,7 @@ class World {
 public:
 	World(SpriteManager* spriteManager);
 	~World();
-	std::vector<Block*> createMap();
+	void readMap(std::string fileName);
 	void update();
 	void draw();
 	void testBlockLife();
@@ -21,7 +22,7 @@ public:
 private:
 	SpriteManager* sprite_manager_;
 	Player* player;
-	std::vector<Block*> map;
+	std::vector<Block*>* map;
 	bool collisonRight, collisionLeft, collisionDown, collisionUp;
 };
 

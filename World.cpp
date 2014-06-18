@@ -11,47 +11,43 @@
 #include <iostream>
 #include <sstream>
 
+
 using namespace std;
 
 World::World(SpriteManager* spriteManager):
 		sprite_manager_(spriteManager),
 		player(new Player(*sprite_manager_->getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(100,100))),
+		map(new vector<Block*>()),
 		collisonRight(false),
 		collisionLeft(false),
 		collisionDown(false),
 		collisionUp(false){
-			map = createMap();
+	this->readMap("map.txt");
 }
 
 World::~World(){
-	for(auto block : map){
-		delete block;
-	}
+//	size_t i = 0;
+//	for(auto block : this->map){
+//		delete block;
+//		cout << i++ << endl;
+//	}
 	delete player;
 }
 
-vector<Block*> World::createMap() {
-	vector<Block*> map;
-	ifstream quelle("map.txt");
+void World::readMap(string fileName) {
+	ifstream quelle(fileName);
 	int rowCount = 0;
 
 	if (!quelle) {
 			cerr << "map.txt kann nicht geöffnet werden!\n";
 	}
-
-	while (true) {
-		char ch[21];
-		quelle.getline(ch, sizeof(ch));
-
-		if (ch[0] == '#') {
-			break;
-		}
-
+	char ch[21];
+	while (quelle.getline(ch, sizeof(ch))) {
 		for(int i= 0; i< 20; i++) {
 			if(ch[i] == 'x') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::dirt ,Vec2(100*i,100*rowCount), sprite_manager_->getSprite("assets/graphics/dirt.ppm"));
-				map.push_back(block);
+				map->push_back(block);
 				cout << "new Ground " << 20*i << " " << 20*rowCount << endl;
 			}
 			if(ch[i] == 's') {
@@ -61,7 +57,6 @@ vector<Block*> World::createMap() {
 		}
 		rowCount++;
 	}
-	return map;
 }
 
 void World::testBlockLife(){
