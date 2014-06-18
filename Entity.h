@@ -24,14 +24,22 @@ public:
 		return *this;
 	}
 
-	virtual Entity& setDimension(Vec2 dim){
+	virtual Entity& setDimension(Vec2 dim) {
 		this->dimension_ = dim;
 		return *this;
 	}
 
-	virtual Entity& setPosition(Vec2 pos){
+	virtual Entity& setPosition(Vec2 pos) {
 		this->position_ = pos;
 		return *this;
+	}
+
+	virtual const Vec2 getPosition() const {
+		return this->position_;
+	}
+
+	virtual const Vec2 getDimension() const {
+		return this->dimension_;
 	}
 
 private:
