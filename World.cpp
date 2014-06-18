@@ -17,11 +17,7 @@ using namespace std;
 World::World(SpriteManager* spriteManager):
 		sprite_manager_(spriteManager),
 		player(new Player(sprite_manager_->getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(1280.0/16,720.0/9))),
-		map(new vector<Block*>()),
-		collisonRight(false),
-		collisionLeft(false),
-		collisionDown(false),
-		collisionUp(false){
+		map(new vector<Block*>()){
 	cout << "readmap" << endl;
 	this->readMap("map.txt");
 }
@@ -73,6 +69,10 @@ void World::testBlockLife(){
 //	}
 }
 
+void World::tick(){
+	player->tick();
+}
+
 void World::draw(){
 
 	//cout << "draw blocks("<< map->size()<< ")" << endl;
@@ -80,7 +80,7 @@ void World::draw(){
 		block->draw();
 	}
 
-	player->tick();
+
 	//cout << "draw player" << endl;
 	player->draw();
 }

@@ -15,7 +15,7 @@ public:
 	World(SpriteManager* spriteManager);
 	~World();
 	void readMap(std::string fileName);
-	void update();
+	void tick();
 	void draw();
 	void testBlockLife();
 	void testCollision();
@@ -23,7 +23,6 @@ private:
 	SpriteManager* sprite_manager_;
 	Player* player;
 	std::vector<Block*>* map;
-	bool collisonRight, collisionLeft, collisionDown, collisionUp;
 };
 
 
