@@ -10,7 +10,7 @@
 
 #include <GLFW/glfw3.h>
 
-#include "Sprite.h"
+#include "SpriteManager.h"
 
 
 class Game {
@@ -29,7 +29,7 @@ private:
 	void render();
 
 	//TODO: only for test purposes!
-	Sprite test_sprite_;
+	SpriteManager sprite_manager_;
 
 
 };

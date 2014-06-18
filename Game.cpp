@@ -7,6 +7,7 @@
 
 #include "Game.h"
 #include <iostream>
+#include "Vec2.h"
 
 using namespace std;
 
@@ -49,14 +50,6 @@ void Game::init() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
-	//Path is only valid when program is executed in Eclipse
-	//When executing directly, add "../" in front of path!
-	test_sprite_.setDimensions(200,200);
-	bool succes = test_sprite_.loadFromPPM("assets/graphics/mario.ppm", Sprite::RGBA);
-	if(!succes){
-		cerr << "Error while loading sprite" << endl;
-	}
-
 }
 
 
@@ -86,7 +79,8 @@ void Game::render() {
 
 	//Only for testing purposes!
 	static int x=0;
-	test_sprite_.draw(x,0);
+	//Path is only valid when program is executed in Eclipse
+	sprite_manager_.getSprite("assets/graphics/mario.ppm")->draw(Vec2(x,0),Vec2(200,200));
 	x = ++x > window_width_ ? 0 : x;
 
 }

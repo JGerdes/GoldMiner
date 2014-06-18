@@ -9,19 +9,20 @@
 #define SPRITE_H_
 
 #include <string>
+#include "Vec2.h"
 
 class Sprite {
 public:
 	enum Type{RGB = 3, RGBA = 4};
 
 
-	Sprite(unsigned int width = 0, unsigned int height = 0, Type type = RGB):
+	Sprite(unsigned int tex_handle, Type type = RGB):
 		type_(type),
-		width_(width),
-		height_(height),
-		image_width_(0),
-		image_height_(0),
-		buffer_(new float[0]){
+		width_(0),
+		height_(0),
+		buffer_(new float[0]),
+		tex_handle_(tex_handle),
+		path_(""){
 	}
 
 	virtual ~Sprite(){
@@ -30,26 +31,21 @@ public:
 
 	bool loadFromPPM(const std::string& filename, Type type);
 
-	void draw(float x, float y) const;
-
-	void setDimensions(unsigned int width, unsigned int height);
+	void draw(const Vec2& position, const Vec2& dimension) const;
 
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;
-	unsigned int getImageWidth() const;
-	unsigned int getImageHeight() const;
 	const float* getBuffer() const;
+	std::string getPath() const;
 
 
 private:
 	Type type_;
 	unsigned int width_;
 	unsigned int height_;
-	unsigned int image_width_;
-	unsigned int image_height_;
 	float* buffer_;
-
-	unsigned int nextPowerOf2(unsigned int n);
+	unsigned int tex_handle_;
+	std::string path_;
 };
 
 #endif /* SPRITE_H_ */

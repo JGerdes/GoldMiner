@@ -23,7 +23,7 @@ public:
 	Vec2(const Vec2 &v) :
 			x(v.x), y(v.y) {
 	}
-	virtual ~Vec2();
+	virtual ~Vec2(){}
 
 	double getX() const {
 		return x;
