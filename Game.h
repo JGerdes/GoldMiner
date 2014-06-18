@@ -9,7 +9,7 @@
 #define GAME_H_
 
 #include <GLFW/glfw3.h>
-
+#include "Player.h"
 #include "SpriteManager.h"
 
 
@@ -22,6 +22,7 @@ private:
 	GLFWwindow* window_;
 	double window_width_;
 	double window_height_;
+
 
 	void init();
 	void run();

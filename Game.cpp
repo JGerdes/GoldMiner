@@ -10,7 +10,11 @@
 #include "Vec2.h"
 #include "InputManager.h"
 
+
 using namespace std;
+
+
+
 
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr),
@@ -45,6 +49,7 @@ Game::~Game() {
 }
 
 void Game::init() {
+
 
 	glViewport(0, 0, window_width_, window_height_);
 	glEnable(GL_TEXTURE_2D);
@@ -84,10 +89,13 @@ void Game::render() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//Only for testing purposes!
-	static int x=0;
-	//Path is only valid when program is executed in Eclipse
-	sprite_manager_.getSprite("assets/graphics/mario.ppm")->draw(Vec2(x,0),Vec2(200,200));
-	x = ++x > window_width_ ? 0 : x;
+	player.tick();
+
+
+//	//Only for testing purposes!
+//	static int x=0;
+//	//Path is only valid when program is executed in Eclipse
+//	sprite_manager_.getSprite("assets/graphics/mario.ppm")->draw(Vec2(x,0),Vec2(200,200));
+//	x = ++x > window_width_ ? 0 : x;
 
 }
