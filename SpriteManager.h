@@ -14,6 +14,7 @@
 
 class SpriteManager {
 public:
+
 	SpriteManager();
 	virtual ~SpriteManager();
 

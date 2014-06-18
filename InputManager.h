@@ -11,15 +11,7 @@
 #include <tr1/unordered_map>
 #include <vector>
 #include "Game.h"
-
-class MouseListener{
-public:
-	virtual ~MouseListener(){};
-	virtual void onMouseMove(float x, float y, float dx, float dy);
-	virtual void onButtonUp(int button);
-	virtual void onButtonDown(int button);
-	virtual void onScroll(double x_offset, double y_offset);
-};
+#include "MouseListener.h"
 
 class KeyListener{
 public:
@@ -37,6 +29,8 @@ public:
 	static void onButton(GLFWwindow *window, int button, int action, int mods);
 	static void onScroll(GLFWwindow *window, double x_offset, double y_offset);
 
+	InputManager();
+
     void onMouseMoveImpl(GLFWwindow *window, double x, double y);
 	void onKeyImpl(GLFWwindow *window, int key, int scancode, int action, int mods);
 	void onButtonImpl(GLFWwindow *window, int button, int action, int mods);
@@ -47,6 +41,9 @@ public:
 	bool isKeyDown(int key);
 	bool isButtonDown(int button);
 
+	InputManager(InputManager const&);
+	void operator=(InputManager const&);
+
 private:
     std::tr1::unordered_map<int, bool> keys_;
     std::tr1::unordered_map<int, bool> mouse_buttons_;
@@ -54,11 +51,10 @@ private:
     std::vector<MouseListener*> mouse_listeners_;
     std::vector<KeyListener*> key_listeners_;
 
+    double last_x = 0;
+	double last_y = 0;
 
-    InputManager(){}
 
-    InputManager(InputManager const&);
-    void operator=(InputManager const&);
 };
 
 #endif /* INPUTMANAGER_H_ */

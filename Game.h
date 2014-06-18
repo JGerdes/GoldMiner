@@ -11,6 +11,9 @@
 #include <GLFW/glfw3.h>
 #include "Player.h"
 #include "SpriteManager.h"
+#include "World.h"
+
+class World;
 
 
 class Game {
@@ -23,6 +26,7 @@ private:
 	double window_width_;
 	double window_height_;
 
+	World* world_;
 
 	void init();
 	void run();

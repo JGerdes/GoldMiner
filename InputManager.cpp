@@ -9,6 +9,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "InputManager.h"
+#include "Vec2.h"
 #include <stdexcept>
 
 using namespace std;
@@ -32,11 +33,16 @@ void InputManager::onScroll(GLFWwindow *window, double x_offset, double y_offset
 	InputManager::getInstance().onScrollImpl(window, x_offset, y_offset);
 }
 
+
+InputManager::InputManager():
+		last_x(0),
+		last_y(0){
+
+}
+
 void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
-	static double last_x = 0;
-	static double last_y = 0;
 	for(auto listener : mouse_listeners_){
-		listener->onMouseMove(x, y, last_x, last_y);
+		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
 	}
 	last_x = x;
 	last_y = y;
@@ -66,17 +72,17 @@ void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int 
 	}
 	for(auto listener : mouse_listeners_){
 		if(action == GLFW_PRESS){
-			listener->onButtonDown(button);
+			listener->onButtonDown(button, Vec2(last_x, last_y) );
 		}
 		if(action == GLFW_RELEASE){
-			listener->onButtonUp(button);
+			listener->onButtonUp(button, Vec2(last_x, last_y));
 		}
 	}
 }
 
 void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_offset){
 	for(auto listener : mouse_listeners_){
-		listener->onScroll(x_offset, y_offset);
+		listener->onScroll(Vec2(x_offset, y_offset));
 	}
 }
 

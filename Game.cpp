@@ -19,7 +19,8 @@ using namespace std;
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr),
 		window_width_(width),
-		window_height_(height){
+		window_height_(height),
+		world_(new World(sprite_manager_)){
 
 	cout << "Game started" << endl;
 
@@ -45,7 +46,7 @@ Game::Game(double width = 1280, double height = 720) :
 }
 
 Game::~Game() {
-	// TODO Auto-generated destructor stub
+	delete world_;
 }
 
 void Game::init() {
@@ -89,13 +90,6 @@ void Game::render() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	player.tick();
-
-
-//	//Only for testing purposes!
-//	static int x=0;
-//	//Path is only valid when program is executed in Eclipse
-//	sprite_manager_.getSprite("assets/graphics/mario.ppm")->draw(Vec2(x,0),Vec2(200,200));
-//	x = ++x > window_width_ ? 0 : x;
+	world_->draw();
 
 }

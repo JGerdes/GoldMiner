@@ -1,19 +1,27 @@
-#ifndef CONTROL_H_
-#define CONTROL_H_
+#ifndef WORLD_H_
+#define WORLD_H_
 
 #include <vector>
+#include "Block.h"
+#include "Player.h"
+#include "SpriteManager.h"
+
+class Player;
+class Block;
 
 class World {
 public:
-	World();
-	~World(){};
-	std::vector<Ground> createMap();
+	World(SpriteManager spriteManager);
+	~World();
+	std::vector<Block*> createMap();
 	void update();
+	void draw();
 	void testBlockLife();
 	void testCollision();
 private:
-	Player player;
-	std::vector<Ground> map;
+	SpriteManager sprite_manager_;
+	Player* player;
+	std::vector<Block*> map;
 	bool collisonRight, collisionLeft, collisionDown, collisionUp;
 };
 
@@ -22,4 +30,4 @@ private:
 
 
 
-#endif /* CONTROL_H_ */
+#endif /* WORLD_H_ */

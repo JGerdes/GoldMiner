@@ -11,6 +11,7 @@ Player::~Player() {
 	// TODO Auto-generated destructor stub
 }
 
+
 void Player::tick() {
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT)) {
 		this->destination_.getY() += 10;
