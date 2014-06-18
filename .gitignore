@@ -21,3 +21,4 @@
 *.app
 /Debug
 .settings/org.eclipse.cdt.managedbuilder.core.prefs
+.cproject
