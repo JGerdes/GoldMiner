@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Entity::Entity(Sprite sprite, Vec2 position, Vec2 dimension) :
+Entity::Entity(Sprite* sprite, Vec2 position, Vec2 dimension) :
 		dimension_(dimension),
 		position_(position),
 		sprite_(sprite) {
@@ -21,8 +21,7 @@ Entity::~Entity(){
 }
 
 void Entity::draw() const {
-	cout << "draw entity" << endl;
-	sprite_.draw(position_, dimension_);
+	sprite_->draw(position_, dimension_);
 }
 
 Entity& Entity::setDimension(Vec2 dim) {

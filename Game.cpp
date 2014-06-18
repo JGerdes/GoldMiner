@@ -13,15 +13,12 @@
 
 using namespace std;
 
-
-
-
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr),
 		window_width_(width),
 		window_height_(height),
 		sprite_manager_(new SpriteManager()),
-		world_(new World(sprite_manager_)){ //
+		world_(nullptr){ //
 
 	cout << "Game started" << endl;
 
@@ -65,6 +62,7 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
+	world_ = new World(sprite_manager_);
 }
 
 
@@ -88,17 +86,11 @@ void Game::run() {
 
 void Game::render() {
 
-
-	cout << "render" << endl;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, window_width_, 0, window_height_, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-//	static Sprite sprite(1, Sprite::RGBA);
-//	sprite.loadFromPPM("assets/graphics/mario.ppm", Sprite::RGBA);
-//	sprite.draw(Vec2(0,0), Vec2(100,100));
 	world_->draw();
-
 }

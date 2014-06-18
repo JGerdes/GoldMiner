@@ -13,7 +13,7 @@
 
 class Player: public Entity {
 public:
-	Player(Sprite sprite, Vec2 position, Vec2 dimension) :
+	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
 			Entity(sprite, position, dimension) {
 
 	}

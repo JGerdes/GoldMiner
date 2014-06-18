@@ -9,12 +9,11 @@
 
 #include <fstream>
 #include <iostream>
-#include <GLFW/glfw3.h>
+
 
 using namespace std;
 
-bool Sprite::loadFromPPM(const string& filename, Type type){
-	type_ = type;
+bool Sprite::loadFromPPM(const string& filename){
 	ifstream datei(filename);
 	if(!datei){
 		return false;
@@ -28,7 +27,7 @@ bool Sprite::loadFromPPM(const string& filename, Type type){
 
 
 	float* buffer_temp;
-	buffer_temp = new float[width_*height_*type_];
+	buffer_temp = new float[width_*height_*4];
 	for(unsigned int i=0; i< width_*height_; i++){
 		float r;
 		float g;
@@ -42,13 +41,11 @@ bool Sprite::loadFromPPM(const string& filename, Type type){
 		buffer_temp[4*i+1] = g/bitsPerPixel;
 		buffer_temp[4*i+2] = b/bitsPerPixel;
 
-		if(type_ == RGBA){
 			//TODO: use other color for transparent pixel instead of black
-			if(r==0 && g==0 && b==0){
-				buffer_temp[4*i+3] =0;
-			}else{
-				buffer_temp[4*i+3] =1;
-			}
+		if(r==0 && g==0 && b==0){
+			buffer_temp[4*i+3] =0;
+		}else{
+			buffer_temp[4*i+3] =1;
 		}
 	}
 	if(buffer_ != nullptr){
@@ -56,6 +53,17 @@ bool Sprite::loadFromPPM(const string& filename, Type type){
 	}
 	buffer_ = buffer_temp;
 	path_ = filename;
+
+	glGenTextures(1, &tex_handle_);
+	glBindTexture(GL_TEXTURE_2D, tex_handle_);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_FLOAT, buffer_);
+	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+
+	cout << "load sprite :"<< path_ << endl;
+	cout << "TextHandle load: [" << tex_handle_<< "]" << endl;
+
+
 	return true;
 }
 
@@ -78,25 +86,19 @@ string Sprite::getPath() const{
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
-	cout << "draw sprite :"<< path_ << endl;
 	glPushMatrix();
-	glTranslated(position.getX(), position.getY(), 0);
-	GLuint texHandle = tex_handle_;
-	glGenTextures(1, &texHandle);
-	glBindTexture(GL_TEXTURE_2D, texHandle);
-	int glMode = (type_== RGBA) ? GL_RGBA : GL_RGB;
-	glTexImage2D(GL_TEXTURE_2D, 0, glMode, width_, height_, 0, GL_RGBA, GL_FLOAT, buffer_);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+	glTranslated(position.getX(), 720-position.getY()-dimension.getY(), 0);
+	glBindTexture(GL_TEXTURE_2D, tex_handle_);
 
 	glBegin(GL_QUADS);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex2d( 100,  100);
+		glVertex2d( dimension.getX(),  dimension.getY());
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex2d(0.0, 100);
+		glVertex2d(0.0, dimension.getY());
 		glTexCoord2d(0.0f, 1.0f);
 		glVertex2d( 0.0,0.0);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex2d( 100, 0);
+		glVertex2d( dimension.getX(), 0);
 	glEnd();
+	glPopMatrix();
 }

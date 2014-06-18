@@ -16,12 +16,13 @@ using namespace std;
 
 World::World(SpriteManager* spriteManager):
 		sprite_manager_(spriteManager),
-		player(new Player(*sprite_manager_->getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(100,100))),
+		player(new Player(sprite_manager_->getSprite("assets/graphics/mario.ppm"),Vec2(0,0),  Vec2(1280.0/16,720.0/9))),
 		map(new vector<Block*>()),
 		collisonRight(false),
 		collisionLeft(false),
 		collisionDown(false),
 		collisionUp(false){
+	cout << "readmap" << endl;
 	this->readMap("map.txt");
 }
 
@@ -41,22 +42,27 @@ void World::readMap(string fileName) {
 	if (!quelle) {
 			cerr << "map.txt kann nicht geöffnet werden!\n";
 	}
-	char ch[21];
+	char ch[17];
+	for(int i= 0; i< 16; i++) {
+		ch[i] = ' ';
+	}
 	while (quelle.getline(ch, sizeof(ch))) {
-		for(int i= 0; i< 20; i++) {
+		for(int i= 0; i< 16; i++) {
 			if(ch[i] == 'x') {
 				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::dirt ,Vec2(100*i,100*rowCount), sprite_manager_->getSprite("assets/graphics/dirt.ppm"));
+				Block* block = new Block(Block::dirt ,Vec2((1280.0/16)*i,(720.0/9)*rowCount), sprite_manager_->getSprite("assets/graphics/dirt.ppm"));
 				map->push_back(block);
-				cout << "new Ground " << 20*i << " " << 20*rowCount << endl;
+				cout << "new Ground " <<(1280.0/16)*i << " ," << (720.0/9)*rowCount << endl;
 			}
 			if(ch[i] == 's') {
-				player->setPosition(Vec2(20*i,20*rowCount));
+				player->setPosition(Vec2((1280.0/16)*i,(720.0/9)*rowCount));
 				cout << "Player Pos " << 20*i << " " << 20*rowCount << endl;
 			}
+			ch[i] = ' ';
 		}
 		rowCount++;
 	}
+	cout << "rowcount:" << rowCount << endl;
 }
 
 void World::testBlockLife(){
@@ -69,15 +75,12 @@ void World::testBlockLife(){
 
 void World::draw(){
 
-//	cout << "draw blocks("<< map.size()<< ")" << endl;
-//	unsigned int i=0;
-//	for(auto block : map){
-//		cout << i << endl;
-//		block->draw();
-//		++i;
-//	}
+	//cout << "draw blocks("<< map->size()<< ")" << endl;
+	for(auto block : *map){
+		block->draw();
+	}
 
 	player->tick();
-	cout << "draw player" << endl;
+	//cout << "draw player" << endl;
 	player->draw();
 }

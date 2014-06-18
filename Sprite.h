@@ -10,14 +10,13 @@
 
 #include <string>
 #include "Vec2.h"
+#include <GLFW/glfw3.h>
 
 class Sprite {
 public:
-	enum Type{RGB = 3, RGBA = 4};
 
 
-	Sprite(unsigned int tex_handle, Type type = RGBA):
-		type_(type),
+	Sprite(unsigned int tex_handle):
 		width_(0),
 		height_(0),
 		buffer_(new float[0]),
@@ -29,7 +28,7 @@ public:
 		delete[] buffer_;
 	}
 
-	bool loadFromPPM(const std::string& filename, Type type);
+	bool loadFromPPM(const std::string& filename);
 
 	void draw(const Vec2& position, const Vec2& dimension) const;
 
@@ -40,11 +39,10 @@ public:
 
 
 private:
-	Type type_;
 	unsigned int width_;
 	unsigned int height_;
 	float* buffer_;
-	unsigned int tex_handle_;
+	GLuint tex_handle_;
 	std::string path_;
 };
 

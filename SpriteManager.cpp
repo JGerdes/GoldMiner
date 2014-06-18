@@ -22,13 +22,13 @@ SpriteManager::~SpriteManager() {
 }
 
 Sprite* SpriteManager::getSprite(string path){
-	for(Sprite* sprite : sprites_){
-		if(sprite->getPath() == path){
-			return sprite;
-		}
-	}
-	Sprite* sprite = new Sprite(sprites_.size(), Sprite::RGBA);
-	if(sprite->loadFromPPM(path, Sprite::RGBA)){
+//	for(Sprite* sprite : sprites_){
+//		if(sprite->getPath() == path){
+//			return sprite;
+//		}
+//	}
+	Sprite* sprite = new Sprite(sprites_.size());
+	if(sprite->loadFromPPM(path)){
 		sprites_.push_back(sprite);
 		return sprite;
 	}else{
@@ -36,5 +36,7 @@ Sprite* SpriteManager::getSprite(string path){
 		cerr << "Error while loading sprite @"<< path << endl;
 		return nullptr;
 	}
+
+
 
 }

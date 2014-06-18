@@ -13,7 +13,7 @@
 
 class Entity {
 public:
-	Entity(Sprite sprite, Vec2 position, Vec2 dimension);
+	Entity(Sprite* sprite, Vec2 position, Vec2 dimension);
 	virtual ~Entity();
 
 	virtual void draw() const;
@@ -27,7 +27,7 @@ protected:
 	Vec2 dimension_;
 	Vec2 position_;
 	Vec2 destination_;
-	Sprite sprite_;
+	Sprite* sprite_;
 
 };
 
