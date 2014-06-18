@@ -10,14 +10,13 @@
 
 #include <tr1/unordered_map>
 #include <vector>
-#include "Game.h"
 #include "MouseListener.h"
 
 class KeyListener{
 public:
 	virtual ~KeyListener(){};
-	virtual void onKeyUp(int key);
-	virtual void onKeyDown(int key);
+	virtual void onKeyUp(int key)=0;
+	virtual void onKeyDown(int key)=0;
 };
 
 class InputManager {
@@ -35,8 +34,8 @@ public:
 	void onButtonImpl(GLFWwindow *window, int button, int action, int mods);
 	void onScrollImpl(GLFWwindow *window, double x_offset, double y_offset);
 
-	void addMouseMoveListener(KeyListener listener);
-	void addKeyListener(KeyListener listener);
+	void addMouseMoveListener(const KeyListener& listener);
+	void addKeyListener(const KeyListener& listener);
 	bool isKeyDown(int key);
 	bool isButtonDown(int button);
 

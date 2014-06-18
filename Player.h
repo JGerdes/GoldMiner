@@ -1,4 +1,7 @@
 /*
+void Player::onKeyDown(int key){
+
+}
  * Player.h
  *
  *  Created on: 18.06.2014
@@ -11,7 +14,7 @@
 #include "Entity.h"
 #include "InputManager.h"
 
-class Player: public Entity, KeyListener {
+class Player: public Entity, public KeyListener {
 public:
 	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
 			Entity(sprite, position, dimension),
@@ -21,8 +24,8 @@ public:
 			canFall(true){
 
 	}
-	virtual void onKeyUp(int key);
-	virtual void onKeyDown(int key);
+	void onKeyUp(int key);
+	void onKeyDown(int key);
 
 	virtual ~Player();
 
