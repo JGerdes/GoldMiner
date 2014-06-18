@@ -41,7 +41,7 @@ InputManager::InputManager():
 }
 
 void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
-	for(auto listener : mouse_listeners_){
+	for(MouseListener* listener : mouse_listeners_){
 		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
 	}
 	last_x = x;
@@ -54,7 +54,7 @@ void InputManager::onKeyImpl(GLFWwindow *window, int key, int scancode, int acti
 	}else{
 		keys_[key] = false;
 	}
-	for(auto listener : key_listeners_){
+	for(KeyListener* listener : key_listeners_){
 		if(action == GLFW_PRESS){
 			listener->onKeyDown(key);
 		}
@@ -70,7 +70,7 @@ void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int 
 	}else{
 		mouse_buttons_[button] = false;
 	}
-	for(auto listener : mouse_listeners_){
+	for(MouseListener* listener : mouse_listeners_){
 		if(action == GLFW_PRESS){
 			listener->onButtonDown(button, Vec2(last_x, last_y) );
 		}
@@ -81,7 +81,7 @@ void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int 
 }
 
 void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_offset){
-	for(auto listener : mouse_listeners_){
+	for(MouseListener* listener : mouse_listeners_){
 		listener->onScroll(Vec2(x_offset, y_offset));
 	}
 }
@@ -102,5 +102,13 @@ bool InputManager::isButtonDown(int button){
 	}catch (const std::out_of_range& oor) {
 		return false;
 	}
+}
+
+void InputManager::addMouseListener(MouseListener* listener){
+	mouse_listeners_.push_back(listener);
+}
+
+void InputManager::addKeyListener(KeyListener* listener){
+	key_listeners_.push_back(listener);
 }
 
