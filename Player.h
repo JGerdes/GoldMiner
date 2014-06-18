@@ -18,10 +18,10 @@ class Player: public Entity, public KeyListener {
 public:
 	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
 			Entity(sprite, position, dimension),
-			canJump(true),
-			canMoveLeft(true),
-			canMoveRight(true),
-			canFall(true){
+			canJump_(true),
+			canMoveLeft_(true),
+			canMoveRight_(true),
+			canFall_(true){
 		InputManager::getInstance().addKeyListener(this);
 
 	}
@@ -29,12 +29,13 @@ public:
 	void onKeyDown(int key);
 
 	virtual ~Player();
-
 	virtual void tick();
+
+	void setMoveables(bool canJump, bool canMoveLeft, bool canMoveRight, bool canFall);
 
 private:
 
-	bool canJump, canMoveLeft, canMoveRight, canFall;
+	bool canJump_, canMoveLeft_, canMoveRight_, canFall_;
 };
 
 #endif /* PLAYER_H_ */

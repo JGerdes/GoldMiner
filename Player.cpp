@@ -26,19 +26,27 @@ void Player::onKeyUp(int key){
 
 }
 
+void Player::setMoveables(bool canJump, bool canMoveLeft, bool canMoveRight, bool canFall){
+	this->canFall_ = canFall;
+	this->canJump_ = canJump;
+	this->canMoveLeft_ = canMoveLeft;
+	this->canMoveRight_ = canMoveRight;
+}
+
 
 void Player::tick() {
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT)) {
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT) && this->canMoveRight_) {
 		this->destination_.getX() += 10;
 	}
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_LEFT)) {
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_LEFT)&& this->canMoveLeft_) {
 		this->destination_.getX() -= 10;
 	}
 
 
 	//------GRAVTIY-------
-
-	this->destination_.getY() += 1;
+	if(this->canFall_){
+		this->destination_.getY() += 2;
+	}
 
 	//-----UPDATE POSITION -------
 

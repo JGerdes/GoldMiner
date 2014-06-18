@@ -21,8 +21,8 @@ public:
 	void testCollision();
 private:
 	SpriteManager* sprite_manager_;
-	Player* player;
-	std::vector<Block*>* map;
+	Player* player_;
+	std::vector<Block*>* map_;
 };
 
 

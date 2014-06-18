@@ -80,7 +80,7 @@ void Game::run() {
 		render();
 		i++;
 		if(glfwGetTime() > 1){
-			cout << "Zeit: " << glfwGetTime() << "frames: " << i << endl;
+			cout << "Zeit: " << glfwGetTime() << " frames: " << i << endl;
 			glfwSetTime(0);
 			i = 0;
 		}
