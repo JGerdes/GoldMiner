@@ -13,34 +13,15 @@
 
 class Entity {
 public:
-	Entity(Sprite sprite, Vec2 position, Vec2 dimension) :
-			dimension_(dimension), position_(position), sprite_(sprite) {
-	}
-
+	Entity(Sprite sprite, Vec2 position, Vec2 dimension);
 	virtual ~Entity();
 
-	virtual Entity& draw() const {
-		sprite_.draw(position_, dimension_);
-		return *this;
-	}
-
-	virtual Entity& setDimension(Vec2 dim) {
-		this->dimension_ = dim;
-		return *this;
-	}
-
-	virtual Entity& setPosition(Vec2 pos) {
-		this->position_ = pos;
-		return *this;
-	}
-
-	virtual const Vec2 getPosition() const {
-		return this->position_;
-	}
-
-	virtual const Vec2 getDimension() const {
-		return this->dimension_;
-	}
+	virtual void draw() const;
+	virtual Entity& setDimension(Vec2 dim);
+	virtual Entity& setPosition(Vec2 pos);
+	virtual const Vec2& getPosition() const;
+	virtual const Vec2& getDimension() const;
+	virtual void tick();
 
 private:
 	Vec2 dimension_;
