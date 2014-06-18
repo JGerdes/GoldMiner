@@ -11,12 +11,18 @@
 #include "Entity.h"
 #include "InputManager.h"
 
-class Player: public Entity {
+class Player: public Entity, KeyListener {
 public:
 	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
-			Entity(sprite, position, dimension) {
+			Entity(sprite, position, dimension),
+			canJump(true),
+			canMoveLeft(true),
+			canMoveRight(true),
+			canFall(true){
 
 	}
+	virtual void onKeyUp(int key);
+	virtual void onKeyDown(int key);
 
 	virtual ~Player();
 
@@ -24,6 +30,7 @@ public:
 
 private:
 
+	bool canJump, canMoveLeft, canMoveRight, canFall;
 };
 
 #endif /* PLAYER_H_ */
