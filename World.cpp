@@ -32,12 +32,20 @@ World::~World() {
 	delete player_;
 }
 
+void World::onKeyDown(int key) {
+
+}
+
+void World::onKeyUp(int key) {
+
+}
+
 void World::testCollision() {
 
-	bool left, right, top, bottom;
-	left = right = top = bottom = true;
+	Block* left, *right, *top, *bottom;
+	left = right = top = bottom = nullptr;
 
-	for (auto block : *map_) {
+	for (Block* block : *map_) {
 
 		double bx, by, bw, bh, px, py, pw, ph;
 		bx = block->getPosition().getX();
@@ -50,11 +58,12 @@ void World::testCollision() {
 		ph = this->player_->getDimension().getY();
 		//-----UNTEN-----
 
+		py -= 5;
 		if (by + bh >= py && py > by) {
 
 			if ((bx <= px && px <= bx + bw) || (bx >= px && px + pw >= bx)) {
 
-				bottom = false;
+				bottom = block;
 			}
 		}
 		//-----LINKS-----
@@ -62,24 +71,25 @@ void World::testCollision() {
 		px -= 5;
 
 		if (bx + bw >= px && bx <= px) {
-			if ((by <= py  && py <= by + bh) || (by >= py && py + ph >= by)) {
+			if ((by <= py && py <= by + bh) || (by >= py && py + ph >= by)) {
 
-				left = false;
+				left = block;
 			}
 		}
 		//-----RECHTS-----
 		px += 10;
 		if (bx <= px + pw && bx > px) {
-			if ((by <= py  && py <= by + bh) || (by >= py && py + ph >= by)) {
+			if ((by <= py && py <= by + bh) || (by >= py && py + ph >= by)) {
 
-				right = false;
+				right = block;
 			}
 		}
+		if (bottom) {
+			top = block;
+		}
 	}
-	if (bottom) {
-		top = false;
-	}
-	this->player_->setMoveables(top, left, right, bottom);
+
+	this->player_->setNearestBlocks(top, left, right, bottom);
 }
 
 void World::readMap(string fileName) {

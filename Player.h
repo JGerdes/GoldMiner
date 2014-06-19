@@ -13,15 +13,16 @@ void Player::onKeyDown(int key){
 
 #include "Entity.h"
 #include "InputManager.h"
+#include "Block.h"
 
 class Player: public Entity, public KeyListener {
 public:
 	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
 			Entity(sprite, position, dimension),
-			canJump_(true),
-			canMoveLeft_(true),
-			canMoveRight_(true),
-			canFall_(true){
+			top_(nullptr),
+			left_(nullptr),
+			right_(nullptr),
+			bottom_(nullptr){
 		InputManager::getInstance().addKeyListener(this);
 
 	}
@@ -31,11 +32,11 @@ public:
 	virtual ~Player();
 	virtual void tick();
 
-	void setMoveables(bool canJump, bool canMoveLeft, bool canMoveRight, bool canFall);
+	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
 private:
 
-	bool canJump_, canMoveLeft_, canMoveRight_, canFall_;
+	Block* top_, *left_, *right_, *bottom_;
 };
 
 #endif /* PLAYER_H_ */

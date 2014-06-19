@@ -10,47 +10,54 @@
 
 using namespace std;
 
-
-
 Player::~Player() {
 	// TODO Auto-generated destructor stub
 }
 
-void Player::onKeyDown(int key){
-	if(key == GLFW_KEY_SPACE && this->canJump_){
+void Player::onKeyDown(int key) {
+	if (key == GLFW_KEY_W && this->top_ != nullptr) {
 		this->destination_.getY() += 80;
 	}
+	if (key == GLFW_KEY_LEFT) {
+
+	}
+	if (key == GLFW_KEY_RIGHT) {
+
+	}
+	if (key == GLFW_KEY_UP) {
+
+	}
+	if (key == GLFW_KEY_DOWN) {
+
+	}
 }
 
-void Player::onKeyUp(int key){
+void Player::onKeyUp(int key) {
 
 }
 
-void Player::setMoveables(bool canJump, bool canMoveLeft, bool canMoveRight, bool canFall){
-	this->canFall_ = canFall;
-	this->canJump_ = canJump;
-	this->canMoveLeft_ = canMoveLeft;
-	this->canMoveRight_ = canMoveRight;
+void Player::setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom) {
+	this->bottom_ = bottom;
+	this->top_ = top;
+	this->left_ = left;
+	this->right_ = right;
 }
-
 
 void Player::tick() {
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT) && this->canMoveRight_) {
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_D)&& this->right_ == nullptr) {
 		this->destination_.getX() += 5;
 	}
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_LEFT)&& this->canMoveLeft_) {
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_A) && this->left_ == nullptr) {
 		this->destination_.getX() -= 5;
 	}
 
-
 	//------GRAVTIY-------
-	if(this->canFall_){
+	if (this->bottom_ == nullptr) {
 		this->destination_.getY() -= 2;
 	}
 
 	//-----UPDATE POSITION -------
 
 	this->position_ += (this->destination_ - this->position_) /= 10.0;
-
 
 }

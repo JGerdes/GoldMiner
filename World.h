@@ -10,7 +10,7 @@
 class Player;
 class Block;
 
-class World {
+class World : public KeyListener{
 public:
 	World(SpriteManager* spriteManager);
 	~World();
@@ -19,6 +19,10 @@ public:
 	void draw();
 	void testBlockLife();
 	void testCollision();
+
+	void onKeyUp(int key);
+	void onKeyDown(int key);
+
 private:
 	SpriteManager* sprite_manager_;
 	Player* player_;
