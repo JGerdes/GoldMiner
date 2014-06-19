@@ -186,20 +186,17 @@ void World::readMap(string fileName) {
 	cout << "rowcount:" << rowCount << endl;
 }
 
-void World::testBlockLife() {
-//	for(unsigned int i=0; i<map.size(); i++)    {
-//		if(map.at(i).getHp()<=0) {
-//			map.erase(map.begin() + i);
-//		}
-//	}
-}
+
 
 void World::tick() {
 	this->testCollision();
 	vector<Block*>::iterator iter = map_->begin();
 	while(iter != map_->end()){
 		if((*iter)->isDestroyed()){
-			map_->erase(iter++);
+			map_->erase(iter);
+			if(iter != map_->end()){
+				++iter;
+			}
 		}else{
 			++iter;
 		}
