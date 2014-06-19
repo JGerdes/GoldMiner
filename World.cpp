@@ -149,6 +149,8 @@ void World::tick() {
 	while(iter != map_->end()){
 		if((*iter)->isDestroyed()){
 			map_->erase(iter++);
+		}else{
+			++iter;
 		}
 	}
 

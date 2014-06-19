@@ -18,16 +18,16 @@ void Player::onKeyDown(int key) {
 	if (key == GLFW_KEY_W && this->top_ != nullptr) {
 		this->destination_.getY() += 80;
 	}
-	if (key == GLFW_KEY_LEFT) {
+	if (key == GLFW_KEY_LEFT && this->left_ != nullptr) {
 		this->left_->mine();
 	}
-	if (key == GLFW_KEY_RIGHT) {
+	if (key == GLFW_KEY_RIGHT && this->right_ != nullptr) {
 		this->right_->mine();
 	}
-	if (key == GLFW_KEY_UP) {
+	if (key == GLFW_KEY_UP && this->top_ != nullptr) {
 		this->top_->mine();
 	}
-	if (key == GLFW_KEY_DOWN) {
+	if (key == GLFW_KEY_DOWN && this->bottom_ != nullptr) {
 		this->bottom_->mine();
 	}
 }
