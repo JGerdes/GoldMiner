@@ -53,15 +53,15 @@ void Player::tick() {
 
 
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_D)&& this->right_ == nullptr) {
-		this->destination_.getX() += 5;
+		this->destination_.getX() += 3;
 	}
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_A) && this->left_ == nullptr) {
-		this->destination_.getX() -= 5;
+		this->destination_.getX() -= 3;
 	}
 
 	//------GRAVTIY-------
 	if (this->bottom_ == nullptr) {
-		this->destination_.getY() -= 2;
+		this->destination_.getY() -= 3;
 	}
 
 	//-----UPDATE POSITION -------

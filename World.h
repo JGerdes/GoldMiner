@@ -17,7 +17,6 @@ public:
 	void readMap(std::string fileName);
 	void tick();
 	void draw();
-	void testBlockLife();
 	void testCollision();
 
 	void onKeyUp(int key);
