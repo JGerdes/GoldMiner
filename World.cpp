@@ -104,6 +104,15 @@ void World::readMap(string fileName) {
 				cout << "new Ground " << (1280.0 / 16) * i << " ,"
 						<< (720.0 / 9) * rowCount << endl;
 			}
+			if (ch[i] == 'g') {
+				//TODO block höhe und breite benutzen
+				Block* block = new Block(Block::dirt,
+						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
+						sprite_manager_->getSprite("assets/graphics/gold.ppm"));
+				map_->push_back(block);
+				cout << "new Ground " << (1280.0 / 16) * i << " ,"
+						<< (720.0 / 9) * rowCount << endl;
+			}
 			if (ch[i] == 's') {
 				player_->setPosition(
 						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount));
