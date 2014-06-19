@@ -20,6 +20,7 @@ public:
 	virtual Entity& setDimension(Vec2 dim);
 	virtual Entity& setPosition(Vec2 pos);
 	virtual Vec2 getPosition() const;
+	virtual Vec2 getDestination() const;
 	virtual const Vec2& getDimension() const;
 	virtual void tick() = 0;
 

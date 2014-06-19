@@ -44,13 +44,13 @@ void World::testCollision() {
 		by = block->getPosition().getY();
 		bw = block->getDimension().getX();
 		bh = block->getDimension().getY();
-		px = this->player_->getPosition().getX();
-		py = this->player_->getPosition().getY();
+		px = this->player_->getDestination().getX();
+		py = this->player_->getDestination().getY();
 		pw = this->player_->getDimension().getX();
 		ph = this->player_->getDimension().getY();
 		//-----UNTEN-----
 
-		if (py + ph >= by) {
+		if (py + ph >= by && by + bh < py) {
 
 			if ((bx >= px && bx + bw >= px)  || (bx <= px + pw && bx + bw >= px+pw)) {
 				cout << "bottom" << endl;
