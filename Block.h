@@ -31,6 +31,9 @@ public:
 	virtual void onButtonDown(int button , Vec2 screen_pos);
 	virtual void onScroll(Vec2 offset);
 
+	Type getType(){
+		return type_;
+	}
 
 protected:
 	Type type_;

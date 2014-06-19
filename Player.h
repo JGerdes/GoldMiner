@@ -34,7 +34,10 @@ public:
 
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
+	const int& getScore();
+	void addToScore();
 private:
+	unsigned int score = 0;
 	Block* top_, *left_, *right_, *bottom_;
 };
 

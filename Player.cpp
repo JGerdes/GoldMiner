@@ -76,3 +76,11 @@ void Player::tick() {
 	this->position_ += (this->destination_ - this->position_) /= 10.0;
 
 }
+
+const int& Player::getScore(){
+	return this->score;
+}
+
+void Player::addToScore(){
+	this->score +=1;
+}

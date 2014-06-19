@@ -193,6 +193,9 @@ void World::tick() {
 	vector<Block*>::iterator iter = map_->begin();
 	while(iter != map_->end()){
 		if((*iter)->isDestroyed()){
+			if((*iter)->getType() == Block::gold){
+				this->player_->addToScore();
+			}
 			map_->erase(iter);
 			if(iter != map_->end()){
 				++iter;
