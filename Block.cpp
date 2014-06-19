@@ -11,7 +11,9 @@
 
 Block::Block(Type type, Vec2 position, Sprite* sprite):
 	Entity(sprite, position, Vec2(1280.0/16,720.0/9)),
-	type_(type){
+	type_(type),
+	damage_(0),
+	max_damage_(500){
 	// TODO Auto-generated constructor stub
 
 }
