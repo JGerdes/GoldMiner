@@ -10,11 +10,11 @@
 #include <iostream>
 
 
-Block::Block(Type type, Vec2 position, Sprite* sprite):
+Block::Block(Type type, Vec2 position, Sprite* sprite, unsigned int max_damage):
 	Entity(sprite, position, Vec2(1280.0/16,720.0/9)),
 	type_(type),
 	damage_(0),
-	max_damage_(5){
+	max_damage_(max_damage){
 	// TODO Auto-generated constructor stub
 
 }

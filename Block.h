@@ -20,7 +20,7 @@ public:
 		gold
 	};
 
-	Block(Type type, Vec2 position, Sprite* sprite);
+	Block(Type type, Vec2 position, Sprite* sprite, unsigned int maxdamage);
 	virtual ~Block();
 	virtual void tick();
 	virtual void mine();
