@@ -18,7 +18,7 @@ Player::~Player() {
 
 void Player::onKeyDown(int key){
 	if(key == GLFW_KEY_SPACE){
-		this->destination_.getY() -= 120;
+		this->destination_.getY() += 120;
 	}
 }
 
@@ -45,7 +45,7 @@ void Player::tick() {
 
 	//------GRAVTIY-------
 	if(this->canFall_){
-		this->destination_.getY() += 2;
+		this->destination_.getY() -= 2;
 	}
 
 	//-----UPDATE POSITION -------

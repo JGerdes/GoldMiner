@@ -86,11 +86,14 @@ string Sprite::getPath() const{
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
+
+	glEnable(GL_TEXTURE);
 	glPushMatrix();
-	glTranslated(position.getX(), 720-position.getY()-dimension.getY(), 0);
+	glTranslated(position.getX(), position.getY(), 0);
 	glBindTexture(GL_TEXTURE_2D, tex_handle_);
 
 	glBegin(GL_QUADS);
+		glColor3f(1,1,1);
 		glTexCoord2d(1.0f, 0.0f);
 		glVertex2d( dimension.getX(),  dimension.getY());
 		glTexCoord2d(0.0f, 0.0f);
@@ -100,5 +103,14 @@ void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 		glTexCoord2d(1.0f, 1.0f);
 		glVertex2d( dimension.getX(), 0);
 	glEnd();
+
+
+	glLineWidth(3);
+	glBegin(GL_LINES);
+		glColor3f(0,1,0);
+		glVertex2d(0,0);
+		glVertex2d(100,0);
+	glEnd();
+
 	glPopMatrix();
 }
