@@ -17,8 +17,8 @@ Player::~Player() {
 }
 
 void Player::onKeyDown(int key){
-	if(key == GLFW_KEY_SPACE){
-		this->destination_.getY() += 120;
+	if(key == GLFW_KEY_SPACE && this->canJump_){
+		this->destination_.getY() += 80;
 	}
 }
 
@@ -36,10 +36,10 @@ void Player::setMoveables(bool canJump, bool canMoveLeft, bool canMoveRight, boo
 
 void Player::tick() {
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_RIGHT) && this->canMoveRight_) {
-		this->destination_.getX() += 10;
+		this->destination_.getX() += 5;
 	}
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_LEFT)&& this->canMoveLeft_) {
-		this->destination_.getX() -= 10;
+		this->destination_.getX() -= 5;
 	}
 
 

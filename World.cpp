@@ -17,7 +17,7 @@ World::World(SpriteManager* spriteManager) :
 		sprite_manager_(spriteManager), player_(
 				new Player(
 						sprite_manager_->getSprite("assets/graphics/mario.ppm"),
-						Vec2(0, 0), Vec2(1280.0 / 16, 720.0 / 9))), map_(
+						Vec2(0, 0), Vec2(1280.0 / 18, 720.0 / 11))), map_(
 				new vector<Block*>()) {
 	cout << "readmap" << endl;
 	this->readMap("map.txt");
@@ -33,7 +33,7 @@ World::~World() {
 }
 
 void World::testCollision() {
-	cout << "testCollision" << endl;
+
 	bool left, right, top, bottom;
 	left = right = top = bottom = true;
 
@@ -50,27 +50,34 @@ void World::testCollision() {
 		ph = this->player_->getDimension().getY();
 		//-----UNTEN-----
 
-		if (py + ph >= by && by + bh < py) {
+		if (by + bh >= py && py > by) {
 
-			if ((bx >= px && bx + bw >= px)  || (bx <= px + pw && bx + bw >= px+pw)) {
-				cout << "bottom" << endl;
+			if ((bx <= px && px <= bx + bw) || (bx >= px && px + pw >= bx)) {
+
 				bottom = false;
 			}
 		}
 		//-----LINKS-----
-		if (bx + bw < px - 10) {
-			if ((by > py && (by + bh) < py) || (py > by && (py + ph) < by)) {
-				cout << "left" << endl;
+		py += 5;
+		px -= 5;
+
+		if (bx + bw >= px && bx <= px) {
+			if ((by <= py  && py <= by + bh) || (by >= py && py + ph >= by)) {
+
 				left = false;
 			}
 		}
 		//-----RECHTS-----
-		if (bx > px + pw + 10) {
-			if ((by > py && (by + bh) < py) || (py > by && (py + ph) < by)) {
-				cout << "right" << endl;
+		px += 10;
+		if (bx <= px + pw && bx > px) {
+			if ((by <= py  && py <= by + bh) || (by >= py && py + ph >= by)) {
+
 				right = false;
 			}
 		}
+	}
+	if (bottom) {
+		top = false;
 	}
 	this->player_->setMoveables(top, left, right, bottom);
 }
@@ -91,7 +98,7 @@ void World::readMap(string fileName) {
 			if (ch[i] == 'x') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::dirt,
-						Vec2((1280.0 / 16) * i, 640-(720.0 / 9) * rowCount),
+						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
 						sprite_manager_->getSprite("assets/graphics/dirt.ppm"));
 				map_->push_back(block);
 				cout << "new Ground " << (1280.0 / 16) * i << " ,"
@@ -99,7 +106,7 @@ void World::readMap(string fileName) {
 			}
 			if (ch[i] == 's') {
 				player_->setPosition(
-						Vec2((1280.0 / 16) * i, 640-(720.0 / 9) * rowCount));
+						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount));
 				cout << "Player Pos " << 20 * i << " " << 20 * rowCount << endl;
 			}
 			ch[i] = ' ';
