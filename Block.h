@@ -23,14 +23,19 @@ public:
 	Block(Type type, Vec2 position, Sprite* sprite);
 	virtual ~Block();
 	virtual void tick();
+	virtual void mine();
+	virtual bool isDestroyed();
 
 	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta);
 	virtual void onButtonUp(int button, Vec2 screen_pos);
 	virtual void onButtonDown(int button , Vec2 screen_pos);
 	virtual void onScroll(Vec2 offset);
 
+
 protected:
 	Type type_;
+	unsigned int damage_;
+	unsigned int max_damage_;
 };
 
 #endif /* BLOCK_H_ */

@@ -39,3 +39,11 @@ void Block::onScroll(Vec2 offset){
 void Block::tick(){
 	//TODO: do stuff
 }
+
+void Block::mine(){
+	damage_ += 1;
+}
+
+bool Block::isDestroyed(){
+	return(damage_ >= max_damage_);
+}
