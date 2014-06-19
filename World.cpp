@@ -195,6 +195,8 @@ void World::tick() {
 		if((*iter)->isDestroyed()){
 			if((*iter)->getType() == Block::gold){
 				this->player_->addToScore();
+				std::cout << "Picked up a gold" << std::endl;
+				std::cout << "Current Score: " << this->player_->getScore() << std::endl;
 			}
 			map_->erase(iter);
 			if(iter != map_->end()){
