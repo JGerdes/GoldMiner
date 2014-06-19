@@ -33,6 +33,9 @@ Entity& Entity::setPosition(Vec2 pos) {
 	this->destination_ = pos;
 	return *this;
 }
+Vec2 Entity::getDestination() const {
+	return this->destination_;
+}
 
 Vec2 Entity::getPosition() const {
 	return Vec2(position_);
