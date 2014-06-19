@@ -21,7 +21,8 @@ public:
 		height_(0),
 		buffer_(new float[0]),
 		tex_handle_(tex_handle),
-		path_(""){
+		path_(""),
+		debug_(false){
 	}
 
 	virtual ~Sprite(){
@@ -44,6 +45,7 @@ private:
 	float* buffer_;
 	GLuint tex_handle_;
 	std::string path_;
+	bool debug_;
 };
 
 #endif /* SPRITE_H_ */
