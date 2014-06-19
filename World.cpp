@@ -66,6 +66,16 @@ void World::testCollision() {
 				bottom = block;
 			}
 		}
+
+		//-------OBEN-----
+		if (by <= py + ph+10 && by > py) {
+
+			if ((bx <= px && px <= bx + bw) || (bx >= px && px + pw >= bx)) {
+
+				top = block;
+			}
+		}
+
 		//-----LINKS-----
 		py += 5;
 		px -= 5;
@@ -84,9 +94,8 @@ void World::testCollision() {
 				right = block;
 			}
 		}
-		if (bottom) {
-			top = block;
-		}
+
+
 	}
 
 	this->player_->setNearestBlocks(top, left, right, bottom);

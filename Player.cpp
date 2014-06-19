@@ -15,7 +15,7 @@ Player::~Player() {
 }
 
 void Player::onKeyDown(int key) {
-	if (key == GLFW_KEY_W && this->top_ != nullptr) {
+	if (key == GLFW_KEY_W && this->bottom_ != nullptr) {
 		this->destination_.getY() += 80;
 	}
 	if (key == GLFW_KEY_LEFT && this->left_ != nullptr) {
