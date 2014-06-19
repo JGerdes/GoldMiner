@@ -15,7 +15,7 @@ Player::~Player() {
 }
 
 void Player::onKeyDown(int key) {
-	if (key == GLFW_KEY_W && this->bottom_ != nullptr) {
+	if ((key == GLFW_KEY_W || key == GLFW_KEY_SPACE) && this->bottom_ != nullptr) {
 		this->destination_.getY() += 80;
 	}
 	if (key == GLFW_KEY_LEFT && this->left_ != nullptr) {
@@ -44,6 +44,14 @@ void Player::setNearestBlocks(Block* top, Block* left, Block* right, Block* bott
 }
 
 void Player::tick() {
+
+	if(this->position_.getX() < -100 || this->position_.getX() > 1380 || this->position_.getY() < -200){
+		this->position_ = Vec2(1280 / 2, 800);
+		this->destination_= Vec2(1280 / 2, 800);
+	}
+
+
+
 	if (InputManager::getInstance().isKeyDown(GLFW_KEY_D)&& this->right_ == nullptr) {
 		this->destination_.getX() += 5;
 	}

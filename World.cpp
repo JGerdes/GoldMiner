@@ -134,7 +134,7 @@ void World::readMap(string fileName) {
 			}
 			if (ch[i] == 's') {
 				player_->setPosition(
-						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount));
+						Vec2((1280.0 / 16) * i, 642 - (720.0 / 9) * rowCount));
 				cout << "Player Pos " << 20 * i << " " << 20 * rowCount << endl;
 			}
 			ch[i] = ' ';
