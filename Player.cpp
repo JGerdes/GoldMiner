@@ -52,11 +52,18 @@ void Player::tick() {
 
 
 
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_D)&& this->right_ == nullptr) {
-		this->destination_.getX() += 5;
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_D)) {
+		sprite_->flip(false);
+		if(this->right_ == nullptr){
+			this->destination_.getX() += 5;
+		}
+
 	}
-	if (InputManager::getInstance().isKeyDown(GLFW_KEY_A) && this->left_ == nullptr) {
-		this->destination_.getX() -= 5;
+	if (InputManager::getInstance().isKeyDown(GLFW_KEY_A)) {
+		sprite_->flip(true);
+		if(this->left_ == nullptr){
+			this->destination_.getX() -= 5;
+		}
 	}
 
 	//------GRAVTIY-------

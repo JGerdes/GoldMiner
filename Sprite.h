@@ -12,7 +12,19 @@
 #include "Vec2.h"
 #include <GLFW/glfw3.h>
 
+class Color{
+public:
+	Color(float r=0, float g=0, float b=0):
+		r(r),
+		g(g),
+		b(b){}
+	float r, g, b;
+};
+
+
 class Sprite {
+
+
 public:
 
 
@@ -22,7 +34,9 @@ public:
 		buffer_(new float[0]),
 		tex_handle_(tex_handle),
 		path_(""),
-		debug_(false){
+		debug_(false),
+		color_(Color(1,1,1)),
+		flipped_(false){
 	}
 
 	virtual ~Sprite(){
@@ -37,6 +51,9 @@ public:
 	unsigned int getHeight() const;
 	const float* getBuffer() const;
 	std::string getPath() const;
+	Color& getColor();
+	void flip();
+	void flip(bool flipped);
 
 
 private:
@@ -46,6 +63,8 @@ private:
 	GLuint tex_handle_;
 	std::string path_;
 	bool debug_;
+	Color color_;
+	bool flipped_;
 };
 
 #endif /* SPRITE_H_ */

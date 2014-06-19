@@ -35,7 +35,6 @@ public:
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
 private:
-
 	Block* top_, *left_, *right_, *bottom_;
 };
 

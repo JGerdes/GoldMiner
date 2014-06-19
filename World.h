@@ -27,6 +27,7 @@ private:
 	SpriteManager* sprite_manager_;
 	Player* player_;
 	std::vector<Block*>* map_;
+	std::vector<Block*>* bg_map_;
 };
 
 

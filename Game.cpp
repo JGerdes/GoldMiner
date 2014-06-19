@@ -74,7 +74,7 @@ void Game::run() {
 
 		world_->tick();
 
-		glClearColor(1, 1, 1, 1.0);
+		glClearColor(0.7, 0.8, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		render();

@@ -83,6 +83,15 @@ string Sprite::getPath() const{
 	return path_;
 }
 
+Color& Sprite::getColor(){
+	return color_;
+}
+void Sprite::flip(){
+	flipped_ = !flipped_;
+}
+void Sprite::flip(bool flipped){
+	flipped_ = flipped;
+}
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
@@ -93,15 +102,15 @@ void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 	glBindTexture(GL_TEXTURE_2D, tex_handle_);
 
 	glBegin(GL_QUADS);
-		glColor3f(1,1,1);
+		glColor3f(color_.r,color_.g,color_.b);
 		glTexCoord2d(1.0f, 0.0f);
-		glVertex2d( dimension.getX(),  dimension.getY());
+		glVertex2d( flipped_ ? 0.0 : dimension.getX(),  dimension.getY());
 		glTexCoord2d(0.0f, 0.0f);
-		glVertex2d(0.0, dimension.getY());
+		glVertex2d( flipped_ ? dimension.getX() : 0.0, dimension.getY());
 		glTexCoord2d(0.0f, 1.0f);
-		glVertex2d( 0.0,0.0);
+		glVertex2d( flipped_ ? dimension.getX() : 0.0, 0.0);
 		glTexCoord2d(1.0f, 1.0f);
-		glVertex2d( dimension.getX(), 0);
+		glVertex2d( flipped_ ? 0.0 : dimension.getX(), 0);
 	glEnd();
 
 	if(debug_){

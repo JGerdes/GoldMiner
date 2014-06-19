@@ -1,9 +1,9 @@
-x s            x
-xxxxx  xxxxxxxxx
+g p            g
+xgggg  ggggggggx
 xxxxxx  xxxxxxxx
-xxxxxxx       gx
-xxxxxxxxxxxxxgxx
-xxxxxxxxxxxxxxgx
-xxxggxxxxxxxxxxx
-xxxxgxxxxxgxxxxx
-xxxxxxxxxxgggxxx
+xxxxxxx       ax
+xsxxxxxxxxxxxaxx
+xsxssxxxxxxsssax
+sssaassxxsssssss
+ssssasssssasssss
+ssssssssssaaasss
