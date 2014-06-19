@@ -145,6 +145,13 @@ void World::testBlockLife() {
 
 void World::tick() {
 	this->testCollision();
+	vector<Block*>::iterator iter = map_->begin();
+	while(iter != map_->end()){
+		if((*iter)->isDestroyed()){
+			map_->erase(iter++);
+		}
+	}
+
 	player_->tick();
 }
 
