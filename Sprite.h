@@ -11,6 +11,7 @@
 #include <string>
 #include "Vec2.h"
 #include <GLFW/glfw3.h>
+#include "ImageBuffer.h"
 
 class Color{
 public:
@@ -27,41 +28,29 @@ class Sprite {
 
 public:
 
-
-	Sprite(unsigned int tex_handle):
-		width_(0),
-		height_(0),
-		buffer_(new float[0]),
-		tex_handle_(tex_handle),
-		path_(""),
+	Sprite(ImageBuffer* image_buffer):
+		image_buffer_(image_buffer),
 		debug_(false),
 		color_(Color(1,1,1)),
 		flipped_(false){
 	}
 
 	virtual ~Sprite(){
-		delete[] buffer_;
 	}
 
-	bool loadFromPPM(const std::string& filename);
 
 	void draw(const Vec2& position, const Vec2& dimension) const;
 
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;
-	const float* getBuffer() const;
-	std::string getPath() const;
 	Color& getColor();
+	void setColor(const Color& color);
 	void flip();
 	void flip(bool flipped);
 
 
 private:
-	unsigned int width_;
-	unsigned int height_;
-	float* buffer_;
-	GLuint tex_handle_;
-	std::string path_;
+	ImageBuffer* image_buffer_;
 	bool debug_;
 	Color color_;
 	bool flipped_;

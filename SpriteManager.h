@@ -11,6 +11,7 @@
 #include <vector>
 #include <string>
 #include "Sprite.h"
+#include "ImageBuffer.h"
 
 class SpriteManager {
 public:
@@ -21,6 +22,7 @@ public:
 	Sprite* getSprite(std::string path);
 
 private:
+	std::vector<ImageBuffer*> image_buffers_;
 	std::vector<Sprite*> sprites_;
 };
 

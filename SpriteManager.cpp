@@ -16,27 +16,30 @@ SpriteManager::SpriteManager() {
 }
 
 SpriteManager::~SpriteManager() {
-	for(Sprite* sprite : sprites_){
+	cout << "Deleting " << image_buffers_.size() << " ImageBuffers" << endl;
+	for(ImageBuffer* sprite : image_buffers_){
 		delete sprite;
 	}
 }
 
 Sprite* SpriteManager::getSprite(string path){
-//	for(Sprite* sprite : sprites_){
-//		if(sprite->getPath() == path){
-//			return sprite;
-//		}
-//	}
-	Sprite* sprite = new Sprite(sprites_.size());
-	if(sprite->loadFromPPM(path)){
-		sprites_.push_back(sprite);
-		return sprite;
-	}else{
-		//TODO: Fehlerbehandlung
-		cerr << "Error while loading sprite @"<< path << endl;
-		return nullptr;
+	ImageBuffer* buf = nullptr;
+	for(ImageBuffer* img_buffer : image_buffers_){
+		if(img_buffer->getPath() == path){
+			buf = img_buffer;
+		}
 	}
+	if(buf == nullptr){
+		buf = new ImageBuffer();
+		if(!(buf->loadFromPPM(path))){
+			cerr << "Error while loading file: " << path << endl;
+			return nullptr;
+		}
+		image_buffers_.push_back(buf);
+	}
+	Sprite* sprite = new Sprite(buf);
+	sprites_.push_back(sprite);
 
-
+	return sprite;
 
 }
