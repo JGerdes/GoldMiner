@@ -13,7 +13,7 @@
 
 using namespace std;
 
-World::World(SpriteManager* spriteManager) :
+World::World(SpriteManager* spriteManager, string map) :
 		sprite_manager_(spriteManager), player_(
 				new Player(
 						sprite_manager_->getSprite("assets/graphics/mario.ppm"),
@@ -21,7 +21,7 @@ World::World(SpriteManager* spriteManager) :
 		map_(new vector<Block*>()),
 		bg_map_(new vector<Block*>()){
 	cout << "readmap" << endl;
-	this->readMap("map.txt");
+	this->readMap(map);
 }
 
 World::~World() {

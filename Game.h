@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "SpriteManager.h"
 #include "World.h"
+#include "Startscreen.h"
 
 class World;
 
@@ -22,6 +23,7 @@ public:
 	virtual ~Game();
 
 private:
+	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
 	GLFWwindow* window_;
 	double window_width_;
 	double window_height_;
@@ -36,7 +38,8 @@ private:
 	//TODO: only for test purposes!
 	SpriteManager* sprite_manager_;
 	World* world_;
-
+	World* world1_;
+	Startscreen* startscreen_;
 
 };
 

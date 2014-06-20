@@ -10,6 +10,7 @@
 
 #include <tr1/unordered_map>
 #include <vector>
+#include <GLFW/glfw3.h>
 #include "MouseListener.h"
 #include "KeyListener.h"
 
