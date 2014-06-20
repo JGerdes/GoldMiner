@@ -90,3 +90,11 @@ const int& Player::getScore(){
 void Player::addToScore(){
 	this->score +=1;
 }
+
+const int& Player::getAllDestroyedBlocks(){
+	return this->destroyedBlocks;
+}
+
+void Player::addToDestroyedBlocks(){
+	this->destroyedBlocks +=1;
+}

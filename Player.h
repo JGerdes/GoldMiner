@@ -37,8 +37,13 @@ public:
 
 	const int& getScore();
 	void addToScore();
+
+	const int& getAllDestroyedBlocks();
+	void addToDestroyedBlocks();
+
 private:
 	unsigned int score = 0;
+	unsigned int destroyedBlocks = 0;
 	bool visible_;
 	Block* top_, *left_, *right_, *bottom_;
 };

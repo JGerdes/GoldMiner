@@ -198,6 +198,10 @@ void World::tick() {
 				this->player_->addToScore();
 				std::cout << "Picked up a gold" << std::endl;
 				std::cout << "Current Score: " << this->player_->getScore() << std::endl;
+			}else if((*iter)->getType() == Block::dirt){
+				this->player_->addToDestroyedBlocks();
+				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
+				//TODO: schwerigkeit einfügen.
 			}
 			map_->erase(iter);
 			if(iter != map_->end()){
