@@ -15,6 +15,7 @@ Player::~Player() {
 }
 
 void Player::onKeyDown(int key) {
+	if(visible_ == true) {
 	if ((key == GLFW_KEY_W || key == GLFW_KEY_SPACE) && this->bottom_ != nullptr) {
 		this->destination_.getY() += 80;
 	}
@@ -30,6 +31,7 @@ void Player::onKeyDown(int key) {
 	if (key == GLFW_KEY_DOWN && this->bottom_ != nullptr) {
 		this->bottom_->mine();
 	}
+	}
 }
 
 void Player::onKeyUp(int key) {
@@ -41,6 +43,10 @@ void Player::setNearestBlocks(Block* top, Block* left, Block* right, Block* bott
 	this->top_ = top;
 	this->left_ = left;
 	this->right_ = right;
+}
+
+void Player::setVisible(bool visible) {
+	this->visible_ = visible;
 }
 
 void Player::tick() {

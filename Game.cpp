@@ -9,6 +9,7 @@
 #include <iostream>
 #include "Vec2.h"
 #include "InputManager.h"
+#include "Highscore.h"
 
 
 using namespace std;
@@ -20,8 +21,9 @@ Game::Game(double width = 1280, double height = 720) :
 		sprite_manager_(new SpriteManager()),
 		world_(nullptr),
 		startscreen_(nullptr),
-		gamestate(menue){ //
-
+		gamestate(menue),
+		exit(false){ //
+	InputManager::getInstance().addKeyListener(this);
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -39,9 +41,25 @@ Game::Game(double width = 1280, double height = 720) :
 	}
 
 	glfwMakeContextCurrent(window_);
-
 	init();
 	run();
+
+}
+
+void Game::onKeyDown(int key) {
+	if(gamestate != menue) {
+		if(key == GLFW_KEY_ESCAPE) {
+			gamestate = menue;
+			startscreen_->setLevelOff();
+		}
+	}
+	else
+		if(key == GLFW_KEY_ESCAPE) {
+			exit = true;
+		}
+}
+
+void Game::onKeyUp(int key) {
 
 }
 
@@ -68,6 +86,7 @@ void Game::init() {
 	startscreen_ = new Startscreen(sprite_manager_->getSprite("assets/graphics/menue.ppm"), Vec2(0, 0), Vec2(1280.0, 720.0));
 	world_ = new World(sprite_manager_, "map.txt");
 	world1_ = new World(sprite_manager_, "map2.txt");
+	highscore = new Highscore();
 }
 
 
@@ -75,7 +94,7 @@ void Game::run() {
 	glfwSetTime(0);
 	static unsigned int i = 0;
 	cout << "run" << endl;
-	while (!glfwWindowShouldClose(window_)) {
+	while (!glfwWindowShouldClose(window_) && exit == false) {
 
 		if(gamestate == menue) {
 			startscreen_->tick();
@@ -85,13 +104,22 @@ void Game::run() {
 			if(startscreen_->isLevelTwoStarting()) {
 				gamestate = runningLevelTwo;
 			}
+			if(startscreen_->isHighscoreKlicked()) {
+				//TODO anzeige der Highscore (nicht Konsole)
+				highscore->setHighscore(1);
+				startscreen_->setLevelOff();
+			}
 		}
 
 		if(gamestate == runningLevelTwo) {
+			world1_->getPlayer()->setVisible(true);
+			world_->getPlayer()->setVisible(false);
 			world1_->tick();
 		}
 
 		if(gamestate == runningLevelOne)
+			world1_->getPlayer()->setVisible(false);
+			world_->getPlayer()->setVisible(true);
 			world_->tick();
 
 		glClearColor(0.7, 0.8, 1, 1.0);

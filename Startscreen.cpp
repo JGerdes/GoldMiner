@@ -13,10 +13,9 @@
 
 using namespace std;
 
-Startscreen::Startscreen(Sprite* sprite, Vec2 position, Vec2 dimension): Entity(sprite, position, dimension),
-		startLevelOne(false),
-		startLevelTwo(false),
-		startHighscore(false){
+Startscreen::Startscreen(Sprite* sprite, Vec2 position, Vec2 dimension) :
+		Entity(sprite, position, dimension), startLevelOne(false), startLevelTwo(
+				false), showHighscore(false) {
 	InputManager::getInstance().addMouseListener(this);
 }
 
@@ -25,15 +24,26 @@ Startscreen::~Startscreen() {
 }
 
 void Startscreen::onButtonDown(int button, Vec2 screen_pos) {
-	if(startLevelOne == false && startLevelTwo == false && startHighscore == false) {
-		if(button == GLFW_MOUSE_BUTTON_1) {
-			if(screen_pos.getX() > 1280.0/4 && screen_pos.getX() < 1280.0/4*3 &&
-					screen_pos.getY() > 720.0/8*3 && screen_pos.getY() < 720.0/8*4) {
+	if (startLevelOne == false && startLevelTwo == false
+			&& showHighscore == false) {
+		if (button == GLFW_MOUSE_BUTTON_1) {
+			if (screen_pos.getX() > 1280.0 / 4
+					&& screen_pos.getX() < 1280.0 / 4 * 3
+					&& screen_pos.getY() > 720.0 / 8 * 3
+					&& screen_pos.getY() < 720.0 / 8 * 4) {
 				startLevelOne = true;
 			}
-			if(screen_pos.getX() > 1280.0/4 && screen_pos.getX() < 1280.0/4*3 &&
-					screen_pos.getY() > 720.0/8*4 && screen_pos.getY() < 720.0/8*5) {
+			if (screen_pos.getX() > 1280.0 / 4
+					&& screen_pos.getX() < 1280.0 / 4 * 3
+					&& screen_pos.getY() > 720.0 / 8 * 4
+					&& screen_pos.getY() < 720.0 / 8 * 5) {
 				startLevelTwo = true;
+			}
+			if (screen_pos.getX() > 1280.0 / 4
+					&& screen_pos.getX() < 1280.0 / 4 * 3
+					&& screen_pos.getY() > 720.0 / 8 * 6
+					&& screen_pos.getY() < 720.0 / 8 * 7) {
+				showHighscore = true;
 			}
 		}
 	}
@@ -55,16 +65,23 @@ void Startscreen::drawBg() {
 	this->draw();
 }
 
-bool Startscreen::isLevelOneStarting() const{
+bool Startscreen::isLevelOneStarting() const {
 	return startLevelOne;
 }
 
-bool Startscreen::isLevelTwoStarting() const{
+bool Startscreen::isLevelTwoStarting() const {
 	return startLevelTwo;
 }
 
-bool Startscreen::isHighscoreStarting() const{
-	return startHighscore;
+
+bool Startscreen::isHighscoreKlicked() const{
+	return showHighscore;
+}
+
+void Startscreen::setLevelOff() {
+	startLevelOne = false;
+	startLevelTwo = false;
+	showHighscore = false;
 }
 
 void Startscreen::tick() {

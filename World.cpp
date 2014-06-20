@@ -41,6 +41,10 @@ void World::onKeyUp(int key) {
 
 }
 
+Player* World::getPlayer() const{
+	return player_;
+}
+
 void World::testCollision() {
 
 	Block* left, *right, *top, *bottom;
@@ -220,4 +224,5 @@ void World::draw() {
 
 //cout << "draw player" << endl;
 	player_->draw();
+
 }

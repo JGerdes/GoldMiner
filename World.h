@@ -18,7 +18,7 @@ public:
 	void tick();
 	void draw();
 	void testCollision();
-
+	Player* getPlayer() const;
 	void onKeyUp(int key);
 	void onKeyDown(int key);
 

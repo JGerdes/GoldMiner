@@ -13,14 +13,17 @@
 #include "SpriteManager.h"
 #include "World.h"
 #include "Startscreen.h"
+#include "Highscore.h"
 
 class World;
 
 
-class Game {
+class Game : public KeyListener{
 public:
 	Game(double width, double height);
 	virtual ~Game();
+	void onKeyUp(int key);
+	void onKeyDown(int key);
 
 private:
 	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
@@ -29,7 +32,7 @@ private:
 	double window_height_;
 
 
-
+	bool exit;
 	void init();
 	void run();
 
@@ -39,6 +42,7 @@ private:
 	SpriteManager* sprite_manager_;
 	World* world_;
 	World* world1_;
+	Highscore *highscore;
 	Startscreen* startscreen_;
 
 };

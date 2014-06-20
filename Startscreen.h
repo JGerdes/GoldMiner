@@ -23,12 +23,14 @@ public:
 	void onScroll(Vec2 offset);
 	bool isLevelOneStarting()const;
 	bool isLevelTwoStarting()const;
-	bool isHighscoreStarting()const;
+	bool isHighscoreKlicked() const;
+	void setLevelOff();
+
 
 private:
 	bool startLevelOne;
 	bool startLevelTwo;
-	bool startHighscore;
+	bool showHighscore;
 };
 
 
