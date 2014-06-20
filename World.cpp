@@ -161,23 +161,19 @@ void World::readMap(string fileName) {
 		rowCount++;
 	}
 
-	Sprite *stone = sprite_manager_->getSprite("assets/graphics/stone.ppm");
-	Sprite *dirt = sprite_manager_->getSprite("assets/graphics/dirt.ppm");
-	stone->getColor().r = 0.4;
-	stone->getColor().g = 0.4;
-	stone->getColor().b = 0.5;
-	dirt->getColor().r = 0.4;
-	dirt->getColor().g = 0.4;
-	dirt->getColor().b = 0.5;
 	for(size_t y=1; y<9; y++){
 		for(size_t x=0; x <16; x++){
 
 			if(y < 5){
+				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/dirt.ppm");
+				sprite->setColor(Color(0.9-y/10.0, 0.9-y/10.0, 1-y/10.0));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
-										dirt, 2));
+										sprite, 2));
 			}else{
+				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/stone.ppm");
+				sprite->setColor(Color(0.9-y/10.0, 0.9-y/10.0, 1-y/10.0));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
-														stone, 2));
+										sprite, 2));
 			}
 		}
 
