@@ -164,14 +164,15 @@ void World::readMap(string fileName) {
 	for(size_t y=1; y<9; y++){
 		for(size_t x=0; x <16; x++){
 
+			float darkness = 0.8-y/12.0;
 			if(y < 5){
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/dirt.ppm");
-				sprite->setColor(Color(0.9-y/10.0, 0.9-y/10.0, 1-y/10.0));
+				sprite->setColor(Color(darkness, darkness, darkness+0.05));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
 										sprite, 2));
 			}else{
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/stone.ppm");
-				sprite->setColor(Color(0.9-y/10.0, 0.9-y/10.0, 1-y/10.0));
+				sprite->setColor(Color(darkness, darkness, darkness+0.05));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
 										sprite, 2));
 			}
