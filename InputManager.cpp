@@ -111,4 +111,3 @@ void InputManager::addMouseListener(MouseListener* listener){
 void InputManager::addKeyListener(KeyListener* listener){
 	key_listeners_.push_back(listener);
 }
-

@@ -12,7 +12,7 @@ class Block;
 
 class World : public KeyListener{
 public:
-	World(SpriteManager* spriteManager);
+	World(SpriteManager* spriteManager, std::string map);
 	~World();
 	void readMap(std::string fileName);
 	void tick();

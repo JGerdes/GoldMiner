@@ -18,7 +18,9 @@ Game::Game(double width = 1280, double height = 720) :
 		window_width_(width),
 		window_height_(height),
 		sprite_manager_(new SpriteManager()),
-		world_(nullptr){ //
+		world_(nullptr),
+		startscreen_(nullptr),
+		gamestate(menue){ //
 
 	cout << "Game started" << endl;
 
@@ -45,6 +47,7 @@ Game::Game(double width = 1280, double height = 720) :
 
 Game::~Game() {
 	delete world_;
+	delete startscreen_;
 }
 
 void Game::init() {
@@ -62,7 +65,9 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
-	world_ = new World(sprite_manager_);
+	startscreen_ = new Startscreen(sprite_manager_->getSprite("assets/graphics/menue.ppm"), Vec2(0, 0), Vec2(1280.0, 720.0));
+	world_ = new World(sprite_manager_, "map.txt");
+	world1_ = new World(sprite_manager_, "map2.txt");
 }
 
 
@@ -72,7 +77,22 @@ void Game::run() {
 	cout << "run" << endl;
 	while (!glfwWindowShouldClose(window_)) {
 
-		world_->tick();
+		if(gamestate == menue) {
+			startscreen_->tick();
+			if(startscreen_->isLevelOneStarting()) {
+				gamestate = runningLevelOne;
+			}
+			if(startscreen_->isLevelTwoStarting()) {
+				gamestate = runningLevelTwo;
+			}
+		}
+
+		if(gamestate == runningLevelTwo) {
+			world1_->tick();
+		}
+
+		if(gamestate == runningLevelOne)
+			world_->tick();
 
 		glClearColor(0.7, 0.8, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -97,15 +117,16 @@ void Game::run() {
 
 void Game::render() {
 
-
-
-
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, window_width_, 0, window_height_, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	world_->draw();
+	if(gamestate == menue)
+		startscreen_->draw();
+	if(gamestate == runningLevelOne)
+		world_->draw();
+	if(gamestate == runningLevelTwo)
+		world1_->draw();
 }
