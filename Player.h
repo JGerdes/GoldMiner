@@ -35,17 +35,17 @@ public:
 	void setVisible(bool visible);
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
-	const int& getScore();
+	int getScore() const;
 	void addToScore();
 
-	const int& getAllDestroyedBlocks();
+	int getAllDestroyedBlocks() const;
 	void addToDestroyedBlocks();
 
 private:
 	unsigned int score = 0;
 	unsigned int destroyedBlocks = 0;
-	bool visible_;
 	Block* top_, *left_, *right_, *bottom_;
+	bool visible_;
 };
 
 #endif /* PLAYER_H_ */

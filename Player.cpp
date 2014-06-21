@@ -83,7 +83,7 @@ void Player::tick() {
 
 }
 
-const int& Player::getScore(){
+int Player::getScore() const{
 	return this->score;
 }
 
@@ -91,7 +91,7 @@ void Player::addToScore(){
 	this->score +=1;
 }
 
-const int& Player::getAllDestroyedBlocks(){
+int Player::getAllDestroyedBlocks() const{
 	return this->destroyedBlocks;
 }
 

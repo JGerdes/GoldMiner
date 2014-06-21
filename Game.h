@@ -26,17 +26,14 @@ public:
 	void onKeyDown(int key);
 
 private:
-	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
+
+	void init();
+	void run();
+	void render();
+
 	GLFWwindow* window_;
 	double window_width_;
 	double window_height_;
-
-
-	bool exit;
-	void init();
-	void run();
-
-	void render();
 
 	//TODO: only for test purposes!
 	SpriteManager* sprite_manager_;
@@ -44,6 +41,8 @@ private:
 	World* world1_;
 	Highscore *highscore;
 	Startscreen* startscreen_;
+	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
+	bool exit;
 
 };
 

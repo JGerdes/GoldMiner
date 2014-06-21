@@ -57,7 +57,7 @@ void Highscore::saveHighscore() {
 		cerr << "highscore.txt kann nicht geöffnet werden!\n";
 	}
 
-	for (int i = 0; i < highscoreList_->size(); i++) {
+	for (size_t i = 0; i < highscoreList_->size(); i++) {
 		quelle << highscoreList_->at(i) << endl;
 	}
 
