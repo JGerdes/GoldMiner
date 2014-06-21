@@ -22,7 +22,19 @@ public:
 	void onKeyUp(int key);
 	void onKeyDown(int key);
 
+	bool getGameOver(){
+		return gameOver;
+	}
+	void setGameOver(bool gameOver_){
+		gameOver = gameOver_;
+	}
+	const int FREE_GAME	  = 1000;
+	const int EASY_GAME   = 30;
+	const int NORMAL_GAME = 25;
+	const int HARD_GAME   = 15;
+
 private:
+	bool gameOver = false;
 	SpriteManager* sprite_manager_;
 	Player* player_;
 	std::vector<Block*>* map_;

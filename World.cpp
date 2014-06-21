@@ -201,7 +201,12 @@ void World::tick() {
 			}else if((*iter)->getType() == Block::dirt){
 				this->player_->addToDestroyedBlocks();
 				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
-				//TODO: schwerigkeit einfügen.
+				if(this->player_->getAllDestroyedBlocks() == this->HARD_GAME){
+					std::cout << "GAME OVER" << std::endl;
+					std::cout << "Score: " << this->player_->getScore() << std::endl;
+					std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
+					this->setGameOver(true);
+				}
 			}
 			map_->erase(iter);
 			if(iter != map_->end()){

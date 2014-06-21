@@ -127,6 +127,11 @@ void Game::run() {
 
 		render();
 
+		if(world_->getGameOver()){
+			std::cout << "##### GAME OVER####" << std::endl;
+			gamestate = gameover;
+			this->world_->setGameOver(false);
+		}
 
 		i++;
 		if(glfwGetTime() > 1){
