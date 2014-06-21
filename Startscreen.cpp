@@ -11,58 +11,32 @@
 #include "InputManager.h"
 #include "Entity.h"
 
+
 using namespace std;
 
-Startscreen::Startscreen(Sprite* sprite, Vec2 position, Vec2 dimension) :
-		Entity(sprite, position, dimension), startLevelOne(false), startLevelTwo(
-				false), showHighscore(false) {
-	InputManager::getInstance().addMouseListener(this);
+Startscreen::Startscreen(SpriteManager* spriteManager, Vec2 position, Vec2 dimension) :
+		Entity(spriteManager->getSprite("assets/graphics/menue.ppm"), position, dimension),
+		startLevelOne(false),
+		startLevelTwo(false),
+		showHighscore(false),
+		levelOneButton(Button(1, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6))),
+		levelTwoButton(Button(2, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,300), Vec2(64*6,16*6))),
+		font_(new Font(spriteManager->getSprite("assets/graphics/font.ppm"),"assets/graphics/font.txt")){
+	levelOneButton.setHandler(this);
+	levelTwoButton.setHandler(this);
+	font_->setColor(Color(1,1,1));
+	font_->setSize(3);
 }
 
 Startscreen::~Startscreen() {
-
+	delete font_;
 }
 
-void Startscreen::onButtonDown(int button, Vec2 screen_pos) {
-	if (startLevelOne == false && startLevelTwo == false
-			&& showHighscore == false) {
-		if (button == GLFW_MOUSE_BUTTON_1) {
-			if (screen_pos.getX() > 1280.0 / 4
-					&& screen_pos.getX() < 1280.0 / 4 * 3
-					&& screen_pos.getY() > 720.0 / 8 * 3
-					&& screen_pos.getY() < 720.0 / 8 * 4) {
-				startLevelOne = true;
-			}
-			if (screen_pos.getX() > 1280.0 / 4
-					&& screen_pos.getX() < 1280.0 / 4 * 3
-					&& screen_pos.getY() > 720.0 / 8 * 4
-					&& screen_pos.getY() < 720.0 / 8 * 5) {
-				startLevelTwo = true;
-			}
-			if (screen_pos.getX() > 1280.0 / 4
-					&& screen_pos.getX() < 1280.0 / 4 * 3
-					&& screen_pos.getY() > 720.0 / 8 * 6
-					&& screen_pos.getY() < 720.0 / 8 * 7) {
-				showHighscore = true;
-			}
-		}
-	}
-}
 
-void Startscreen::onMouseMove(Vec2 screen_pos, Vec2 delta) {
-
-}
-
-void Startscreen::onScroll(Vec2 offset) {
-
-}
-
-void Startscreen::onButtonUp(int button, Vec2 screen_pos) {
-
-}
-
-void Startscreen::drawBg() {
-	this->draw();
+void Startscreen::draw() {
+	Entity::draw();
+	levelOneButton.draw();
+	font_->draw_text(Vec2((1280-64*5)/2.0,380), "Level 1");
 }
 
 bool Startscreen::isLevelOneStarting() const {
@@ -86,4 +60,16 @@ void Startscreen::setLevelOff() {
 
 void Startscreen::tick() {
 
+}
+
+
+void Startscreen::onButtonClick(unsigned int id){
+	switch(id){
+	case 1:
+		startLevelOne = true;
+		break;
+	case 2:
+		startLevelTwo = true;
+		break;
+	}
 }

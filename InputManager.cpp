@@ -41,6 +41,7 @@ InputManager::InputManager():
 }
 
 void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
+	y = 720-y;
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
 	}

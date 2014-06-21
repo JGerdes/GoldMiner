@@ -83,7 +83,7 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
-	startscreen_ = new Startscreen(sprite_manager_->getSprite("assets/graphics/menue.ppm"), Vec2(0, 0), Vec2(1280.0, 720.0));
+	startscreen_ = new Startscreen(sprite_manager_, Vec2(0, 0), Vec2(1280.0, 720.0));
 	world_ = new World(sprite_manager_, "map.txt");
 	world1_ = new World(sprite_manager_, "map2.txt");
 	highscore = new Highscore();

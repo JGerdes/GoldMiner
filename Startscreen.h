@@ -10,27 +10,30 @@
 
 #include "InputManager.h"
 #include "Entity.h"
+#include "Button.h"
+#include "SpriteManager.h"
+#include "Font.h"
 
-class Startscreen : public MouseListener, public Entity{
+class Startscreen : public Entity, public ButtonHandler{
 public:
-	Startscreen(Sprite* sprite, Vec2 position, Vec2 dimension);
+	Startscreen(SpriteManager* spriteManager, Vec2 position, Vec2 dimension);
 	~Startscreen();
 	void tick();
-	void drawBg();
-	void onButtonDown(int button , Vec2 screen_pos);
-	void onMouseMove(Vec2 screen_pos, Vec2 delta);
-	void onButtonUp(int button, Vec2 screen_pos);
-	void onScroll(Vec2 offset);
+	void draw();
 	bool isLevelOneStarting()const;
 	bool isLevelTwoStarting()const;
 	bool isHighscoreKlicked() const;
 	void setLevelOff();
+	virtual void onButtonClick(unsigned int id);
 
 
 private:
 	bool startLevelOne;
 	bool startLevelTwo;
 	bool showHighscore;
+	Button levelOneButton;
+	Button levelTwoButton;
+	Font* font_;
 };
 
 
