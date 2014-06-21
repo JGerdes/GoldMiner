@@ -19,7 +19,10 @@ World::World(SpriteManager* spriteManager, string map) :
 						sprite_manager_->getSprite("assets/graphics/mario.ppm"),
 						Vec2(0, 0), Vec2(1280.0 / 18, 720.0 / 11))),
 		map_(new vector<Block*>()),
-		bg_map_(new vector<Block*>()){
+		bg_map_(new vector<Block*>()),
+		font_(new Font(sprite_manager_->getSprite("assets/graphics/font.ppm"),"assets/graphics/font.txt")){
+	font_->setColor(Color(1,1,1));
+	font_->setSize(2);
 	cout << "readmap" << endl;
 	this->readMap(map);
 }
@@ -31,6 +34,7 @@ World::~World() {
 //		cout << i++ << endl;
 //	}
 	delete player_;
+	delete font_;
 }
 
 void World::onKeyDown(int key) {
@@ -230,6 +234,13 @@ void World::draw() {
 	for (auto block : *map_) {
 		block->draw();
 	}
+
+	stringstream score_text;
+	score_text << "Score:" <<player_->getScore();
+	font_->draw_text(Vec2(1100,680),score_text.str());
+	score_text.str("");
+	score_text << "Tool:" <<round(((float)(player_->getAllDestroyedBlocks())/HARD_GAME)*100) << "%";
+	font_->draw_text(Vec2(1100,640),score_text.str());
 
 //cout << "draw player" << endl;
 	player_->draw();

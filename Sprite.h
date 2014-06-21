@@ -40,6 +40,7 @@ public:
 
 
 	void draw(const Vec2& position, const Vec2& dimension) const;
+	void draw(const Vec2& position, const Vec2& dimension, const Vec2& tex_start, const Vec2& tex_end) const;
 
 	unsigned int getWidth() const;
 	unsigned int getHeight() const;

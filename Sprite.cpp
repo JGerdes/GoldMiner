@@ -39,6 +39,12 @@ void Sprite::flip(bool flipped){
 
 void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
+	draw(position,dimension, Vec2(0.0,0.0), Vec2(1.0,1.0));
+
+}
+
+void Sprite::draw(const Vec2& position, const Vec2& dimension, const Vec2& tex_start, const Vec2& tex_end) const{
+
 
 	glEnable(GL_TEXTURE_2D);
 	glPushMatrix();
@@ -51,13 +57,13 @@ void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
 	glBegin(GL_QUADS);
 		glColor3f(color_.r,color_.g,color_.b);
-		glTexCoord2d(1.0f, 0.0f);
+		glTexCoord2d(tex_end.getX(), tex_start.getY());
 		glVertex2d(width , height);
-		glTexCoord2d(0.0f, 0.0f);
+		glTexCoord2d(tex_start.getX(), tex_start.getY());
 		glVertex2d( tex_x, height);
-		glTexCoord2d(0.0f, 1.0f);
+		glTexCoord2d(tex_start.getX(), tex_end.getY());
 		glVertex2d( tex_x, 0.0);
-		glTexCoord2d(1.0f, 1.0f);
+		glTexCoord2d(tex_end.getX(), tex_end.getY());
 		glVertex2d( width, 0);
 	glEnd();
 

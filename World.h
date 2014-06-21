@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "SpriteManager.h"
 #include <string>
+#include "Font.h"
 
 class Player;
 class Block;
@@ -39,6 +40,7 @@ private:
 	Player* player_;
 	std::vector<Block*>* map_;
 	std::vector<Block*>* bg_map_;
+	Font* font_;
 };
 
 
