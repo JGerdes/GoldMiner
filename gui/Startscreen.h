@@ -13,27 +13,32 @@
 #include "Button.h"
 #include "SpriteManager.h"
 #include "Font.h"
+#include "Screen.h"
+#include <vector>
 
-class Startscreen : public Entity, public ButtonHandler{
+class Startscreen : public Screen{
 public:
-	Startscreen(SpriteManager* spriteManager, Vec2 position, Vec2 dimension);
+	enum button{
+		levelOneButton = 0,
+		levelTwoButton = 1,
+		highScoreButton = 3,
+		exitButton = 4
+	};
+
+
+	Startscreen(SpriteManager* spriteManager);
 	~Startscreen();
-	void tick();
-	void draw();
-	bool isLevelOneStarting()const;
-	bool isLevelTwoStarting()const;
-	bool isHighscoreKlicked() const;
+
+	Button* getButton(int id);
+
 	void setLevelOff();
 	virtual void onButtonClick(unsigned int id);
-
+	virtual void tick();
+	virtual void draw() const;
 
 private:
-	bool startLevelOne;
-	bool startLevelTwo;
-	bool showHighscore;
-	Button levelOneButton;
-	Button levelTwoButton;
-	Button highScoreButton;
+	Sprite* bg_;
+	std::vector<Button*> buttons_;
 	Font* font_;
 };
 

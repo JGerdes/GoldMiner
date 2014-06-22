@@ -9,23 +9,31 @@
 #define GAME_H_
 
 #include <GLFW/glfw3.h>
+#include "objects/World.h"
 #include "objects/Player.h"
 #include "gui/SpriteManager.h"
-#include "objects/World.h"
-#include "gui/Startscreen.h"
 #include "gui/Highscore.h"
 #include "gui/GameOverScreen.h"
+#include "gui/Startscreen.h"
+#include "gui/Worldscreen.h"
+#include <vector>
 
 class World;
 
 
-class Game : public KeyListener{
+class Game : public KeyListener, public ButtonHandler{
 public:
+	enum screens{
+		startscreen = 0,
+		worldscreen = 1,
+		gameoverscreen = 2,
+		heighscorscreen = 3,
+	};
 	Game(double width, double height);
 	virtual ~Game();
 	void onKeyUp(int key);
 	void onKeyDown(int key);
-
+	virtual void onButtonClick(unsigned int id);
 private:
 
 	void init();
@@ -38,13 +46,9 @@ private:
 
 	//TODO: only for test purposes!
 	SpriteManager* sprite_manager_;
-	World* world_;
-	World* world1_;
-	Highscore *highscore;
-	Startscreen* startscreen_;
-	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
-	bool exit;
-	GameOverScreen* gameoverscreen_;
+
+	Screen* currentScreen_;
+	std::vector<Screen*> screens_;
 
 };
 

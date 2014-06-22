@@ -15,14 +15,8 @@
 using namespace std;
 
 Game::Game(double width = 1280, double height = 720) :
-		window_(nullptr),
-		window_width_(width),
-		window_height_(height),
-		sprite_manager_(new SpriteManager()),
-		world_(nullptr),
-		startscreen_(nullptr),
-		gamestate(menue),
-		exit(false){ //
+		window_(nullptr), window_width_(width), window_height_(height), sprite_manager_(
+				new SpriteManager()) { //
 	InputManager::getInstance().addKeyListener(this);
 	cout << "Game started" << endl;
 
@@ -32,7 +26,7 @@ Game::Game(double width = 1280, double height = 720) :
 	}
 	glfwWindowHint(GLFW_SAMPLES, 16);
 	window_ = glfwCreateWindow(window_width_, window_height_, "GoldMiner", NULL,
-			NULL);
+	NULL);
 
 	if (window_ == nullptr) {
 		glfwTerminate();
@@ -47,18 +41,7 @@ Game::Game(double width = 1280, double height = 720) :
 }
 
 void Game::onKeyDown(int key) {
-	if(gamestate != menue) {
-		if(key == GLFW_KEY_ESCAPE) {
-			gamestate = menue;
-			startscreen_->setLevelOff();
-			world1_->resetGame();
-			world_->resetGame();
-		}
-	}
-	else
-		if(key == GLFW_KEY_ESCAPE) {
-			exit = true;
-		}
+
 }
 
 void Game::onKeyUp(int key) {
@@ -66,8 +49,10 @@ void Game::onKeyUp(int key) {
 }
 
 Game::~Game() {
-	delete world_;
-	delete startscreen_;
+	vector<Screen*>::iterator iter = screens_.begin();
+	while (iter != screens_.end()) {
+		delete (*iter++);
+	}
 }
 
 void Game::init() {
@@ -77,7 +62,7 @@ void Game::init() {
 	glViewport(0, 0, window_width_, window_height_);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//Callbacks bei GLFW registrieren
 	glfwSetCursorPosCallback(window_, &InputManager::onMouseMove);
@@ -85,77 +70,32 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
-	startscreen_ = new Startscreen(sprite_manager_, Vec2(0, 0), Vec2(1280.0, 720.0));
-	world_ = new World(sprite_manager_, "assets/levels/map.txt");
-	world1_ = new World(sprite_manager_, "assets/levels/map2.txt");
-	highscore = new Highscore();
-	gameoverscreen_ = new GameOverScreen(
-			sprite_manager_->getSprite("assets/graphics/mario.ppm"), Vec2(0, 0),
-			Vec2(1280.0, 720.0));
-}
+	this->screens_.push_back(new Startscreen(sprite_manager_));
+	this->screens_.push_back(new Worldscreen(sprite_manager_));
+//	this->screens.push_back(new Gameoverscreen(sprite_manager_));
+//	this->screens.push_back(new Heighscorscreen(sprite_manager_));
 
+//	world_ = new World(sprite_manager_, "assets/levels/map.txt");
+//	world1_ = new World(sprite_manager_, "assets/levels/map2.txt");
+
+	currentScreen_ = screens_.at(startscreen);
+}
 
 void Game::run() {
 	glfwSetTime(0);
 	static unsigned int i = 0;
 	cout << "run" << endl;
-	while (!glfwWindowShouldClose(window_) && exit == false) {
+	while (!glfwWindowShouldClose(window_)) {
 
-		if(gamestate == menue) {
-			startscreen_->tick();
-			if(startscreen_->isLevelOneStarting()) {
-				gamestate = runningLevelOne;
-			}
-			if(startscreen_->isLevelTwoStarting()) {
-				gamestate = runningLevelTwo;
-			}
-			if(startscreen_->isHighscoreKlicked()) {
-				//TODO anzeige der Highscore (nicht Konsole)
-				highscore->setHighscore(1);
-				startscreen_->setLevelOff();
-			}
-		}
-
-		if (gamestate == gameover
-				&& gameoverscreen_->getIsGameOver() == false) {
-			gamestate = menue;
-		}
-
-		if (gamestate == runningLevelTwo) {
-			if (world1_->getGameOver() == true) {
-				gameoverscreen_->setGameOver(true);
-				startscreen_->setLevelOff();
-				gamestate = gameover;
-			}
-			world1_->getPlayer()->setVisible(true);
-			world_->getPlayer()->setVisible(false);
-			world1_->tick();
-		}
-
-		if (gamestate == runningLevelOne) {
-			if (world_->getGameOver() == true) {
-				gameoverscreen_->setGameOver(true);
-				startscreen_->setLevelOff();
-				gamestate = gameover;
-			}
-			world1_->getPlayer()->setVisible(false);
-			world_->getPlayer()->setVisible(true);
-			world_->tick();
-		}
+		currentScreen_->tick();
 
 		glClearColor(0.7, 0.8, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		render();
 
-		if(world_->getGameOver()){
-			std::cout << "##### GAME OVER####" << std::endl;
-			gamestate = gameover;
-			this->world_->setGameOver(false);
-		}
-
 		i++;
-		if(glfwGetTime() > 1){
+		if (glfwGetTime() > 1) {
 			cout << "Zeit: " << glfwGetTime() << " frames: " << i << endl;
 			glfwSetTime(0);
 			i = 0;
@@ -167,8 +107,6 @@ void Game::run() {
 	glfwTerminate();
 }
 
-
-
 void Game::render() {
 
 	glMatrixMode(GL_PROJECTION);
@@ -177,12 +115,10 @@ void Game::render() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	if(gamestate == menue)
-		startscreen_->draw();
-	if(gamestate == runningLevelOne)
-		world_->draw();
-	if(gamestate == runningLevelTwo)
-		world1_->draw();
-	if (gamestate == gameover)
-		gameoverscreen_->draw();
+	currentScreen_->draw();
+
+}
+
+void Game::onButtonClick(unsigned int id) {
+
 }
