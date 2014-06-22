@@ -14,6 +14,7 @@
 #include "World.h"
 #include "Startscreen.h"
 #include "Highscore.h"
+#include "GameOverScreen.h"
 
 class World;
 
@@ -43,6 +44,7 @@ private:
 	Startscreen* startscreen_;
 	enum Gamestate {menue, runningLevelOne, runningLevelTwo, gameover} gamestate;
 	bool exit;
+	GameOverScreen* gameoverscreen_;
 
 };
 

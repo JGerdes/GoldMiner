@@ -10,7 +10,7 @@
 #include "Vec2.h"
 #include "InputManager.h"
 #include "Highscore.h"
-
+#include "GameOverScreen.h"
 
 using namespace std;
 
@@ -51,6 +51,8 @@ void Game::onKeyDown(int key) {
 		if(key == GLFW_KEY_ESCAPE) {
 			gamestate = menue;
 			startscreen_->setLevelOff();
+			world1_->resetGame();
+			world_->resetGame();
 		}
 	}
 	else
@@ -87,6 +89,9 @@ void Game::init() {
 	world_ = new World(sprite_manager_, "map.txt");
 	world1_ = new World(sprite_manager_, "map2.txt");
 	highscore = new Highscore();
+	gameoverscreen_ = new GameOverScreen(
+			sprite_manager_->getSprite("assets/graphics/mario.ppm"), Vec2(0, 0),
+			Vec2(1280.0, 720.0));
 }
 
 
@@ -111,16 +116,32 @@ void Game::run() {
 			}
 		}
 
-		if(gamestate == runningLevelTwo) {
+		if (gamestate == gameover
+				&& gameoverscreen_->getIsGameOver() == false) {
+			gamestate = menue;
+		}
+
+		if (gamestate == runningLevelTwo) {
+			if (world1_->getGameOver() == true) {
+				gameoverscreen_->setGameOver(true);
+				startscreen_->setLevelOff();
+				gamestate = gameover;
+			}
 			world1_->getPlayer()->setVisible(true);
 			world_->getPlayer()->setVisible(false);
 			world1_->tick();
 		}
 
-		if(gamestate == runningLevelOne)
+		if (gamestate == runningLevelOne) {
+			if (world_->getGameOver() == true) {
+				gameoverscreen_->setGameOver(true);
+				startscreen_->setLevelOff();
+				gamestate = gameover;
+			}
 			world1_->getPlayer()->setVisible(false);
 			world_->getPlayer()->setVisible(true);
 			world_->tick();
+		}
 
 		glClearColor(0.7, 0.8, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -162,4 +183,6 @@ void Game::render() {
 		world_->draw();
 	if(gamestate == runningLevelTwo)
 		world1_->draw();
+	if (gamestate == gameover)
+		gameoverscreen_->draw();
 }

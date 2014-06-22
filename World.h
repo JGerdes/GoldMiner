@@ -22,6 +22,8 @@ public:
 	Player* getPlayer() const;
 	void onKeyUp(int key);
 	void onKeyDown(int key);
+	void resetGame();
+	bool getGameOver() const;
 
 	bool getGameOver(){
 		return gameOver;

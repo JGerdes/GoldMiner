@@ -42,6 +42,11 @@ Player* World::getPlayer() const{
 	return player_;
 }
 
+void World::resetGame() {
+
+		//TODO restMap
+}
+
 void World::testCollision() {
 
 	Block* left, *right, *top, *bottom;
@@ -95,6 +100,10 @@ void World::testCollision() {
 		}
 	}
 	this->player_->setNearestBlocks(top, left, right, bottom);
+}
+
+bool World::getGameOver() const{
+	return gameOver;
 }
 
 void World::readMap(string fileName) {
@@ -206,6 +215,10 @@ void World::tick() {
 		}else{
 			++iter;
 		}
+	}
+
+	if(player_->getScore() > 6) {
+		gameOver = true;
 	}
 
 	player_->tick();
