@@ -106,6 +106,10 @@ bool World::getGameOver() const{
 	return gameOver;
 }
 
+void World::setDifficulty(difficulty d){
+	difficulty_ = d;
+}
+
 void World::readMap(string fileName) {
 	ifstream quelle(fileName);
 	int rowCount = 0;

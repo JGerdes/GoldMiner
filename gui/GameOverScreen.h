@@ -9,21 +9,18 @@
 #define GAMEOVERSCREEN_H_
 
 #include "io/InputManager.h"
-#include "../objects/Entity.h"
+#include "Screen.h"
 
-class GameOverScreen : public MouseListener, public Entity {
+class GameOverScreen : public Screen {
 public:
-	GameOverScreen(Sprite* sprite, Vec2 position, Vec2 dimension);
+	GameOverScreen(SpriteManager* spriteManager, bool enable);
 	~GameOverScreen();
-	bool onButtonDown(int button , Vec2 screen_pos);
-	void onMouseMove(Vec2 screen_pos, Vec2 delta);
-	void onButtonUp(int button, Vec2 screen_pos);
-	void onScroll(Vec2 offset);
-	void tick();
-	bool getIsGameOver();
-	void setGameOver(bool gameOver);
+
+	virtual void tick();
+	virtual void draw()const;
+
 private:
-	bool isGameOver;
+
 };
 
 
