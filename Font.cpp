@@ -34,9 +34,7 @@ Font::Font(Sprite* font_sprite, string charPath):
 		}
 
 		char_width_ = sprite_->getWidth()/((float)chars_per_row_);
-		char_height_ = sprite_->getHeight()/((float)lines)
-
-	;
+		char_height_ = sprite_->getHeight()/((float)lines);
 }
 
 Font::~Font(){
