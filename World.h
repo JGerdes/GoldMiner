@@ -11,7 +11,7 @@
 class Player;
 class Block;
 
-class World : public KeyListener{
+class World{
 public:
 	World(SpriteManager* spriteManager, std::string map);
 	~World();

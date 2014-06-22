@@ -37,13 +37,6 @@ World::~World() {
 	delete font_;
 }
 
-void World::onKeyDown(int key) {
-
-}
-
-void World::onKeyUp(int key) {
-
-}
 
 Player* World::getPlayer() const{
 	return player_;
@@ -66,7 +59,6 @@ void World::testCollision() {
 		pw = this->player_->getDimension().getX();
 		ph = this->player_->getDimension().getY();
 		//-----UNTEN-----
-
 		py -= 5;
 		if (by + bh >= py && py > by) {
 
@@ -75,7 +67,6 @@ void World::testCollision() {
 				bottom = block;
 			}
 		}
-
 		//-------OBEN-----
 		if (by <= py + ph+10 && by > py) {
 
@@ -84,7 +75,6 @@ void World::testCollision() {
 				top = block;
 			}
 		}
-
 		//-----LINKS-----
 		py += 5;
 		px -= 5;
@@ -103,10 +93,7 @@ void World::testCollision() {
 				right = block;
 			}
 		}
-
-
 	}
-
 	this->player_->setNearestBlocks(top, left, right, bottom);
 }
 
