@@ -13,10 +13,8 @@ public:
 	WorldEventListener();
 	virtual ~WorldEventListener();
 
-	void onGameOver() = 0;
-
-	//O.O DAT WORLD EVENT
-	void onZuckerBergFallDown() = 0;
+	virtual void onLose() = 0;
+	virtual void onWin(unsigned int score) = 0;
 };
 
 #endif /* WORLDEVENTLISTENER_H_ */

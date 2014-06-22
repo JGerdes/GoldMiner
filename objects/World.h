@@ -7,6 +7,7 @@
 #include "../gui/SpriteManager.h"
 #include <string>
 #include "../gui/Font.h"
+#include "../gui/WorldEventListener.h"
 
 class Player;
 class Block;
@@ -30,26 +31,20 @@ public:
 	void onKeyDown(int key);
 	void resetGame();
 	bool getGameOver() const;
-
 	void setDifficulty(difficulty d);
 
-	bool getGameOver(){
-		return gameOver;
-	}
-	void setGameOver(bool gameOver_){
-		gameOver = gameOver_;
-	}
-
+	void setWorldEventListener(WorldEventListener* listener);
 
 private:
 
-	bool gameOver = false;
 	SpriteManager* sprite_manager_;
 	Player* player_;
 	std::vector<Block*>* map_;
 	std::vector<Block*>* bg_map_;
 	Font* font_;
 	difficulty difficulty_;
+	WorldEventListener* listener_;
+	unsigned int goldAmount_;
 };
 
 

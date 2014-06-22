@@ -84,7 +84,7 @@ void Player::tick() {
 
 }
 
-int Player::getScore() const{
+unsigned int Player::getScore() const{
 	return this->score;
 }
 

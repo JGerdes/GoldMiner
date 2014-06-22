@@ -33,7 +33,7 @@ public:
 	virtual void tick();
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
-	int getScore() const;
+	unsigned int getScore() const;
 	void addToScore();
 
 	int getAllDestroyedBlocks() const;

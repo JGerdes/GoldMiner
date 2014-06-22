@@ -21,7 +21,9 @@ World::World(SpriteManager* spriteManager, string map) :
 		map_(new vector<Block*>()),
 		bg_map_(new vector<Block*>()),
 		font_(new Font(sprite_manager_->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
-		difficulty_(EASY_GAME){
+		difficulty_(EASY_GAME),
+		listener_(nullptr),
+		goldAmount_(0){
 	font_->setColor(Color(1,1,1));
 	font_->setSize(2);
 	cout << "readmap" << endl;
@@ -102,9 +104,6 @@ void World::testCollision() {
 
 }
 
-bool World::getGameOver() const{
-	return gameOver;
-}
 
 void World::setDifficulty(difficulty d){
 	difficulty_ = d;
@@ -158,6 +157,7 @@ void World::readMap(string fileName) {
 				map_->push_back(block);
 				cout << "new Ground " << (1280.0 / 16) * i << " ,"
 						<< (720.0 / 9) * rowCount << endl;
+				goldAmount_++;
 			}
 			if (ch[i] == 'p') {
 				player_->setPosition(
@@ -191,6 +191,11 @@ void World::readMap(string fileName) {
 	cout << "rowcount:" << rowCount << endl;
 }
 
+void World::setWorldEventListener(WorldEventListener* listener){
+	listener_ = listener;
+}
+
+
 
 
 void World::tick() {
@@ -206,10 +211,7 @@ void World::tick() {
 				this->player_->addToDestroyedBlocks();
 				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
 				if(this->player_->getAllDestroyedBlocks() == difficulty_){
-					std::cout << "GAME OVER" << std::endl;
-					std::cout << "Score: " << this->player_->getScore() << std::endl;
-					std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
-					this->setGameOver(true);
+					listener_->onLose();
 				}
 			}
 			map_->erase(iter);
@@ -220,11 +222,9 @@ void World::tick() {
 			++iter;
 		}
 	}
-
-	if(player_->getScore() > 6) {
-		gameOver = true;
+	if(goldAmount_ == player_->getScore()){
+		listener_->onWin(player_->getScore());
 	}
-
 	player_->tick();
 }
 
