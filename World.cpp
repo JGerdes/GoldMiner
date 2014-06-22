@@ -20,7 +20,7 @@ World::World(SpriteManager* spriteManager, string map) :
 						Vec2(0, 0), Vec2(1280.0 / 18, 720.0 / 11))),
 		map_(new vector<Block*>()),
 		bg_map_(new vector<Block*>()),
-		font_(new Font(sprite_manager_->getSprite("assets/graphics/font.ppm"),"assets/graphics/font.txt")){
+		font_(new Font(sprite_manager_->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")){
 	font_->setColor(Color(1,1,1));
 	font_->setSize(2);
 	cout << "readmap" << endl;

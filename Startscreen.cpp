@@ -22,7 +22,7 @@ Startscreen::Startscreen(SpriteManager* spriteManager, Vec2 position, Vec2 dimen
 		levelOneButton(Button(1, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6))),
 		levelTwoButton(Button(2, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,300), Vec2(64*6,16*6))),
 		highScoreButton(Button(3, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,150), Vec2(64*6,16*6))),
-		font_(new Font(spriteManager->getSprite("assets/graphics/font.ppm"),"assets/graphics/font.txt")){
+		font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")){
 	levelOneButton.setHandler(this);
 	levelTwoButton.setHandler(this);
 	highScoreButton.setHandler(this);
