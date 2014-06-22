@@ -46,7 +46,7 @@ public:
 private:
 
 	Sprite* bg_;
-	std::vector<Button*> buttons_;
+	std::vector<Button*> menu_buttons_;
 	std::vector<Button*> difficulty_buttons_;
 
 	Font* font_;
