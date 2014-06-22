@@ -45,15 +45,16 @@ void Font::draw_text(Vec2 pos, string text) const{
 	static const float w = ((float)char_width_)/sprite_->getWidth();
 	static const float h = ((float)char_height_)/sprite_->getHeight();
 	for(size_t i=0; i<text.length(); i++){
-		pos += Vec2(char_width_*size_, 0);
 		Vec2 c_pos = getPositionOfChar(text[i]);
 		if(c_pos.getX() == -1){
+			pos += Vec2(char_width_*size_, 0);
 			continue;
 		}
 		float wi = c_pos.getX();
 		float hi = c_pos.getY();
 
 		sprite_->draw(pos, Vec2(char_width_*size_, char_height_*size_), Vec2(wi*w,hi*h), Vec2((wi+1)*w,(hi+1)*h));
+		pos += Vec2(char_width_*size_, 0);
 	}
 
 }
