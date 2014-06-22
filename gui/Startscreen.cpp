@@ -13,8 +13,8 @@
 
 using namespace std;
 
-Startscreen::Startscreen(SpriteManager* spriteManager) :
-		Screen(spriteManager),
+Startscreen::Startscreen(SpriteManager* spriteManager, bool enable) :
+		Screen(spriteManager, enable),
 		font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")){
 
 	bg_ = spriteManager->getSprite("assets/graphics/menue.ppm");
@@ -36,6 +36,7 @@ Startscreen::Startscreen(SpriteManager* spriteManager) :
 	b->setFont(font_);
 	b->setText("3x1t");
 	buttons_.push_back(b);
+	cout << "startscreen created" << endl;
 }
 
 Startscreen::~Startscreen() {
@@ -46,7 +47,6 @@ void Startscreen::tick(){
 
 
 }
-
 
 void Startscreen::draw() const {
 	font_->setSize(3);

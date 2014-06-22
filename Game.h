@@ -21,7 +21,7 @@
 class World;
 
 
-class Game : public KeyListener, public ButtonHandler{
+class Game : public ButtonHandler{
 public:
 	enum screens{
 		startscreen = 0,
@@ -31,8 +31,6 @@ public:
 	};
 	Game(double width, double height);
 	virtual ~Game();
-	void onKeyUp(int key);
-	void onKeyDown(int key);
 	virtual void onButtonClick(unsigned int id);
 private:
 

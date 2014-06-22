@@ -13,12 +13,12 @@
 
 class Worldscreen: public Screen {
 public:
-	Worldscreen(SpriteManager* spriteManager);
+	Worldscreen(SpriteManager* spriteManager, bool enable);
 	virtual ~Worldscreen();
 	virtual void tick();
 	virtual void draw() const ;
 
-	void setLevel(World* world);
+	void setWorld(World* world);
 
 
 private:

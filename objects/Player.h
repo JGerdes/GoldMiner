@@ -22,8 +22,7 @@ public:
 			top_(nullptr),
 			left_(nullptr),
 			right_(nullptr),
-			bottom_(nullptr),
-			visible_(false){
+			bottom_(nullptr){
 		InputManager::getInstance().addKeyListener(this);
 
 	}
@@ -32,7 +31,6 @@ public:
 
 	virtual ~Player();
 	virtual void tick();
-	void setVisible(bool visible);
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
 	int getScore() const;
@@ -45,7 +43,6 @@ private:
 	unsigned int score = 0;
 	unsigned int destroyedBlocks = 0;
 	Block* top_, *left_, *right_, *bottom_;
-	bool visible_;
 };
 
 #endif /* PLAYER_H_ */

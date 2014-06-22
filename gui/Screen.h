@@ -13,16 +13,26 @@
 class Screen {
 public:
 
-	Screen(SpriteManager* spriteManager) :
-			spriteManager_(spriteManager) {
+	Screen(SpriteManager* spriteManager, bool enable) :
+			spriteManager_(spriteManager),
+			enabled_(enable){
 	}
 	virtual ~Screen() {
 	}
 	virtual void tick() = 0;
 	virtual void draw() const = 0;
 
+	bool isEnabled(){
+		return enabled_;
+	}
+
+	void setEnabled(bool enable){
+		enabled_ = enable;
+	}
+
 private:
 	SpriteManager* spriteManager_;
+	bool enabled_;
 };
 
 #endif /* SCREEN_H_ */

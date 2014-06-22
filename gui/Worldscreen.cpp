@@ -10,8 +10,8 @@
 using namespace std;
 
 
-Worldscreen::Worldscreen(SpriteManager* spriteManager):
-	Screen(spriteManager),
+Worldscreen::Worldscreen(SpriteManager* spriteManager, bool enable):
+	Screen(spriteManager, enable),
 	world_(nullptr){
 
 }
@@ -35,6 +35,6 @@ void Worldscreen::tick(){
 	}
 }
 
-void Worldscreen::setLevel(World* world){
+void Worldscreen::setWorld(World* world){
 	world_ = world;
 }

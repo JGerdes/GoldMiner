@@ -62,16 +62,15 @@ void World::testCollision() {
 		py = this->player_->getDestination().getY();
 		pw = this->player_->getDimension().getX();
 		ph = this->player_->getDimension().getY();
-		//-----UNTEN-----
+		//-----DOWN-----
 		py -= 5;
 		if (by + bh >= py && py > by) {
 
 			if ((bx <= px && px <= bx + bw) || (bx >= px && px + pw >= bx)) {
-
 				bottom = block;
 			}
 		}
-		//-------OBEN-----
+		//-------UP-----
 		if (by <= py + ph+10 && by > py) {
 
 			if ((bx <= px && px <= bx + bw) || (bx >= px && px + pw >= bx)) {
@@ -79,7 +78,7 @@ void World::testCollision() {
 				top = block;
 			}
 		}
-		//-----LINKS-----
+		//-----LEFT-----
 		py += 5;
 		px -= 5;
 
@@ -89,7 +88,7 @@ void World::testCollision() {
 				left = block;
 			}
 		}
-		//-----RECHTS-----
+		//-----RIGHT-----
 		px += 10;
 		if (bx <= px + pw && bx > px) {
 			if ((by <= py && py <= by + bh) || (by >= py && py + ph >= by)) {
@@ -99,6 +98,7 @@ void World::testCollision() {
 		}
 	}
 	this->player_->setNearestBlocks(top, left, right, bottom);
+
 }
 
 bool World::getGameOver() const{

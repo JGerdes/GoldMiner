@@ -21,17 +21,15 @@ public:
 	enum button{
 		levelOneButton = 0,
 		levelTwoButton = 1,
-		highScoreButton = 3,
-		exitButton = 4
+		highScoreButton = 2,
+		exitButton = 3,
 	};
 
-
-	Startscreen(SpriteManager* spriteManager);
+	Startscreen(SpriteManager* spriteManager, bool enable);
 	~Startscreen();
 
 	Button* getButton(int id);
 
-	void setLevelOff();
 	virtual void tick();
 	virtual void draw() const;
 
@@ -39,6 +37,7 @@ private:
 	Sprite* bg_;
 	std::vector<Button*> buttons_;
 	Font* font_;
+
 };
 
 

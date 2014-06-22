@@ -16,8 +16,7 @@ using namespace std;
 
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr), window_width_(width), window_height_(height), sprite_manager_(
-				new SpriteManager()) { //
-	InputManager::getInstance().addKeyListener(this);
+				new SpriteManager()) {
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -40,13 +39,7 @@ Game::Game(double width = 1280, double height = 720) :
 
 }
 
-void Game::onKeyDown(int key) {
 
-}
-
-void Game::onKeyUp(int key) {
-
-}
 
 Game::~Game() {
 	vector<Screen*>::iterator iter = screens_.begin();
@@ -70,13 +63,21 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
-	this->screens_.push_back(new Startscreen(sprite_manager_));
-	this->screens_.push_back(new Worldscreen(sprite_manager_));
+	Startscreen* start = new Startscreen(sprite_manager_, true);
+	cout << "Button_1" << endl;
+	start->getButton(Startscreen::levelOneButton)->setHandler(this);
+	cout << "Button_2" << endl;
+	start->getButton(Startscreen::levelTwoButton)->setHandler(this);
+	cout << "Button_3" << endl;
+	start->getButton(Startscreen::highScoreButton)->setHandler(this);
+	cout << "Button_4" << endl;
+	start->getButton(Startscreen::exitButton)->setHandler(this);
+	cout << "all_buttons" << endl;
+
+	this->screens_.push_back(start);
+	this->screens_.push_back(new Worldscreen(sprite_manager_,false));
 //	this->screens.push_back(new Gameoverscreen(sprite_manager_));
 //	this->screens.push_back(new Heighscorscreen(sprite_manager_));
-
-//	world_ = new World(sprite_manager_, "assets/levels/map.txt");
-//	world1_ = new World(sprite_manager_, "assets/levels/map2.txt");
 
 	currentScreen_ = screens_.at(startscreen);
 }
@@ -120,5 +121,23 @@ void Game::render() {
 }
 
 void Game::onButtonClick(unsigned int id) {
-
+	// startscreen buttons
+	if(screens_.at(startscreen)->isEnabled()){
+		if(Startscreen::levelOneButton == id){
+			((Worldscreen*)screens_.at(worldscreen))->setWorld(new World(sprite_manager_, "assets/levels/map.txt"));
+			currentScreen_ = screens_.at(worldscreen);
+			screens_.at(startscreen)->setEnabled(false);
+		}
+		if(Startscreen::levelTwoButton == id){
+			((Worldscreen*)screens_.at(worldscreen))->setWorld(new World(sprite_manager_, "assets/levels/map2.txt"));
+			currentScreen_ = screens_.at(worldscreen);
+			screens_.at(startscreen)->setEnabled(false);
+		}
+		if(Startscreen::highScoreButton == id){
+			screens_.at(startscreen)->setEnabled(false);
+		}
+		if(Startscreen::exitButton == id){
+			screens_.at(startscreen)->setEnabled(false);
+		}
+	}
 }
