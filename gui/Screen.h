@@ -26,7 +26,7 @@ public:
 		return enabled_;
 	}
 
-	void setEnabled(bool enable){
+	virtual void setEnabled(bool enable){
 		enabled_ = enable;
 	}
 

@@ -10,7 +10,7 @@
 #include "Vec2.h"
 #include "gui/io/InputManager.h"
 #include "gui/Highscore.h"
-#include "gui/GameOverScreen.h"
+#include "gui/Gameoverscreen.h"
 
 using namespace std;
 
