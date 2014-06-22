@@ -16,12 +16,13 @@
 #include "gui/GameOverScreen.h"
 #include "gui/Startscreen.h"
 #include "gui/Worldscreen.h"
+#include "objects/WorldEventListener.h"
 #include <vector>
 
 class World;
 
 
-class Game : public ButtonHandler{
+class Game : public ButtonHandler, public WorldEventListener{
 public:
 	enum screens{
 		startscreen = 0,
@@ -32,6 +33,8 @@ public:
 	Game(double width, double height);
 	virtual ~Game();
 	virtual void onButtonClick(unsigned int id);
+	virtual void onLose(unsigned int score, unsigned int destroyedBlocks);
+	virtual void onWin(unsigned int score, unsigned int destroyedBlocks);
 private:
 
 	void init();
@@ -42,7 +45,6 @@ private:
 	double window_width_;
 	double window_height_;
 
-	//TODO: only for test purposes!
 	SpriteManager* sprite_manager_;
 
 	Screen* currentScreen_;

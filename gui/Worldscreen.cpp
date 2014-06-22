@@ -38,3 +38,7 @@ void Worldscreen::tick(){
 void Worldscreen::setWorld(World* world){
 	world_ = world;
 }
+
+World* Worldscreen::getWorld(){
+	return world_;
+}

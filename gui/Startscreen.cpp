@@ -62,8 +62,6 @@ Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMen
 	b->setFont(font_);
 	b->setText("back");
 	difficulty_buttons_.push_back(b);
-
-	cout << "startscreen created" << endl;
 }
 
 Startscreen::~Startscreen() {
@@ -121,5 +119,16 @@ void Startscreen::setDrawMenuButtons(bool b){
 	}
 	drawMenuButtons_ = b;
 }
+
+void Startscreen::setEnabled(bool enable){
+	Screen::setEnabled(enable);
+	for(Button* b : menu_buttons_){
+		b->setVisible(enable);
+	}
+	for(Button* b : difficulty_buttons_){
+		b->setVisible(enable);
+	}
+}
+
 
 

@@ -38,6 +38,7 @@ public:
 
 	virtual void tick();
 	virtual void draw() const;
+	virtual void setEnabled(bool enable);
 
 	void setDrawMenuButtons(bool b);
 

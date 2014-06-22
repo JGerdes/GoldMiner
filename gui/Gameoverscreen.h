@@ -12,26 +12,31 @@
 #include "Screen.h"
 #include "Button.h"
 #include <vector>
+#include <string>
 
 class Gameoverscreen : public Screen {
 public:
+	enum buttons{
+			playAgain = 10,
+			mainMenu = 11
+		};
+
 	Gameoverscreen(SpriteManager* spriteManager, bool enable);
 	~Gameoverscreen();
 
 	virtual void tick();
 	virtual void draw()const;
 	virtual void setEnabled(bool enable);
-	const std::vector<Button*>& getButtons() const;
-
-	enum buttons{
-		playAgain = 10,
-		mainMenu = 11
-	};
+	std::vector<Button*>& getButtons();
+	void setText(std::string text);
+	void setScore(int score);
 
 private:
 	Sprite* background_;
 	Font* font_;
 	std::vector<Button*> buttons_;
+	std::string text_;
+	int score_;
 
 
 };

@@ -19,6 +19,7 @@ public:
 	virtual void draw() const ;
 
 	void setWorld(World* world);
+	World* getWorld();
 
 
 private:

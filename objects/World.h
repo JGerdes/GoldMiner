@@ -7,7 +7,7 @@
 #include "../gui/SpriteManager.h"
 #include <string>
 #include "../gui/Font.h"
-#include "../gui/WorldEventListener.h"
+#include "WorldEventListener.h"
 
 class Player;
 class Block;
