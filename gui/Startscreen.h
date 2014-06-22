@@ -32,7 +32,6 @@ public:
 	Button* getButton(int id);
 
 	void setLevelOff();
-	virtual void onButtonClick(unsigned int id);
 	virtual void tick();
 	virtual void draw() const;
 
