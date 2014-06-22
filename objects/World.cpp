@@ -28,11 +28,10 @@ World::World(SpriteManager* spriteManager, string map) :
 }
 
 World::~World() {
-//	size_t i = 0;
-//	for(auto block : this->map){
-//		delete block;
-//		cout << i++ << endl;
-//	}
+	vector<Block*>::iterator iter = map_->begin();
+	while(iter != map_->end()){
+		delete (*iter++);
+	}
 	delete player_;
 	delete font_;
 }
