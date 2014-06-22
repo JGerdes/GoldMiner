@@ -6,7 +6,7 @@
  */
 
 #include "Block.h"
-#include "Sprite.h"
+#include "../gui/Sprite.h"
 #include <iostream>
 
 

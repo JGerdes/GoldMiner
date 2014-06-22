@@ -9,7 +9,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "InputManager.h"
-#include "Vec2.h"
+#include "../../Vec2.h"
 #include <stdexcept>
 
 using namespace std;

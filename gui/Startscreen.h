@@ -8,8 +8,8 @@
 #ifndef STARTSCREEN_H_
 #define STARTSCREEN_H_
 
-#include "InputManager.h"
-#include "Entity.h"
+#include "../gui/io/InputManager.h"
+#include "../objects/Entity.h"
 #include "Button.h"
 #include "SpriteManager.h"
 #include "Font.h"

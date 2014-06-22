@@ -9,10 +9,10 @@
 #define BUTTON_H_
 
 #include <string>
-#include "Entity.h"
-#include "MouseListener.h"
+#include "../objects/Entity.h"
+#include "io/MouseListener.h"
 #include "Sprite.h"
-#include "Vec2.h"
+#include "../Vec2.h"
 #include "Font.h"
 
 class ButtonHandler{

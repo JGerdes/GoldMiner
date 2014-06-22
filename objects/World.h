@@ -4,9 +4,9 @@
 #include <vector>
 #include "Block.h"
 #include "Player.h"
-#include "SpriteManager.h"
+#include "../gui/SpriteManager.h"
 #include <string>
-#include "Font.h"
+#include "../gui/Font.h"
 
 class Player;
 class Block;

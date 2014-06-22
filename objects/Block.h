@@ -8,8 +8,8 @@
 #ifndef BLOCK_H_
 #define BLOCK_H_
 
-#include "Vec2.h"
-#include "MouseListener.h"
+#include "../Vec2.h"
+#include "../gui/io/MouseListener.h"
 #include "Entity.h"
 
 class Block : public Entity, MouseListener {

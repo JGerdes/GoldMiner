@@ -8,9 +8,9 @@
 #include "Game.h"
 #include <iostream>
 #include "Vec2.h"
-#include "InputManager.h"
-#include "Highscore.h"
-#include "GameOverScreen.h"
+#include "gui/io/InputManager.h"
+#include "gui/Highscore.h"
+#include "gui/GameOverScreen.h"
 
 using namespace std;
 
@@ -86,8 +86,8 @@ void Game::init() {
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
 	startscreen_ = new Startscreen(sprite_manager_, Vec2(0, 0), Vec2(1280.0, 720.0));
-	world_ = new World(sprite_manager_, "map.txt");
-	world1_ = new World(sprite_manager_, "map2.txt");
+	world_ = new World(sprite_manager_, "assets/levels/map.txt");
+	world1_ = new World(sprite_manager_, "assets/levels/map2.txt");
 	highscore = new Highscore();
 	gameoverscreen_ = new GameOverScreen(
 			sprite_manager_->getSprite("assets/graphics/mario.ppm"), Vec2(0, 0),

@@ -6,7 +6,7 @@
  */
 
 #include "Button.h"
-#include "InputManager.h"
+#include "io/InputManager.h"
 #include <iostream>
 #include <sstream>
 

@@ -9,7 +9,7 @@
 #define SPRITE_H_
 
 #include <string>
-#include "Vec2.h"
+#include "../Vec2.h"
 #include <GLFW/glfw3.h>
 #include "ImageBuffer.h"
 

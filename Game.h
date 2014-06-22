@@ -9,12 +9,12 @@
 #define GAME_H_
 
 #include <GLFW/glfw3.h>
-#include "Player.h"
-#include "SpriteManager.h"
-#include "World.h"
-#include "Startscreen.h"
-#include "Highscore.h"
-#include "GameOverScreen.h"
+#include "objects/Player.h"
+#include "gui/SpriteManager.h"
+#include "objects/World.h"
+#include "gui/Startscreen.h"
+#include "gui/Highscore.h"
+#include "gui/GameOverScreen.h"
 
 class World;
 

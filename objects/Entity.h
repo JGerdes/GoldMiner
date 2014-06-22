@@ -8,8 +8,8 @@
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
-#include "Vec2.h"
-#include "Sprite.h"
+#include "../Vec2.h"
+#include "../gui/Sprite.h"
 
 class Entity {
 public:

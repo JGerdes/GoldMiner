@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 #include "Sprite.h"
-#include "Vec2.h"
+#include "../Vec2.h"
 
 class Font {
 public:

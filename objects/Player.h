@@ -12,7 +12,7 @@ void Player::onKeyDown(int key){
 #define PLAYER_H_
 
 #include "Entity.h"
-#include "InputManager.h"
+#include "../gui/io/InputManager.h"
 #include "Block.h"
 
 class Player: public Entity, public KeyListener {

@@ -8,8 +8,8 @@
 #ifndef GAMEOVERSCREEN_H_
 #define GAMEOVERSCREEN_H_
 
-#include "InputManager.h"
-#include "Entity.h"
+#include "io/InputManager.h"
+#include "../objects/Entity.h"
 
 class GameOverScreen : public MouseListener, public Entity {
 public:
