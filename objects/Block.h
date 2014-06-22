@@ -12,7 +12,7 @@
 #include "../gui/io/MouseListener.h"
 #include "Entity.h"
 
-class Block : public Entity, MouseListener {
+class Block : public Entity {
 public:
 
 	enum Type{
@@ -26,10 +26,6 @@ public:
 	virtual void mine();
 	virtual bool isDestroyed();
 
-	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta);
-	virtual void onButtonUp(int button, Vec2 screen_pos);
-	virtual void onButtonDown(int button , Vec2 screen_pos);
-	virtual void onScroll(Vec2 offset);
 
 	Type getType(){
 		return type_;

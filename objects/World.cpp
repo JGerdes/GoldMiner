@@ -20,7 +20,8 @@ World::World(SpriteManager* spriteManager, string map) :
 						Vec2(0, 0), Vec2(1280.0 / 18, 720.0 / 11))),
 		map_(new vector<Block*>()),
 		bg_map_(new vector<Block*>()),
-		font_(new Font(sprite_manager_->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")){
+		font_(new Font(sprite_manager_->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
+		difficulty_(EASY_GAME){
 	font_->setColor(Color(1,1,1));
 	font_->setSize(2);
 	cout << "readmap" << endl;
@@ -200,7 +201,7 @@ void World::tick() {
 			}else if((*iter)->getType() == Block::dirt){
 				this->player_->addToDestroyedBlocks();
 				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
-				if(this->player_->getAllDestroyedBlocks() == this->HARD_GAME){
+				if(this->player_->getAllDestroyedBlocks() == difficulty_){
 					std::cout << "GAME OVER" << std::endl;
 					std::cout << "Score: " << this->player_->getScore() << std::endl;
 					std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;

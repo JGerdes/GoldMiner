@@ -71,14 +71,21 @@ void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int 
 	}else{
 		mouse_buttons_[button] = false;
 	}
+	size_t i = 0;
 	for(MouseListener* listener : mouse_listeners_){
 		if(action == GLFW_PRESS){
-			listener->onButtonDown(button, Vec2(last_x, last_y) );
+			if(listener->onButtonDown(button, Vec2(last_x, last_y))){
+				cout<< "listener: " << i <<endl;
+				return;
+			}
 		}
 		if(action == GLFW_RELEASE){
+			//TODO: genauso wie bei buttton down
 			listener->onButtonUp(button, Vec2(last_x, last_y));
 		}
+		++i;
 	}
+
 }
 
 void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_offset){

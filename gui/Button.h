@@ -28,7 +28,7 @@ public:
 	virtual ~Button();
 	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta);
 	virtual void onButtonUp(int button, Vec2 screen_pos);
-	virtual void onButtonDown(int button , Vec2 screen_pos);
+	virtual bool onButtonDown(int button , Vec2 screen_pos);
 	virtual void onScroll(Vec2 offset);
 
 	virtual void setHandler(ButtonHandler* handler);
@@ -37,12 +37,16 @@ public:
 
 	virtual void draw();
 	virtual void tick(){}
+
+	void setVisible(bool b);
 private:
+
 	unsigned int id_;
 	bool isHovered_;
 	ButtonHandler* handler_;
 	Font* font_;
 	std::string text_;
+	bool visible_;
 };
 
 #endif /* BUTTON_H_ */

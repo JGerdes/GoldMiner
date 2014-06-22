@@ -48,6 +48,7 @@ private:
 	Screen* currentScreen_;
 	std::vector<Screen*> screens_;
 
+	World* active_world_;
 };
 
 #endif /* GAME_H_ */

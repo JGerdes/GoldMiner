@@ -23,20 +23,34 @@ public:
 		levelTwoButton = 1,
 		highScoreButton = 2,
 		exitButton = 3,
+
+		easyButton = 4,
+		normalButton = 5,
+		hardButton = 6,
+		backButton = 7,
+
 	};
 
-	Startscreen(SpriteManager* spriteManager, bool enable);
+	Startscreen(SpriteManager* spriteManager, bool enable, bool drawMenuButtons);
 	~Startscreen();
 
-	Button* getButton(int id);
+	std::vector<Button*> getButtons();
 
 	virtual void tick();
 	virtual void draw() const;
 
+	void setDrawMenuButtons(bool b);
+
+
+
 private:
+
 	Sprite* bg_;
-	std::vector<Button*> buttons_;
+	std::vector<Button*> menu_buttons_;
+	std::vector<Button*> difficulty_buttons_;
+
 	Font* font_;
+	bool drawMenuButtons_;
 
 };
 

@@ -16,7 +16,7 @@ public:
 	virtual ~MouseListener(){}
 	virtual void onMouseMove(Vec2 screen_pos, Vec2 delta)=0;
 	virtual void onButtonUp(int button, Vec2 screen_pos)=0;
-	virtual void onButtonDown(int button , Vec2 screen_pos)=0;
+	virtual bool onButtonDown(int button , Vec2 screen_pos)=0;
 	virtual void onScroll(Vec2 offset)=0;
 };
 

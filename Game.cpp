@@ -63,16 +63,11 @@ void Game::init() {
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
 
-	Startscreen* start = new Startscreen(sprite_manager_, true);
+	Startscreen* start = new Startscreen(sprite_manager_, true, true);
 	cout << "Button_1" << endl;
-	start->getButton(Startscreen::levelOneButton)->setHandler(this);
-	cout << "Button_2" << endl;
-	start->getButton(Startscreen::levelTwoButton)->setHandler(this);
-	cout << "Button_3" << endl;
-	start->getButton(Startscreen::highScoreButton)->setHandler(this);
-	cout << "Button_4" << endl;
-	start->getButton(Startscreen::exitButton)->setHandler(this);
-	cout << "all_buttons" << endl;
+	for(Button* b : start->getButtons()){
+		b->setHandler(this);
+	}
 
 	this->screens_.push_back(start);
 	this->screens_.push_back(new Worldscreen(sprite_manager_,false));
@@ -125,19 +120,34 @@ void Game::onButtonClick(unsigned int id) {
 	if(screens_.at(startscreen)->isEnabled()){
 		if(Startscreen::levelOneButton == id){
 			((Worldscreen*)screens_.at(worldscreen))->setWorld(new World(sprite_manager_, "assets/levels/map.txt"));
-			currentScreen_ = screens_.at(worldscreen);
-			screens_.at(startscreen)->setEnabled(false);
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(false);
+			cout << "levelOneButton" << endl;
 		}
 		if(Startscreen::levelTwoButton == id){
 			((Worldscreen*)screens_.at(worldscreen))->setWorld(new World(sprite_manager_, "assets/levels/map2.txt"));
-			currentScreen_ = screens_.at(worldscreen);
-			screens_.at(startscreen)->setEnabled(false);
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(false);
+			cout << "levelTwoButton" << endl;
 		}
 		if(Startscreen::highScoreButton == id){
 			screens_.at(startscreen)->setEnabled(false);
 		}
 		if(Startscreen::exitButton == id){
 			screens_.at(startscreen)->setEnabled(false);
+		}
+
+		if(Startscreen::easyButton == id){
+			screens_.at(startscreen)->setEnabled(false);
+			currentScreen_ = screens_.at(worldscreen);
+			cout << "easyButton" << endl;
+		}
+		if(Startscreen::normalButton == id){
+
+		}
+		if(Startscreen::hardButton == id){
+
+		}
+		if(Startscreen::backButton == id){
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 		}
 	}
 }

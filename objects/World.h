@@ -13,6 +13,12 @@ class Block;
 
 class World{
 public:
+	enum difficulty{
+		EASY_GAME   = 30,
+		NORMAL_GAME = 25,
+		HARD_GAME   = 15,
+	};
+
 	World(SpriteManager* spriteManager, std::string map);
 	~World();
 	void readMap(std::string fileName);
@@ -25,24 +31,25 @@ public:
 	void resetGame();
 	bool getGameOver() const;
 
+	void setDifficulty(difficulty d);
+
 	bool getGameOver(){
 		return gameOver;
 	}
 	void setGameOver(bool gameOver_){
 		gameOver = gameOver_;
 	}
-	const int FREE_GAME	  = 1000;
-	const int EASY_GAME   = 30;
-	const int NORMAL_GAME = 25;
-	const int HARD_GAME   = 15;
+
 
 private:
+
 	bool gameOver = false;
 	SpriteManager* sprite_manager_;
 	Player* player_;
 	std::vector<Block*>* map_;
 	std::vector<Block*>* bg_map_;
 	Font* font_;
+	difficulty difficulty_;
 };
 
 

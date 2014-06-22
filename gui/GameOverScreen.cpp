@@ -16,12 +16,13 @@ GameOverScreen::~GameOverScreen() {
 
 }
 
-void GameOverScreen::onButtonDown(int button, Vec2 screen_pos) {
-	if (isGameOver == true)
+bool GameOverScreen::onButtonDown(int button, Vec2 screen_pos) {
+	if (isGameOver == true){
 		if (button == GLFW_MOUSE_BUTTON_1) {
 			isGameOver = false;
 		}
-
+	}
+	return false;
 }
 
 void GameOverScreen::setGameOver(bool gameOver) {
