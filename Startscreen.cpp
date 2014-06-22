@@ -21,11 +21,18 @@ Startscreen::Startscreen(SpriteManager* spriteManager, Vec2 position, Vec2 dimen
 		showHighscore(false),
 		levelOneButton(Button(1, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6))),
 		levelTwoButton(Button(2, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,300), Vec2(64*6,16*6))),
+		highScoreButton(Button(3, spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,150), Vec2(64*6,16*6))),
 		font_(new Font(spriteManager->getSprite("assets/graphics/font.ppm"),"assets/graphics/font.txt")){
 	levelOneButton.setHandler(this);
 	levelTwoButton.setHandler(this);
-	font_->setColor(Color(1,1,1));
-	font_->setSize(3);
+	highScoreButton.setHandler(this);
+	font_->setColor(Color(0,0,0));
+	levelOneButton.setFont(font_);
+	levelOneButton.setText("Level 1");
+	levelTwoButton.setFont(font_);
+	levelTwoButton.setText("Level 2");
+	highScoreButton.setFont(font_);
+	highScoreButton.setText("Highscore");
 }
 
 Startscreen::~Startscreen() {
@@ -35,8 +42,13 @@ Startscreen::~Startscreen() {
 
 void Startscreen::draw() {
 	Entity::draw();
+	font_->setSize(3);
 	levelOneButton.draw();
-	font_->draw_text(Vec2((1280-64*5)/2.0,380), "Level 1");
+	levelTwoButton.draw();
+	highScoreButton.draw();
+	font_->setSize(1.8);
+	string by = "by Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers";
+	font_->draw_text(Vec2((1280-font_->compute_dimension(by).getX())/2, 10), by);
 }
 
 bool Startscreen::isLevelOneStarting() const {
@@ -71,5 +83,7 @@ void Startscreen::onButtonClick(unsigned int id){
 	case 2:
 		startLevelTwo = true;
 		break;
+	case 3:
+		showHighscore = true;
 	}
 }

@@ -77,3 +77,9 @@ void Font::setSize(float s){
 	size_ = s;
 }
 
+Vec2 Font::compute_dimension(string text) const{
+	float w = char_width_*size_ * text.length();
+	float h = char_height_*size_;
+	return Vec2(w,h);
+}
+

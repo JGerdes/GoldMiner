@@ -21,6 +21,7 @@ public:
 	void draw_text(Vec2 pos, std::string text) const;
 	void setColor(Color c);
 	void setSize(float s);
+	Vec2 compute_dimension(std::string text) const;
 
 private:
 	Sprite* sprite_;

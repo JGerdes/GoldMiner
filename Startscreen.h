@@ -33,6 +33,7 @@ private:
 	bool showHighscore;
 	Button levelOneButton;
 	Button levelTwoButton;
+	Button highScoreButton;
 	Font* font_;
 };
 

@@ -8,10 +8,12 @@
 #ifndef BUTTON_H_
 #define BUTTON_H_
 
+#include <string>
 #include "Entity.h"
 #include "MouseListener.h"
 #include "Sprite.h"
 #include "Vec2.h"
+#include "Font.h"
 
 class ButtonHandler{
 public:
@@ -29,13 +31,18 @@ public:
 	virtual void onButtonDown(int button , Vec2 screen_pos);
 	virtual void onScroll(Vec2 offset);
 
-			void setHandler(ButtonHandler* handler);
+	virtual void setHandler(ButtonHandler* handler);
+	virtual void setFont(Font* font);
+	virtual void setText(std::string text);
+
 	virtual void draw();
 	virtual void tick(){}
 private:
 	unsigned int id_;
 	bool isHovered_;
 	ButtonHandler* handler_;
+	Font* font_;
+	std::string text_;
 };
 
 #endif /* BUTTON_H_ */
