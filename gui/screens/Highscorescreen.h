@@ -12,6 +12,8 @@
 #include "../Button.h"
 #include "../Font.h"
 #include "../Highscore.h"
+#include <vector>
+#include <string>
 
 class Highscorescreen: public Screen {
 public:
@@ -23,7 +25,7 @@ public:
 
 	virtual void setEnabled(bool enable);
 
-	void setHighscore(Highscore* h);
+	void setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2);
 
 
 private:
@@ -31,9 +33,7 @@ private:
 	std::vector<Button*> buttons_;
 	Font* font_;
 	Sprite* bg_;
-	Highscore* highscore_;
-
-
+	std::vector<std::string> level_1_, level_2_;
 };
 
 #endif /* HIGHSCORESCREEN_H_ */
