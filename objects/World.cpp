@@ -211,7 +211,7 @@ void World::tick() {
 				this->player_->addToDestroyedBlocks();
 				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
 				if(this->player_->getAllDestroyedBlocks() == difficulty_){
-					listener_->onLose(player_->getScore(), player_->getAllDestroyedBlocks());
+					listener_->onLose(player_->getScore(), player_->getAllDestroyedBlocks(), difficulty_);
 				}
 			}
 			map_->erase(iter);
@@ -223,7 +223,7 @@ void World::tick() {
 		}
 	}
 	if(goldAmount_ == player_->getScore()){
-		listener_->onWin(player_->getScore(), player_->getAllDestroyedBlocks());
+		listener_->onWin(player_->getScore(), player_->getAllDestroyedBlocks(), difficulty_);
 	}
 	player_->tick();
 }

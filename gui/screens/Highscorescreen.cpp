@@ -55,9 +55,20 @@ void Highscorescreen::setHighscores(std::vector<unsigned int> level_1, std::vect
 
 
 void Highscorescreen::draw()const{
-	font_->draw_text(Vec2(600,300),"Highscors");
+	font_->setSize(4);
+	font_->draw_text(Vec2(600,400),"Highscores");
 
-	for()
+	font_->setSize(1.5);
+	unsigned int i=0;
+	for(string score : level_1_){
+		font_->draw_text(Vec2(100, 300-30*i), score);
+		++i;
+	}
+	i=0;
+	for(string score : level_2_){
+		font_->draw_text(Vec2(800, 300-30*i), score);
+		++i;
+	}
 }
 
 void Highscorescreen::tick(){

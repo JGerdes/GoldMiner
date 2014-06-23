@@ -20,7 +20,7 @@ Game::Game(double width = 1280, double height = 720) :
 		window_width_(width),
 		window_height_(height),
 		sprite_manager_(new SpriteManager()),
-		current_level_(-1){
+		current_world_(-1){
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -50,6 +50,10 @@ Game::~Game() {
 	while (iter != screens_.end()) {
 		delete (*iter++);
 	}
+	vector<Highscore*>::iterator score_iter = scores_.begin();
+	while (score_iter != scores_.end()) {
+		delete (*score_iter++);
+	}
 }
 
 void Game::init() {
@@ -70,6 +74,10 @@ void Game::init() {
 	level_files_.push_back("map");
 	level_files_.push_back("map2");
 
+	for(string level_file : level_files_){
+		scores_.push_back(new Highscore("assets/levels/"+ level_file+ "_highscore.txt"));
+	}
+
 	Startscreen* start = new Startscreen(sprite_manager_, true, true);
 	for(Button* b : start->getButtons()){
 		b->setHandler(this);
@@ -82,7 +90,7 @@ void Game::init() {
 	this->screens_.push_back(start);
 	this->screens_.push_back(new Worldscreen(sprite_manager_,false));
 	this->screens_.push_back(gameover);
-//	this->screens.push_back(new Heighscorscreen(sprite_manager_));
+	this->screens_.push_back(new Highscorescreen(sprite_manager_, false));
 
 	currentScreen_ = screens_.at(startscreen);
 }
@@ -127,7 +135,7 @@ void Game::render() {
 }
 
 void Game::startWorld(unsigned int id) {
-	current_level_ = id;
+	current_world_ = id;
 	World* world = new World(sprite_manager_, "assets/levels/"+ level_files_[id]+ ".txt");
 	world->setWorldEventListener(this);
 	((Worldscreen*) (screens_.at(worldscreen)))->setWorld(world);
@@ -143,7 +151,10 @@ void Game::onButtonClick(unsigned int id) {
 			startWorld(1);
 			break;
 		case Startscreen::highScoreButton:
-			screens_.at(startscreen)->setEnabled(false);
+			currentScreen_->setEnabled(false);
+			currentScreen_ = screens_.at(highscorescreen);
+			((Highscorescreen*) currentScreen_)->setHighscores(scores_[0]->getTop(10), scores_[1]->getTop(10));
+			currentScreen_->setEnabled(true);
 			break;
 		case Startscreen::exitButton:
 			screens_.at(startscreen)->setEnabled(false);
@@ -175,7 +186,7 @@ void Game::onButtonClick(unsigned int id) {
 			currentScreen_ = screens_.at(startscreen);
 			currentScreen_->setEnabled(true);
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
-			startWorld(current_level_);
+			startWorld(current_world_);
 			break;
 		case Gameoverscreen::mainMenu:
 			cout << "GOS: MainMenu" << endl;
@@ -187,19 +198,27 @@ void Game::onButtonClick(unsigned int id) {
 	}
 }
 
-void Game::onLose(unsigned int score, unsigned int destroyedBlocks){
+void Game::onLose(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
+	score = computeScore(score, destroyedBlocks, maxBlocks);
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setText("You lose!");
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setScore(score);
 	currentScreen_->setEnabled(false);
 	currentScreen_ = screens_.at(gameoverscreen);
 	currentScreen_->setEnabled(true);
+	scores_[current_world_]->addScore(score);
 }
 
-void Game::onWin(unsigned int score, unsigned int destroyedBlocks){
+void Game::onWin(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
+	score = computeScore(score, destroyedBlocks, maxBlocks);
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setText("You win!");
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setScore(score);
 	currentScreen_->setEnabled(false);
 	currentScreen_ = screens_.at(gameoverscreen);
 	currentScreen_->setEnabled(true);
+	scores_[current_world_]->addScore(score);
 
+}
+
+unsigned int Game::computeScore(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
+	return score*10+(maxBlocks-destroyedBlocks)*25;
 }

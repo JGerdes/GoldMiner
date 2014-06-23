@@ -10,68 +10,66 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <sstream>
-#include <strstream>
 
 using namespace std;
 
-Highscore::Highscore() :
-		highscoreList_(new vector<int>()) {
-	loadHighscore();
+Highscore::Highscore(string path):
+	path_(path){
+	loadHighscore(path);
 }
 
-void Highscore::loadHighscore() {
-	highscoreList_->clear();
-	ifstream quelle("highscore.txt");
+Highscore::~Highscore(){
+	saveHighscore(path_);
+}
+
+void Highscore::loadHighscore(string path) {
+	highscoreList_.clear();
+	ifstream quelle(path);
 
 	if (!quelle) {
-		cerr << "highscore.txt kann nicht geöffnet werden!\n";
+		cerr << "Error while loading Highscore: '"<< path <<"' couldn't be opened!" << endl;
 	}
-	char ch[17];
-	for (int i = 0; i < 16; i++) {
-		ch[i] = ' ';
-	}
-	string score;
-	while (quelle.getline(ch, sizeof(ch))) {
-		score.clear();
-		for (int i = 0; i < 16; i++) {
-			if (ch[i] != ' ') {
-				score = score + ch[i];
-			}
-		}
-		highscoreList_->push_back(atoi(score.c_str()));
-	}
-
-	sort(highscoreList_->begin(), highscoreList_->end(), sortFunktion);
-	while (highscoreList_->size() > 10) {
-		highscoreList_->pop_back();
+	string line;
+	while (getline(quelle, line)) {
+		unsigned int score;
+		istringstream (line) >> score;
+		highscoreList_.push_back(score);
 	}
 
 }
 
-void Highscore::saveHighscore() {
-	ofstream quelle("highscore.txt");
+void Highscore::saveHighscore(string path) {
+
+	ofstream quelle(path);
 
 	if (!quelle) {
-		cerr << "highscore.txt kann nicht geöffnet werden!\n";
+		cerr << "Error while saving Highscore: '"<< path <<"' couldn't be opened!" << endl;
 	}
 
-	for (size_t i = 0; i < highscoreList_->size(); i++) {
-		quelle << highscoreList_->at(i) << endl;
+	for (size_t i = 0; i < highscoreList_.size(); i++) {
+		quelle << highscoreList_.at(i) << endl;
 	}
 
-	for (unsigned int i = 0; i < highscoreList_->size(); i++)
-			cout << highscoreList_->at(i) << endl;
 }
 
-void Highscore::setHighscore(int score) {
+void Highscore::addScore(unsigned int score) {
 
-	highscoreList_->push_back(score);
-	sort(highscoreList_->begin(), highscoreList_->end(), sortFunktion);
-	while (highscoreList_->size() > 10) {
-		highscoreList_->pop_back();
-	}
-	saveHighscore();
-
+	highscoreList_.push_back(score);
 }
+
+vector<unsigned int> Highscore::getTop(unsigned int amount){
+	cout << "Highscore:: get top " << amount << endl;
+	vector<unsigned int> top;
+	for(int score : highscoreList_){
+		top.push_back(score);
+	}
+	sort(top.begin(), top.end(), sortFunktion);
+	while (top.size() > amount) {
+		top.pop_back();
+	}
+	cout << "Highscore:: get top " << amount << "ready" <<endl;
+	return top;
+}
+
+

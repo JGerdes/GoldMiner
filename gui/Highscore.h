@@ -9,16 +9,20 @@
 #define HIGHSCORE_H_
 
 #include <vector>
+#include <string>
 
 class Highscore {
 public:
-	Highscore();
-	~Highscore(){};
-	void loadHighscore();
-	void saveHighscore();
+	Highscore(std::string path);
+	~Highscore();
+	void addScore(unsigned int score);
 	void setHighscore(int score);
+	std::vector<unsigned int> getTop(unsigned int amount);
 private:
-	std::vector<int> *highscoreList_;
+	std::string path_;
+	std::vector<unsigned int> highscoreList_;
+	void loadHighscore(std::string path);
+	void saveHighscore(std::string path);
 };
 
 inline bool sortFunktion (int i,int j) { return (i>j); }
