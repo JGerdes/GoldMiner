@@ -73,8 +73,8 @@ Startscreen::~Startscreen() {
 		delete (*iter++);
 	}
 	vector<Button*>::iterator ator = difficulty_buttons_.begin();
-	while(iter != difficulty_buttons_.end()){
-		delete (*iter++);
+	while(ator != difficulty_buttons_.end()){
+		delete (*ator++);
 	}
 }
 
