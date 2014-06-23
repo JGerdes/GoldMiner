@@ -12,7 +12,9 @@
 #include "gui/io/InputManager.h"
 #include "gui/Highscore.h"
 #include "gui/Gameoverscreen.h"
-
+#include <string>
+#include <sstream>
+#define SSTR( x ) dynamic_cast<std::ostringstream &>(( std::ostringstream() << std::dec << x ) ).str()
 using namespace std;
 
 Game::Game(double width = 1280, double height = 720) :
@@ -96,7 +98,8 @@ void Game::run() {
 
 		i++;
 		if (glfwGetTime() > 1) {
-			cout << "Zeit: " << glfwGetTime() << " frames: " << i << endl;
+			string s = "Goldminer Frames: " + SSTR(i);
+			glfwSetWindowTitle(window_, s.c_str());
 			glfwSetTime(0);
 			i = 0;
 		}
