@@ -18,8 +18,11 @@
 using namespace std;
 
 Game::Game(double width = 1280, double height = 720) :
-		window_(nullptr), window_width_(width), window_height_(height), sprite_manager_(
-				new SpriteManager()) {
+		window_(nullptr),
+		window_width_(width),
+		window_height_(height),
+		sprite_manager_(new SpriteManager()),
+		current_level_(-1){
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -65,6 +68,9 @@ void Game::init() {
 	glfwSetMouseButtonCallback(window_, &InputManager::onButton);
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
+
+	level_files_.push_back("map");
+	level_files_.push_back("map2");
 
 	Startscreen* start = new Startscreen(sprite_manager_, true, true);
 	for(Button* b : start->getButtons()){
@@ -122,62 +128,64 @@ void Game::render() {
 
 }
 
+void Game::startWorld(unsigned int id) {
+	current_level_ = id;
+	World* world = new World(sprite_manager_, "assets/levels/"+ level_files_[id]+ ".txt");
+	world->setWorldEventListener(this);
+	((Worldscreen*) (screens_.at(worldscreen)))->setWorld(world);
+	((Startscreen*) (screens_.at(startscreen)))->setDrawMenuButtons(false);
+}
+
 void Game::onButtonClick(unsigned int id) {
-	cout << "onbutclick id:" << id << endl;
-	// startscreen buttons
-	if(screens_.at(startscreen)->isEnabled()){
-		if(Startscreen::levelOneButton == id){
-			World* world = new World(sprite_manager_, "assets/levels/map.txt");
-			world->setWorldEventListener(this);
-			((Worldscreen*)screens_.at(worldscreen))->setWorld(world);
-			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(false);
-			cout << "levelOneButton" << endl;
-		}
-		if(Startscreen::levelTwoButton == id){
-			World* world = new World(sprite_manager_, "assets/levels/map2.txt");
-			world->setWorldEventListener(this);
-			((Worldscreen*)screens_.at(worldscreen))->setWorld(world);
-			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(false);
-			cout << "levelTwoButton" << endl;
-		}
-		if(Startscreen::highScoreButton == id){
+	switch(id){
+		case Startscreen::levelOneButton:
+			startWorld(0);
+			break;
+		case Startscreen::levelTwoButton:
+			startWorld(1);
+			break;
+		case Startscreen::highScoreButton:
 			screens_.at(startscreen)->setEnabled(false);
-		}
-		if(Startscreen::exitButton == id){
+			break;
+		case Startscreen::exitButton:
 			screens_.at(startscreen)->setEnabled(false);
 			glfwTerminate();
 			exit(-1);
-		}
+			break;
 
-		if(Startscreen::easyButton == id){
+		case Startscreen::easyButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::EASY_GAME);
 			screens_.at(startscreen)->setEnabled(false);
 			currentScreen_ = screens_.at(worldscreen);
-		}
-		if(Startscreen::normalButton == id){
+			break;
+		case Startscreen::normalButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::NORMAL_GAME);
 			screens_.at(startscreen)->setEnabled(false);
 			currentScreen_ = screens_.at(worldscreen);
-		}
-		if(Startscreen::hardButton == id){
+			break;
+		case Startscreen::hardButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::HARD_GAME);
 			screens_.at(startscreen)->setEnabled(false);
 			currentScreen_ = screens_.at(worldscreen);
-		}
-		if(Startscreen::backButton == id){
+			break;
+		case Startscreen::backButton:
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
-		}
+			break;
 
-	}
-	if(Gameoverscreen::playAgain == id){
-		//TODO
-	}
-	if(Gameoverscreen::mainMenu == id){
-		cout << "GOS: MainMenu" << endl;
-		currentScreen_->setEnabled(false);
-		currentScreen_ = screens_.at(startscreen);
-		currentScreen_->setEnabled(true);
-		((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
+		case Gameoverscreen::playAgain:
+			currentScreen_->setEnabled(false);
+			currentScreen_ = screens_.at(startscreen);
+			currentScreen_->setEnabled(true);
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
+			startWorld(current_level_);
+			break;
+		case Gameoverscreen::mainMenu:
+			cout << "GOS: MainMenu" << endl;
+			currentScreen_->setEnabled(false);
+			currentScreen_ = screens_.at(startscreen);
+			currentScreen_->setEnabled(true);
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
+			break;
 	}
 }
 
@@ -188,6 +196,7 @@ void Game::onLose(unsigned int score, unsigned int destroyedBlocks){
 	currentScreen_ = screens_.at(gameoverscreen);
 	currentScreen_->setEnabled(true);
 }
+
 void Game::onWin(unsigned int score, unsigned int destroyedBlocks){
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setText("You win!");
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setScore(score);

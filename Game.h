@@ -18,6 +18,7 @@
 #include "gui/Worldscreen.h"
 #include "objects/WorldEventListener.h"
 #include <vector>
+#include <string>
 
 class World;
 
@@ -40,6 +41,7 @@ private:
 	void init();
 	void run();
 	void render();
+	void startWorld(unsigned int id);
 
 	GLFWwindow* window_;
 	double window_width_;
@@ -50,7 +52,8 @@ private:
 	Screen* currentScreen_;
 	std::vector<Screen*> screens_;
 
-	World* active_world_;
+	std::vector<std::string> level_files_;
+	unsigned int current_level_;
 };
 
 #endif /* GAME_H_ */
