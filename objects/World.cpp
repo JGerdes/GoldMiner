@@ -6,6 +6,7 @@
  */
 
 #include "World.h"
+#include "../Game.h"
 #include <vector>
 #include <fstream>
 #include <iostream>
@@ -17,7 +18,7 @@ World::World(SpriteManager* spriteManager, string map) :
 		sprite_manager_(spriteManager), player_(
 				new Player(
 						sprite_manager_->getSprite("assets/graphics/mario.ppm"),
-						Vec2(0, 0), Vec2(1280.0 / 18, 720.0 / 11))),
+						Vec2(0, 0), Vec2(Game::window_width_ / 18, Game::window_height_ / 11))),
 		map_(new vector<Block*>()),
 		bg_map_(new vector<Block*>()),
 		font_(new Font(sprite_manager_->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
@@ -125,43 +126,43 @@ void World::readMap(string fileName) {
 			if (ch[i] == 'x') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::dirt,
-						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
+						Vec2((Game::window_width_ / 16) * i, Game::window_height_ - (Game::window_height_ / 9) * (rowCount+1)),
 						sprite_manager_->getSprite("assets/graphics/dirt.ppm"), 2);
 				map_->push_back(block);
-				cout << "new Ground " << (1280.0 / 16) * i << " ,"
-						<< (720.0 / 9) * rowCount << endl;
+				cout << "new Ground " << (Game::window_width_ / 16) * i << " ,"
+						<< (Game::window_height_ / 9) * rowCount << endl;
 			}
 			if (ch[i] == 'g') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::dirt,
-						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
+						Vec2((Game::window_width_ / 16) * i, Game::window_height_ - (Game::window_height_ / 9) * (rowCount+1)),
 						sprite_manager_->getSprite("assets/graphics/grass.ppm"), 3);
 				map_->push_back(block);
-				cout << "new Ground " << (1280.0 / 16) * i << " ,"
-						<< (720.0 / 9) * rowCount << endl;
+				cout << "new Ground " << (Game::window_width_ / 16) * i << " ,"
+						<< (Game::window_height_ / 9) * rowCount << endl;
 			}
 			if (ch[i] == 's') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::dirt,
-						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
+						Vec2((Game::window_width_ / 16) * i, Game::window_height_ - (Game::window_height_ / 9) * (rowCount+1)),
 						sprite_manager_->getSprite("assets/graphics/stone.ppm"), 6);
 				map_->push_back(block);
-				cout << "new Ground " << (1280.0 / 16) * i << " ,"
-						<< (720.0 / 9) * rowCount << endl;
+				cout << "new Ground " << (Game::window_width_ / 16) * i << " ,"
+						<< (Game::window_height_ / 9) * rowCount << endl;
 			}
 			if (ch[i] == 'a') {
 				//TODO block höhe und breite benutzen
 				Block* block = new Block(Block::gold,
-						Vec2((1280.0 / 16) * i, 640 - (720.0 / 9) * rowCount),
+						Vec2((Game::window_width_ / 16) * i, Game::window_height_ - (Game::window_height_ / 9) * (rowCount+1)),
 						sprite_manager_->getSprite("assets/graphics/gold.ppm"), 10);
 				map_->push_back(block);
-				cout << "new Ground " << (1280.0 / 16) * i << " ,"
-						<< (720.0 / 9) * rowCount << endl;
+				cout << "new Ground " << (Game::window_width_ / 16) * i << " ,"
+						<< (Game::window_height_ / 9) * rowCount << endl;
 				goldAmount_++;
 			}
 			if (ch[i] == 'p') {
 				player_->setPosition(
-						Vec2((1280.0 / 16) * i, 642 - (720.0 / 9) * rowCount));
+						Vec2((Game::window_width_ / 16) * i, 4+Game::window_height_ - (Game::window_height_ / 9) * (rowCount+1)));
 				cout << "Player Pos " << 20 * i << " " << 20 * rowCount << endl;
 			}
 			ch[i] = ' ';
@@ -176,12 +177,12 @@ void World::readMap(string fileName) {
 			if(y < 5){
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/dirt.ppm");
 				sprite->setColor(Color(darkness, darkness, darkness+0.05));
-				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
+				bg_map_->push_back(new Block(Block::dirt, Vec2((Game::window_width_ / 16) * x, Game::window_height_ - (Game::window_height_ / 9) * (y+1)),
 										sprite, 2));
 			}else{
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/stone.ppm");
 				sprite->setColor(Color(darkness, darkness, darkness+0.05));
-				bg_map_->push_back(new Block(Block::dirt, Vec2((1280.0 / 16) * x, 640 - (720.0 / 9) * y),
+				bg_map_->push_back(new Block(Block::dirt, Vec2((Game::window_width_ / 16) * x, Game::window_height_ - (Game::window_height_ / 9) * (y+1)),
 										sprite, 2));
 			}
 		}

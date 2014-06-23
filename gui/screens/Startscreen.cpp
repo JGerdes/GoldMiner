@@ -9,6 +9,7 @@
 #include <string>
 #include "Startscreen.h"
 #include "../../objects/Entity.h"
+#include "../../Game.h"
 
 
 using namespace std;
@@ -22,44 +23,44 @@ Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMen
 
 	//menu
 	font_->setColor(Color(0,0,0));
-	Button* b = new Button(levelOneButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6));
+	Button* b = new Button(levelOneButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,400), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("Level 1");
 	b->setVisible(true);
 	menu_buttons_.push_back(b);
-	b = new Button(levelTwoButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,300), Vec2(64*6,16*6));
+	b = new Button(levelTwoButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,300), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("Level 2");
 	b->setVisible(true);
 	menu_buttons_.push_back(b);
-	b = new Button(highScoreButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,150), Vec2(64*6,16*6));
+	b = new Button(highScoreButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,150), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("H1ghsc0re");
 	b->setVisible(true);
 	menu_buttons_.push_back(b);
-	b = new Button(exitButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(1280-32*6-20,100), Vec2(32*6,8*6));
+	b = new Button(exitButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(Game::window_width_-32*6-20,100), Vec2(32*6,8*6));
 	b->setFont(font_);
 	b->setText("3x1t");
 	b->setVisible(true);
 	menu_buttons_.push_back(b);
 
 	//difficulty
-	b = new Button(easyButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6));
+	b = new Button(easyButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,400), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("easy");
 	difficulty_buttons_.push_back(b);
 
-	b = new Button(normalButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,300), Vec2(64*6,16*6));
+	b = new Button(normalButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,300), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("normal");
 	difficulty_buttons_.push_back(b);
 
-	b = new Button(hardButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,200), Vec2(64*6,16*6));
+	b = new Button(hardButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((Game::window_width_-64*6)/2.0,200), Vec2(64*6,16*6));
 	b->setFont(font_);
 	b->setText("hard");
 	difficulty_buttons_.push_back(b);
 
-	b = new Button(backButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(1280-32*6-20,100), Vec2(32*6,8*6));
+	b = new Button(backButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(Game::window_width_-32*6-20,100), Vec2(32*6,8*6));
 	b->setFont(font_);
 	b->setText("back");
 	difficulty_buttons_.push_back(b);
@@ -85,7 +86,7 @@ void Startscreen::tick(){
 
 void Startscreen::draw() const {
 	font_->setSize(3);
-	bg_->draw(Vec2(0,0), Vec2(1280,720));
+	bg_->draw(Vec2(0,0), Vec2(Game::window_width_,Game::window_height_));
 
 	if(drawMenuButtons_){
 		for(Button* b : menu_buttons_){
@@ -99,7 +100,7 @@ void Startscreen::draw() const {
 
 	font_->setSize(1.8);
 	string by = "by Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers";
-	font_->draw_text(Vec2((1280-font_->compute_dimension(by).getX())/2, 10), by);
+	font_->draw_text(Vec2((Game::window_width_-font_->compute_dimension(by).getX())/2, 10), by);
 }
 
 std::vector<Button*> Startscreen::getButtons(){

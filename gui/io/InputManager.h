@@ -22,12 +22,14 @@ public:
 	static void onKey(GLFWwindow *window, int key, int scancode, int action, int mods);
 	static void onButton(GLFWwindow *window, int button, int action, int mods);
 	static void onScroll(GLFWwindow *window, double x_offset, double y_offset);
+	static void onResize(GLFWwindow * window, int width, int height);
 
 
     void onMouseMoveImpl(GLFWwindow *window, double x, double y);
 	void onKeyImpl(GLFWwindow *window, int key, int scancode, int action, int mods);
 	void onButtonImpl(GLFWwindow *window, int button, int action, int mods);
 	void onScrollImpl(GLFWwindow *window, double x_offset, double y_offset);
+	void onResizeImpl(GLFWwindow * window, int width, int height);
 
 	void addMouseListener(MouseListener* listener);
 	void addKeyListener(KeyListener* listener);

@@ -11,6 +11,7 @@
 #include "InputManager.h"
 #include "../../Vec2.h"
 #include <stdexcept>
+#include "../../Game.h"
 
 using namespace std;
 
@@ -32,6 +33,9 @@ void InputManager::onButton(GLFWwindow *window, int button, int action, int mods
 void InputManager::onScroll(GLFWwindow *window, double x_offset, double y_offset){
 	InputManager::getInstance().onScrollImpl(window, x_offset, y_offset);
 }
+void InputManager::onResize(GLFWwindow * window, int width, int height){
+	InputManager::getInstance().onResizeImpl(window, width, height);
+}
 
 
 InputManager::InputManager():
@@ -41,7 +45,7 @@ InputManager::InputManager():
 }
 
 void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
-	y = 720-y;
+	y = Game::window_height_-y;
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
 	}
@@ -92,6 +96,12 @@ void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_of
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onScroll(Vec2(x_offset, y_offset));
 	}
+}
+
+void InputManager::onResizeImpl(GLFWwindow * window, int width, int height){
+	Game::window_width_ = width;
+	Game::window_height_ = height;
+	cout << "new width:" << Game::window_width_ << endl;
 }
 
 bool InputManager::isKeyDown(int key){

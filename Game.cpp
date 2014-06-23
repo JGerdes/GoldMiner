@@ -15,12 +15,15 @@
 #define SSTR( x ) dynamic_cast<std::ostringstream &>(( std::ostringstream() << std::dec << x ) ).str()
 using namespace std;
 
+double Game::window_width_ = 0;
+double Game::window_height_ = 0;
+
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr),
-		window_width_(width),
-		window_height_(height),
 		sprite_manager_(new SpriteManager()),
 		current_world_(-1){
+	window_width_ = width;
+	window_height_ =height;
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -70,6 +73,7 @@ void Game::init() {
 	glfwSetMouseButtonCallback(window_, &InputManager::onButton);
 	glfwSetKeyCallback(window_, &InputManager::onKey);
 	glfwSetScrollCallback(window_, &InputManager::onScroll);
+	glfwSetWindowSizeCallback(window_, &InputManager::onResize);
 
 	level_files_.push_back("map");
 	level_files_.push_back("map2");

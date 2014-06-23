@@ -32,6 +32,9 @@ public:
 		gameoverscreen = 2,
 		highscorescreen = 3,
 	};
+	static double window_width_;
+	static double window_height_;
+
 	Game(double width, double height);
 	virtual ~Game();
 	virtual void onButtonClick(unsigned int id);
@@ -46,8 +49,6 @@ private:
 	unsigned int computeScore(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks);
 
 	GLFWwindow* window_;
-	double window_width_;
-	double window_height_;
 
 	SpriteManager* sprite_manager_;
 
