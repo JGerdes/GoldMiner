@@ -221,7 +221,6 @@ void Game::onLose(unsigned int score, unsigned int destroyedBlocks, unsigned int
 	currentScreen_->setEnabled(false);
 	currentScreen_ = screens_.at(gameoverscreen);
 	currentScreen_->setEnabled(true);
-	scores_[current_world_]->addScore(score);
 }
 
 void Game::onWin(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
@@ -236,5 +235,5 @@ void Game::onWin(unsigned int score, unsigned int destroyedBlocks, unsigned int 
 }
 
 unsigned int Game::computeScore(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
-	return score*10+(maxBlocks-destroyedBlocks)*25;
+	return ((float)score)/(((maxBlocks-destroyedBlocks) < 1)? 1 :(maxBlocks-destroyedBlocks))*1337;
 }
