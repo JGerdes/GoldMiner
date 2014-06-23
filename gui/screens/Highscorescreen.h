@@ -11,6 +11,7 @@
 #include "Screen.h"
 #include "../Button.h"
 #include "../Font.h"
+#include "../Highscore.h"
 
 class Highscorescreen: public Screen {
 public:
@@ -21,10 +22,17 @@ public:
 	virtual void draw() const;
 
 	virtual void setEnabled(bool enable);
+
+	void setHighscore(Highscore* h);
+
+
 private:
-	Sprite* bg_;
+
 	std::vector<Button*> buttons_;
 	Font* font_;
+	Sprite* bg_;
+	Highscore* highscore_;
+
 
 };
 

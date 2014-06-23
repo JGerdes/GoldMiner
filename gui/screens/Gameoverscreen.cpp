@@ -11,7 +11,7 @@ using namespace std;
 
 Gameoverscreen::Gameoverscreen(SpriteManager* spriteManager, bool enable) :
 		Screen(spriteManager, enable),
-		background_(spriteManager->getSprite("assets/graphics/menue.ppm")),
+		bg_(spriteManager->getSprite("assets/graphics/menue.ppm")),
 		font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
 		text_(""),
 		score_(0){
@@ -27,7 +27,7 @@ Gameoverscreen::Gameoverscreen(SpriteManager* spriteManager, bool enable) :
 }
 
 Gameoverscreen::~Gameoverscreen() {
-	delete background_;
+	delete bg_;
 	delete font_;
 	vector<Button*>::iterator iter = buttons_.begin();
 	while(iter != buttons_.end()){
@@ -41,7 +41,7 @@ void Gameoverscreen::tick() {
 }
 
 void Gameoverscreen::draw()const{
-	background_->draw(Vec2(0,0), Vec2(1280,720));
+	bg_->draw(Vec2(0,0), Vec2(1280,720));
 	font_->setSize(2);
 	font_->setColor(Color(0,0,0));
 	for(Button* b : buttons_){

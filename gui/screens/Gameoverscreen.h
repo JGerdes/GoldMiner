@@ -32,7 +32,7 @@ public:
 	void setScore(int score);
 
 private:
-	Sprite* background_;
+	Sprite* bg_;
 	Font* font_;
 	std::vector<Button*> buttons_;
 	std::string text_;
