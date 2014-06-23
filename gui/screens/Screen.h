@@ -8,8 +8,8 @@
 #ifndef SCREEN_H_
 #define SCREEN_H_
 
-#include "io/InputManager.h"
-#include "SpriteManager.h"
+#include "../io/InputManager.h"
+#include "../SpriteManager.h"
 class Screen {
 public:
 

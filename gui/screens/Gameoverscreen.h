@@ -8,9 +8,9 @@
 #ifndef GAMEOVERSCREEN_H_
 #define GAMEOVERSCREEN_H_
 
-#include "io/InputManager.h"
+#include "../io/InputManager.h"
 #include "Screen.h"
-#include "Button.h"
+#include "../Button.h"
 #include <vector>
 #include <string>
 
