@@ -17,6 +17,10 @@
 
 class Highscorescreen: public Screen {
 public:
+	enum{
+		backButton = 12
+	};
+
 	Highscorescreen(SpriteManager* spriteManager, bool enable);
 	virtual ~Highscorescreen();
 
@@ -26,6 +30,7 @@ public:
 	virtual void setEnabled(bool enable);
 
 	void setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2);
+	std::vector<Button*> getButtons();
 
 
 private:

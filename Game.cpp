@@ -87,10 +87,16 @@ void Game::init() {
 	for(Button* button : gameover->getButtons()){
 		button->setHandler(this);
 	}
+
+	Highscorescreen* highscore = new Highscorescreen(sprite_manager_, false);
+	for(Button* button : highscore->getButtons()){
+		button->setHandler(this);
+	}
+
 	this->screens_.push_back(start);
 	this->screens_.push_back(new Worldscreen(sprite_manager_,false));
 	this->screens_.push_back(gameover);
-	this->screens_.push_back(new Highscorescreen(sprite_manager_, false));
+	this->screens_.push_back(highscore);
 
 	currentScreen_ = screens_.at(startscreen);
 }
@@ -178,6 +184,12 @@ void Game::onButtonClick(unsigned int id) {
 			currentScreen_ = screens_.at(worldscreen);
 			break;
 		case Startscreen::backButton:
+			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
+			break;
+		case Highscorescreen::backButton:
+			currentScreen_->setEnabled(false);
+			currentScreen_ = screens_.at(startscreen);
+			currentScreen_->setEnabled(true);
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 			break;
 
