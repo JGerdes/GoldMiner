@@ -9,7 +9,7 @@
 #define WORLDSCREEN_H_
 
 #include "Screen.h"
-#include "../objects/World.h"
+#include "../../objects/World.h"
 
 class Worldscreen: public Screen {
 public:

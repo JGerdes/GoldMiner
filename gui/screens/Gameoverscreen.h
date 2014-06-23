@@ -8,9 +8,9 @@
 #ifndef GAMEOVERSCREEN_H_
 #define GAMEOVERSCREEN_H_
 
-#include "io/InputManager.h"
+#include "../io/InputManager.h"
 #include "Screen.h"
-#include "Button.h"
+#include "../Button.h"
 #include <vector>
 #include <string>
 
@@ -32,7 +32,7 @@ public:
 	void setScore(int score);
 
 private:
-	Sprite* background_;
+	Sprite* bg_;
 	Font* font_;
 	std::vector<Button*> buttons_;
 	std::string text_;

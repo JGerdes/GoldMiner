@@ -13,9 +13,9 @@
 #include "objects/Player.h"
 #include "gui/SpriteManager.h"
 #include "gui/Highscore.h"
-#include "gui/GameOverScreen.h"
-#include "gui/Startscreen.h"
-#include "gui/Worldscreen.h"
+#include "gui/screens/GameOverScreen.h"
+#include "gui/screens/Startscreen.h"
+#include "gui/screens/Worldscreen.h"
 #include "objects/WorldEventListener.h"
 #include <vector>
 #include <string>

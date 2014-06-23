@@ -8,11 +8,11 @@
 #ifndef STARTSCREEN_H_
 #define STARTSCREEN_H_
 
-#include "../gui/io/InputManager.h"
-#include "../objects/Entity.h"
-#include "Button.h"
-#include "SpriteManager.h"
-#include "Font.h"
+#include "../../gui/io/InputManager.h"
+#include "../../objects/Entity.h"
+#include "../Button.h"
+#include "../SpriteManager.h"
+#include "../Font.h"
 #include "Screen.h"
 #include <vector>
 
@@ -46,13 +46,13 @@ public:
 
 private:
 
-	Sprite* bg_;
+
 	std::vector<Button*> menu_buttons_;
 	std::vector<Button*> difficulty_buttons_;
 
 	Font* font_;
 	bool drawMenuButtons_;
-
+	Sprite* bg_;
 };
 
 

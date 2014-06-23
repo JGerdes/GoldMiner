@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 #include "Startscreen.h"
-#include "../objects/Entity.h"
+#include "../../objects/Entity.h"
 
 
 using namespace std;
@@ -16,9 +16,10 @@ using namespace std;
 Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMenuButtons) :
 		Screen(spriteManager, enable),
 		font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
-		drawMenuButtons_(drawMenuButtons){
+		drawMenuButtons_(drawMenuButtons),
+		bg_(spriteManager->getSprite("assets/graphics/menue.ppm")){
 
-	bg_ = spriteManager->getSprite("assets/graphics/menue.ppm");
+
 	//menu
 	font_->setColor(Color(0,0,0));
 	Button* b = new Button(levelOneButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2((1280-64*6)/2.0,400), Vec2(64*6,16*6));
@@ -66,6 +67,15 @@ Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMen
 
 Startscreen::~Startscreen() {
 	delete font_;
+	delete bg_;
+	vector<Button*>::iterator iter = menu_buttons_.begin();
+	while(iter != menu_buttons_.end()){
+		delete (*iter++);
+	}
+	vector<Button*>::iterator ator = difficulty_buttons_.begin();
+	while(iter != difficulty_buttons_.end()){
+		delete (*iter++);
+	}
 }
 
 void Startscreen::tick(){

@@ -10,8 +10,6 @@
 #include <iostream>
 #include "Vec2.h"
 #include "gui/io/InputManager.h"
-#include "gui/Highscore.h"
-#include "gui/Gameoverscreen.h"
 #include <string>
 #include <sstream>
 #define SSTR( x ) dynamic_cast<std::ostringstream &>(( std::ostringstream() << std::dec << x ) ).str()
