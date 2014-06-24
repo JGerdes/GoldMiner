@@ -12,7 +12,7 @@
 
 
 Block::Block(Type type, Vec2 position, Sprite* sprite, unsigned int max_damage):
-	Entity(sprite, position, Vec2(Game::window_width_/16,Game::window_height_/9)),
+	Entity(sprite, position, Vec2(Game::window_width/16,Game::window_height/9)),
 	type_(type),
 	damage_(0),
 	max_damage_(max_damage){

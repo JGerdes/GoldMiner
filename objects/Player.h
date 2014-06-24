@@ -26,22 +26,23 @@ public:
 		InputManager::getInstance().addKeyListener(this);
 
 	}
-	void onKeyUp(int key);
-	void onKeyDown(int key);
-
 	virtual ~Player();
 	virtual void tick();
+
+	void onKeyUp(int key);
+	void onKeyDown(int key);
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
-
-	unsigned int getScore() const;
 	void addToScore();
-
-	int getAllDestroyedBlocks() const;
 	void addToDestroyedBlocks();
 
+
+	int getAllDestroyedBlocks() const;
+	unsigned int getScore() const;
+
+
 private:
-	unsigned int score = 0;
-	unsigned int destroyedBlocks = 0;
+	unsigned int score_ = 0;
+	unsigned int destroyed_blocks = 0;
 	Block* top_, *left_, *right_, *bottom_;
 };
 

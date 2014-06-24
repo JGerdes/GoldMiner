@@ -13,81 +13,81 @@
 class Vec2 {
 public:
 	Vec2() :
-			x(0.0), y(0.0) {
+			x_(0.0), y_(0.0) {
 	}
 
 	Vec2(double _x, double _y) :
-			x(_x), y(_y) {
+			x_(_x), y_(_y) {
 	}
 
 	Vec2(const Vec2 &v) :
-			x(v.x), y(v.y) {
+			x_(v.x_), y_(v.y_) {
 	}
 	virtual ~Vec2(){}
 
 	double& getX() {
-		return x;
+		return x_;
 	}
 
 	double& getY() {
-		return y;
+		return y_;
 	}
 
 	double getX() const {
-		return x;
+		return x_;
 	}
 
 	double getY() const {
-		return y;
+		return y_;
 	}
 
 	Vec2& operator +=(const Vec2 &v) {
-		x += v.x;
-		y += v.y;
+		x_ += v.x_;
+		y_ += v.y_;
 		return *this;
 	}
 
 	Vec2& operator -=(const Vec2 &v) {
-		x -= v.x;
-		y -= v.y;
+		x_ -= v.x_;
+		y_ -= v.y_;
 		return *this;
 	}
 
-	Vec2& operator-(const Vec2 &v){
-		return *(new Vec2(x-v.x, y-v.y));
+	Vec2& operator -(const Vec2 &v){
+		return *(new Vec2(x_-v.x_, y_-v.y_));
 	}
 
 	Vec2& operator *=(double scalar) {
-		x *= scalar;
-		y *= scalar;
+		x_ *= scalar;
+		y_ *= scalar;
 		return *this;
 	}
 
 	Vec2& operator /=(double scalar) {
-		x /= scalar;
-		y /= scalar;
+		x_ /= scalar;
+		y_ /= scalar;
 		return *this;
 	}
 
 	double length() const {
-		return sqrt(pow(x, 2) + pow(y, 2));
+		return sqrt(pow(x_, 2) + pow(y_, 2));
 	}
 
 	Vec2& normalize() {
 		double length = this->length();
-		x /= length;
-		y /= length;
+		x_ /= length;
+		y_ /= length;
 		return *this;
 	}
 
 	Vec2 & invert() {
-		x = -x;
-		y = -y;
+		x_ = -x_;
+		y_ = -y_;
 		return *this;
 	}
 
 private:
-	double x, y;
+	double x_, y_;
 
 };
 

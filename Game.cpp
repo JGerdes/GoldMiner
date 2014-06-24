@@ -15,15 +15,15 @@
 #define SSTR( x ) dynamic_cast<std::ostringstream &>(( std::ostringstream() << std::dec << x ) ).str()
 using namespace std;
 
-double Game::window_width_ = 0;
-double Game::window_height_ = 0;
+double Game::window_width = 0;
+double Game::window_height = 0;
 
 Game::Game(double width = 1280, double height = 720) :
 		window_(nullptr),
 		sprite_manager_(new SpriteManager()),
 		current_world_(-1){
-	window_width_ = width;
-	window_height_ =height;
+	window_width = width;
+	window_height =height;
 	cout << "Game started" << endl;
 
 	if (!glfwInit()) {
@@ -31,7 +31,7 @@ Game::Game(double width = 1280, double height = 720) :
 		return;
 	}
 	glfwWindowHint(GLFW_SAMPLES, 16);
-	window_ = glfwCreateWindow(window_width_, window_height_, "GoldMiner", NULL,
+	window_ = glfwCreateWindow(window_width, window_height, "GoldMiner", NULL,
 	NULL);
 
 	if (window_ == nullptr) {
@@ -63,7 +63,7 @@ void Game::init() {
 
 	cout << "init" << endl;
 
-	glViewport(0, 0, window_width_, window_height_);
+	glViewport(0, 0, window_width, window_height);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -102,7 +102,7 @@ void Game::init() {
 	this->screens_.push_back(gameover);
 	this->screens_.push_back(highscore);
 
-	currentScreen_ = screens_.at(startscreen);
+	current_screen_ = screens_.at(startscreen);
 }
 
 void Game::run() {
@@ -111,7 +111,7 @@ void Game::run() {
 	cout << "run" << endl;
 	while (!glfwWindowShouldClose(window_)) {
 
-		currentScreen_->tick();
+		current_screen_->tick();
 
 		glClearColor(0.7, 0.8, 1, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -132,15 +132,15 @@ void Game::run() {
 	glfwTerminate();
 }
 
-void Game::render() {
+void Game::render() const{
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0, window_width_, 0, window_height_, -1, 1);
+	glOrtho(0, window_width, 0, window_height, -1, 1);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	currentScreen_->draw();
+	current_screen_->draw();
 
 }
 
@@ -161,10 +161,10 @@ void Game::onButtonClick(unsigned int id) {
 			startWorld(1);
 			break;
 		case Startscreen::highScoreButton:
-			currentScreen_->setEnabled(false);
-			currentScreen_ = screens_.at(highscorescreen);
-			((Highscorescreen*) currentScreen_)->setHighscores(scores_[0]->getTop(10), scores_[1]->getTop(10));
-			currentScreen_->setEnabled(true);
+			current_screen_->setEnabled(false);
+			current_screen_ = screens_.at(highscorescreen);
+			((Highscorescreen*) current_screen_)->setHighscores(scores_[0]->getTop(10), scores_[1]->getTop(10));
+			current_screen_->setEnabled(true);
 			break;
 		case Startscreen::exitButton:
 			screens_.at(startscreen)->setEnabled(false);
@@ -175,40 +175,40 @@ void Game::onButtonClick(unsigned int id) {
 		case Startscreen::easyButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::EASY_GAME);
 			screens_.at(startscreen)->setEnabled(false);
-			currentScreen_ = screens_.at(worldscreen);
+			current_screen_ = screens_.at(worldscreen);
 			break;
 		case Startscreen::normalButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::NORMAL_GAME);
 			screens_.at(startscreen)->setEnabled(false);
-			currentScreen_ = screens_.at(worldscreen);
+			current_screen_ = screens_.at(worldscreen);
 			break;
 		case Startscreen::hardButton:
 			((Worldscreen*)screens_.at(worldscreen))->getWorld()->setDifficulty(World::HARD_GAME);
 			screens_.at(startscreen)->setEnabled(false);
-			currentScreen_ = screens_.at(worldscreen);
+			current_screen_ = screens_.at(worldscreen);
 			break;
 		case Startscreen::backButton:
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 			break;
 		case Highscorescreen::backButton:
-			currentScreen_->setEnabled(false);
-			currentScreen_ = screens_.at(startscreen);
-			currentScreen_->setEnabled(true);
+			current_screen_->setEnabled(false);
+			current_screen_ = screens_.at(startscreen);
+			current_screen_->setEnabled(true);
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 			break;
 
 		case Gameoverscreen::playAgain:
-			currentScreen_->setEnabled(false);
-			currentScreen_ = screens_.at(startscreen);
-			currentScreen_->setEnabled(true);
+			current_screen_->setEnabled(false);
+			current_screen_ = screens_.at(startscreen);
+			current_screen_->setEnabled(true);
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 			startWorld(current_world_);
 			break;
 		case Gameoverscreen::mainMenu:
 			cout << "GOS: MainMenu" << endl;
-			currentScreen_->setEnabled(false);
-			currentScreen_ = screens_.at(startscreen);
-			currentScreen_->setEnabled(true);
+			current_screen_->setEnabled(false);
+			current_screen_ = screens_.at(startscreen);
+			current_screen_->setEnabled(true);
 			((Startscreen*)screens_.at(startscreen))->setDrawMenuButtons(true);
 			break;
 	}
@@ -218,18 +218,18 @@ void Game::onLose(unsigned int score, unsigned int destroyedBlocks, unsigned int
 	score = computeScore(score, destroyedBlocks, maxBlocks);
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setText("You lose!");
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setScore(score);
-	currentScreen_->setEnabled(false);
-	currentScreen_ = screens_.at(gameoverscreen);
-	currentScreen_->setEnabled(true);
+	current_screen_->setEnabled(false);
+	current_screen_ = screens_.at(gameoverscreen);
+	current_screen_->setEnabled(true);
 }
 
 void Game::onWin(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks){
 	score = computeScore(score, destroyedBlocks, maxBlocks);
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setText("You win!");
 	((Gameoverscreen*)screens_.at(gameoverscreen))->setScore(score);
-	currentScreen_->setEnabled(false);
-	currentScreen_ = screens_.at(gameoverscreen);
-	currentScreen_->setEnabled(true);
+	current_screen_->setEnabled(false);
+	current_screen_ = screens_.at(gameoverscreen);
+	current_screen_->setEnabled(true);
 	scores_[current_world_]->addScore(score);
 
 }

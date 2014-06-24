@@ -32,8 +32,8 @@ public:
 		gameoverscreen = 2,
 		highscorescreen = 3,
 	};
-	static double window_width_;
-	static double window_height_;
+	static double window_width;
+	static double window_height;
 
 	Game(double width, double height);
 	virtual ~Game();
@@ -44,17 +44,14 @@ private:
 
 	void init();
 	void run();
-	void render();
+	void render() const;
 	void startWorld(unsigned int id);
 	unsigned int computeScore(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks);
 
 	GLFWwindow* window_;
-
 	SpriteManager* sprite_manager_;
-
-	Screen* currentScreen_;
+	Screen* current_screen_;
 	std::vector<Screen*> screens_;
-
 	std::vector<std::string> level_files_;
 	std::vector<Highscore*> scores_;
 	unsigned int current_world_;
