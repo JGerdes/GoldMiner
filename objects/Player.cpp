@@ -1,15 +1,18 @@
-/*
- * Player.cpp
- *
- *  Created on: 18.06.2014
- *      Author: Jonathan
- */
-
 #include "Player.h"
 #include "../Game.h"
 #include <iostream>
 
 using namespace std;
+
+Player::Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
+	Entity(sprite, position, dimension),
+	top_(nullptr),
+	left_(nullptr),
+	right_(nullptr),
+	bottom_(nullptr){
+		InputManager::getInstance().addKeyListener(this);
+
+}
 
 Player::~Player() {
 	// TODO Auto-generated destructor stub

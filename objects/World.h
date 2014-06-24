@@ -19,6 +19,9 @@
 class Player;
 class Block;
 
+/**
+ * @author Chris Brockhoff, Jonas Gerdes, Jonathan
+ */
 class World{
 public:
 	enum difficulty{

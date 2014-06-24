@@ -183,7 +183,7 @@ void World::tick() {
 				this->player_->addToScore();
 				std::cout << "Picked up a gold" << std::endl;
 				std::cout << "Current Score: " << this->player_->getScore() << std::endl;
-			}else if((*iter)->getType() == Block::dirt){
+			}else {
 				this->player_->addToDestroyedBlocks();
 				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
 				if(this->player_->getAllDestroyedBlocks() == difficulty_){
