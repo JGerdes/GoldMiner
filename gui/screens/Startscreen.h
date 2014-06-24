@@ -45,14 +45,10 @@ public:
 
 
 private:
-
-
 	std::vector<Button*> menu_buttons_;
 	std::vector<Button*> difficulty_buttons_;
 
-	Font* font_;
 	bool drawMenuButtons_;
-	Sprite* bg_;
 };
 
 

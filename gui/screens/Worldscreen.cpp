@@ -11,7 +11,7 @@ using namespace std;
 
 
 Worldscreen::Worldscreen(SpriteManager* spriteManager, bool enable):
-	Screen(spriteManager, enable),
+	Screen(spriteManager, new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt"), spriteManager->getSprite("assets/graphics/menue.ppm"), enable),
 	world_(nullptr){
 
 }

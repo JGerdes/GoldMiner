@@ -15,26 +15,14 @@ using namespace std;
 
 
 Highscorescreen::Highscorescreen(SpriteManager* spriteManager, bool enable):
-	Screen(spriteManager, enable),
-	font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
-	bg_(spriteManager->getSprite("assets/graphics/menue.ppm")){
-
-	Button* b = new Button(Highscorescreen::backButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(Game::window_width-32*6-20,100), Vec2(32*6,8*6));
+	Screen(spriteManager, new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt"), spriteManager->getSprite("assets/graphics/menue.ppm"), enable){
+	Button* b = new Button(Highscorescreen::backButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(Game::window_width_-32*6-20,100), Vec2(32*6,8*6));
 	b->setFont(font_);
 	b->setText("back");
 	buttons_.push_back(b);
 }
 
 Highscorescreen::~Highscorescreen() {
-	delete font_;
-	delete bg_;
-}
-
-void Highscorescreen::setEnabled(bool enable){
-	Screen::setEnabled(enable);
-	for(Button* b : buttons_){
-		b->setVisible(enable);
-	}
 }
 
 void Highscorescreen::setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2){
@@ -58,17 +46,17 @@ void Highscorescreen::setHighscores(std::vector<unsigned int> level_1, std::vect
 
 
 void Highscorescreen::draw()const{
-	bg_->draw(Vec2(0,0), Vec2(Game::window_width, Game::window_height));
+	bg_->draw(Vec2(0,0), Vec2(Game::window_width_, Game::window_height_));
 	font_->setSize(4);
 	font_->setColor(Color(1,1,1));
 	static const string title = "Highscores";
 	static const string lvl1 = "Level 1";
 	static const string lvl2 = "Level 2";
 
-	font_->draw_text(Vec2((Game::window_width-font_->compute_dimension(title).getX())/2,460),title);
+	font_->draw_text(Vec2((Game::window_width_-font_->compute_dimension(title).getX())/2,460),title);
 	font_->setSize(3);
 	font_->draw_text(Vec2(300 ,400),lvl1);
-	font_->draw_text(Vec2(Game::window_width-300-font_->compute_dimension(lvl2).getX() ,400),lvl2);
+	font_->draw_text(Vec2(Game::window_width_-300-font_->compute_dimension(lvl2).getX() ,400),lvl2);
 
 	font_->setSize(2.5);
 	unsigned int i=0;
@@ -78,7 +66,7 @@ void Highscorescreen::draw()const{
 	}
 	i=0;
 	for(string score : level_2_){
-		font_->draw_text(Vec2(Game::window_width-300-font_->compute_dimension(score).getX(), 350-40*i), score);
+		font_->draw_text(Vec2(Game::window_width_-300-font_->compute_dimension(score).getX(), 350-40*i), score);
 		++i;
 	}
 
@@ -93,6 +81,3 @@ void Highscorescreen::tick(){
 
 }
 
-vector<Button*> Highscorescreen::getButtons(){
-	return buttons_;
-}

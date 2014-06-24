@@ -26,15 +26,10 @@ public:
 
 	virtual void tick();
 	virtual void draw()const;
-	virtual void setEnabled(bool enable);
-	std::vector<Button*>& getButtons();
 	void setText(std::string text);
 	void setScore(int score);
 
 private:
-	Sprite* bg_;
-	Font* font_;
-	std::vector<Button*> buttons_;
 	std::string text_;
 	int score_;
 
