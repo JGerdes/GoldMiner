@@ -7,7 +7,7 @@
 
 
 /**
- * @author Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers
+ * @author Chris Brockhoff, Johann Luziv, Jonathan Wiemers
  *
  * Das Spielerobjekt von Goldminer.
  * Hat alle Informationen vom Spieler. Verarbeitet Benutzereingaben wärend des Spiel.
