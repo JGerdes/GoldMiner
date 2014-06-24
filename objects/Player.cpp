@@ -52,8 +52,8 @@ void Player::setNearestBlocks(Block* top, Block* left, Block* right, Block* bott
 void Player::tick() {
 
 	if(this->position_.getX() < -100 || this->position_.getX() > 1380 || this->position_.getY() < -200){
-		this->position_ = Vec2(Game::window_width_ / 2, 800);
-		this->destination_= Vec2(Game::window_width_ / 2, 800);
+		this->position_ = Vec2(Game::window_width / 2, 800);
+		this->destination_= Vec2(Game::window_width / 2, 800);
 	}
 
 
@@ -86,17 +86,17 @@ void Player::tick() {
 }
 
 unsigned int Player::getScore() const{
-	return this->score;
+	return this->score_;
 }
 
 void Player::addToScore(){
-	this->score +=1;
+	this->score_ +=1;
 }
 
 int Player::getAllDestroyedBlocks() const{
-	return this->destroyedBlocks;
+	return this->destroyed_blocks;
 }
 
 void Player::addToDestroyedBlocks(){
-	this->destroyedBlocks +=1;
+	this->destroyed_blocks +=1;
 }

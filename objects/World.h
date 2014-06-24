@@ -20,20 +20,21 @@ public:
 		HARD_GAME   = 15,
 	};
 
+
 	World(SpriteManager* spriteManager, std::string map);
 	~World();
 	void readMap(std::string fileName);
 	void tick();
-	void draw();
+	void draw() const;
 	void testCollision();
-	Player* getPlayer() const;
 	void onKeyUp(int key);
 	void onKeyDown(int key);
 	void resetGame();
-	bool getGameOver() const;
 	void setDifficulty(difficulty d);
-
 	void setWorldEventListener(WorldEventListener* listener);
+
+	bool getGameOver() const;
+	Player* getPlayer() const;
 
 private:
 
@@ -44,7 +45,7 @@ private:
 	Font* font_;
 	difficulty difficulty_;
 	WorldEventListener* listener_;
-	unsigned int goldAmount_;
+	unsigned int gold_amount_;
 };
 
 

@@ -45,7 +45,7 @@ InputManager::InputManager():
 }
 
 void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
-	y = Game::window_height_-y;
+	y = Game::window_height-y;
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
 	}
@@ -99,9 +99,9 @@ void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_of
 }
 
 void InputManager::onResizeImpl(GLFWwindow * window, int width, int height){
-	Game::window_width_ = width;
-	Game::window_height_ = height;
-	cout << "new width:" << Game::window_width_ << endl;
+	Game::window_width = width;
+	Game::window_height = height;
+	cout << "new width:" << Game::window_width << endl;
 }
 
 bool InputManager::isKeyDown(int key){
