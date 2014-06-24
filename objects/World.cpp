@@ -27,7 +27,6 @@ World::World(SpriteManager* spriteManager, string map) :
 		gold_amount_(0){
 	font_->setColor(Color(1,1,1));
 	font_->setSize(2);
-	cout << "readmap" << endl;
 	this->readMap(map);
 }
 
@@ -41,7 +40,7 @@ World::~World() {
 }
 
 
-Player* World::getPlayer() const{
+const Player* World::getPlayer() const{
 	return player_;
 }
 
@@ -106,6 +105,12 @@ void World::setDifficulty(difficulty d){
 	difficulty_ = d;
 }
 
+Block* World::createBlock(Block::Type type, Sprite* sprite, int i, int rowCount) {
+	cout << "createBlock" << endl;
+ 	return new Block(type ,Vec2((Game::window_width / 16) * i,Game::window_height - (Game::window_height / 9) * (rowCount + 1)) , sprite);
+}
+
+
 void World::readMap(string fileName) {
 	ifstream quelle(fileName);
 	int rowCount = 0;
@@ -119,47 +124,23 @@ void World::readMap(string fileName) {
 	}
 	while (quelle.getline(ch, sizeof(ch))) {
 		for (int i = 0; i < 16; i++) {
-			if (ch[i] == 'x') {
-				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::dirt,
-						Vec2((Game::window_width / 16) * i, Game::window_height - (Game::window_height / 9) * (rowCount+1)),
-						sprite_manager_->getSprite("assets/graphics/dirt.ppm"), 2);
-				map_->push_back(block);
-				cout << "new Ground " << (Game::window_width / 16) * i << " ,"
-						<< (Game::window_height / 9) * rowCount << endl;
-			}
-			if (ch[i] == 'g') {
-				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::dirt,
-						Vec2((Game::window_width / 16) * i, Game::window_height - (Game::window_height / 9) * (rowCount+1)),
-						sprite_manager_->getSprite("assets/graphics/grass.ppm"), 3);
-				map_->push_back(block);
-				cout << "new Ground " << (Game::window_width / 16) * i << " ,"
-						<< (Game::window_height / 9) * rowCount << endl;
-			}
-			if (ch[i] == 's') {
-				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::dirt,
-						Vec2((Game::window_width / 16) * i, Game::window_height - (Game::window_height / 9) * (rowCount+1)),
-						sprite_manager_->getSprite("assets/graphics/stone.ppm"), 6);
-				map_->push_back(block);
-				cout << "new Ground " << (Game::window_width / 16) * i << " ,"
-						<< (Game::window_height / 9) * rowCount << endl;
-			}
-			if (ch[i] == 'a') {
-				//TODO block höhe und breite benutzen
-				Block* block = new Block(Block::gold,
-						Vec2((Game::window_width / 16) * i, Game::window_height - (Game::window_height / 9) * (rowCount+1)),
-						sprite_manager_->getSprite("assets/graphics/gold.ppm"), 10);
-				map_->push_back(block);
-				cout << "new Ground " << (Game::window_width / 16) * i << " ,"
-						<< (Game::window_height / 9) * rowCount << endl;
+			switch(ch[i]){
+			case 'x':
+				map_->push_back(createBlock(Block::dirt, sprite_manager_->getSprite("assets/graphics/dirt.ppm"), i, rowCount));
+				break;
+			case 'g':
+				map_->push_back(createBlock(Block::grass, sprite_manager_->getSprite("assets/graphics/grass.ppm"),i, rowCount));
+				break;
+			case 's':
+				map_->push_back(createBlock(Block::stone, sprite_manager_->getSprite("assets/graphics/stone.ppm"),i, rowCount));
+				break;
+			case 'a':
+				map_->push_back(createBlock(Block::gold, sprite_manager_->getSprite("assets/graphics/gold.ppm"),i, rowCount));
 				gold_amount_++;
-			}
-			if (ch[i] == 'p') {
-				player_->setPosition(
-						Vec2((Game::window_width / 16) * i, 4+Game::window_height - (Game::window_height / 9) * (rowCount+1)));
-				cout << "Player Pos " << 20 * i << " " << 20 * rowCount << endl;
+				break;
+			case 'p':
+				player_->setPosition(Vec2((Game::window_width / 16) * i,
+						4+Game::window_height - (Game::window_height / 9) * (rowCount+1)));
 			}
 			ch[i] = ' ';
 		}
@@ -174,18 +155,16 @@ void World::readMap(string fileName) {
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/dirt.ppm");
 				sprite->setColor(Color(darkness, darkness, darkness+0.05));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((Game::window_width / 16) * x, Game::window_height - (Game::window_height / 9) * (y+1)),
-										sprite, 2));
+										sprite));
 			}else{
 				Sprite* sprite = sprite_manager_->getSprite("assets/graphics/stone.ppm");
 				sprite->setColor(Color(darkness, darkness, darkness+0.05));
 				bg_map_->push_back(new Block(Block::dirt, Vec2((Game::window_width / 16) * x, Game::window_height - (Game::window_height / 9) * (y+1)),
-										sprite, 2));
+										sprite));
 			}
 		}
 
 	}
-
-	cout << "rowcount:" << rowCount << endl;
 }
 
 void World::setWorldEventListener(WorldEventListener* listener){
@@ -226,8 +205,6 @@ void World::tick() {
 }
 
 void World::draw() const{
-
-//cout << "draw blocks("<< map->size()<< ")" << endl;
 	for (auto block : *bg_map_) {
 		block->draw();
 	}
@@ -242,8 +219,6 @@ void World::draw() const{
 	score_text.str("");
 	score_text << "Tool:" <<round(((float)(player_->getAllDestroyedBlocks())/difficulty_)*100) << "%";
 	font_->draw_text(Vec2(1100,640),score_text.str());
-
-//cout << "draw player" << endl;
 	player_->draw();
 
 }

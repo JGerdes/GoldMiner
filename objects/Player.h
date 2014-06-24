@@ -1,12 +1,3 @@
-/*
-void Player::onKeyDown(int key){
-
-}
- * Player.h
- *
- *  Created on: 18.06.2014
- *      Author: Jonathan
- */
 
 #ifndef PLAYER_H_
 #define PLAYER_H_
@@ -35,14 +26,14 @@ public:
 	void addToScore();
 	void addToDestroyedBlocks();
 
-
 	int getAllDestroyedBlocks() const;
-	unsigned int getScore() const;
+	const unsigned int getScore() const;
 
 
 private:
 	unsigned int score_ = 0;
 	unsigned int destroyed_blocks = 0;
+
 	Block* top_, *left_, *right_, *bottom_;
 };
 

@@ -2,7 +2,7 @@
  * Game.h
  *
  *  Created on: 06.06.2014
- *      Author: Jonas
+ *      Author: Jonas, Jonathan
  */
 
 #ifndef GAME_H_
@@ -36,7 +36,7 @@ public:
 	static double window_height;
 
 	Game(double width, double height);
-	virtual ~Game();
+	~Game();
 	virtual void onButtonClick(unsigned int id);
 	virtual void onLose(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks);
 	virtual void onWin(unsigned int score, unsigned int destroyedBlocks, unsigned int maxBlocks);

@@ -1,3 +1,10 @@
+/*
+ * World.h
+ *
+ *  Created on: 06.06.2014
+ *      Author: Jonathan Wiemers, Jonas Gerdes
+ */
+
 #ifndef WORLD_H_
 #define WORLD_H_
 
@@ -33,9 +40,10 @@ public:
 	void setWorldEventListener(WorldEventListener* listener);
 
 	bool getGameOver() const;
-	Player* getPlayer() const;
+	const Player* getPlayer() const;
 
 private:
+	Block* createBlock(Block::Type, Sprite* sprite, int i, int rowCount);
 
 	SpriteManager* sprite_manager_;
 	Player* player_;
@@ -45,6 +53,8 @@ private:
 	difficulty difficulty_;
 	WorldEventListener* listener_;
 	unsigned int gold_amount_;
+
+
 };
 
 

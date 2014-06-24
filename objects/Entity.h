@@ -1,10 +1,3 @@
-/*
- * Entity.h
- *
- *  Created on: 18.06.2014
- *      Author: Jonathan
- */
-
 #ifndef ENTITY_H_
 #define ENTITY_H_
 
@@ -17,12 +10,16 @@ public:
 	virtual ~Entity();
 
 	virtual void draw() const;
+	virtual void tick() = 0;
+
 	virtual Entity& setDimension(Vec2 dim);
 	virtual Entity& setPosition(Vec2 pos);
+
 	virtual Vec2 getPosition() const;
 	virtual Vec2 getDestination() const;
 	virtual const Vec2& getDimension() const;
-	virtual void tick() = 0;
+
+
 
 protected:
 	Vec2 dimension_;

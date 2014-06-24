@@ -2,7 +2,7 @@
  * KeyListener.h
  *
  *  Created on: 18.06.2014
- *      Author: Jonas
+ *      Author: Jonathan Wiemers, Jonas Gerdes
  */
 
 #ifndef KEYLISTENER_H_

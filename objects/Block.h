@@ -11,23 +11,29 @@
 #include "../Vec2.h"
 #include "../gui/io/MouseListener.h"
 #include "Entity.h"
+#include <vector>
+#include <string>
 
 class Block : public Entity {
 public:
 
 	enum Type{
-		dirt,
-		gold
+		dirt = 2,
+		grass = 3,
+		stone = 5,
+		gold = 7,
 	};
 
-	Block(Type type, Vec2 position, Sprite* sprite, unsigned int maxdamage);
+	Block(Type type, Vec2 position, Sprite* sprite);
 	virtual ~Block();
+
 	virtual void tick();
-	virtual void mine();
-	virtual bool isDestroyed();
+
+	void mine();
+	const bool isDestroyed();
 
 
-	Type getType(){
+	const Type getType(){
 		return type_;
 	}
 
@@ -35,6 +41,7 @@ protected:
 	Type type_;
 	unsigned int damage_;
 	unsigned int max_damage_;
+	std::vector<std::string> paths_;
 };
 
 #endif /* BLOCK_H_ */
