@@ -27,17 +27,11 @@ public:
 	virtual void tick();
 	virtual void draw() const;
 
-	virtual void setEnabled(bool enable);
-
 	void setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2);
-	std::vector<Button*> getButtons();
 
 
 private:
 
-	std::vector<Button*> buttons_;
-	Font* font_;
-	Sprite* bg_;
 	std::vector<std::string> level_1_, level_2_;
 };
 

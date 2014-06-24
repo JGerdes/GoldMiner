@@ -15,10 +15,7 @@ using namespace std;
 
 
 Highscorescreen::Highscorescreen(SpriteManager* spriteManager, bool enable):
-	Screen(spriteManager, enable),
-	font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
-	bg_(spriteManager->getSprite("assets/graphics/menue.ppm")){
-
+	Screen(spriteManager, new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt"), spriteManager->getSprite("assets/graphics/menue.ppm"), enable){
 	Button* b = new Button(Highscorescreen::backButton,  spriteManager->getSprite("assets/graphics/button.ppm"),Vec2(Game::window_width_-32*6-20,100), Vec2(32*6,8*6));
 	b->setFont(font_);
 	b->setText("back");
@@ -26,15 +23,6 @@ Highscorescreen::Highscorescreen(SpriteManager* spriteManager, bool enable):
 }
 
 Highscorescreen::~Highscorescreen() {
-	delete font_;
-	delete bg_;
-}
-
-void Highscorescreen::setEnabled(bool enable){
-	Screen::setEnabled(enable);
-	for(Button* b : buttons_){
-		b->setVisible(enable);
-	}
 }
 
 void Highscorescreen::setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2){
@@ -93,6 +81,3 @@ void Highscorescreen::tick(){
 
 }
 
-vector<Button*> Highscorescreen::getButtons(){
-	return buttons_;
-}

@@ -15,10 +15,8 @@
 using namespace std;
 
 Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMenuButtons) :
-		Screen(spriteManager, enable),
-		font_(new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt")),
-		drawMenuButtons_(drawMenuButtons),
-		bg_(spriteManager->getSprite("assets/graphics/menue.ppm")){
+		Screen(spriteManager, new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt"), spriteManager->getSprite("assets/graphics/menue.ppm"), enable),
+		drawMenuButtons_(drawMenuButtons){
 
 
 	//menu
@@ -67,8 +65,6 @@ Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMen
 }
 
 Startscreen::~Startscreen() {
-	delete font_;
-	delete bg_;
 	vector<Button*>::iterator iter = menu_buttons_.begin();
 	while(iter != menu_buttons_.end()){
 		delete (*iter++);
