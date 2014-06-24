@@ -1,10 +1,3 @@
-/*
- * Highscorescreen.h
- *
- *  Created on: 23.06.2014
- *      Author: Jonathan
- */
-
 #ifndef HIGHSCORESCREEN_H_
 #define HIGHSCORESCREEN_H_
 

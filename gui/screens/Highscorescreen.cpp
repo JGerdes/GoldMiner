@@ -53,10 +53,10 @@ void Highscorescreen::draw()const{
 	static const string lvl1 = "Level 1";
 	static const string lvl2 = "Level 2";
 
-	font_->draw_text(Vec2((Game::window_width-font_->compute_dimension(title).getX())/2,460),title);
+	font_->draw_text(Vec2((Game::window_width-font_->computeDimension(title).getX())/2,460),title);
 	font_->setSize(3);
 	font_->draw_text(Vec2(300 ,400),lvl1);
-	font_->draw_text(Vec2(Game::window_width-300-font_->compute_dimension(lvl2).getX() ,400),lvl2);
+	font_->draw_text(Vec2(Game::window_width-300-font_->computeDimension(lvl2).getX() ,400),lvl2);
 
 	font_->setSize(2.5);
 	unsigned int i=0;
@@ -66,7 +66,7 @@ void Highscorescreen::draw()const{
 	}
 	i=0;
 	for(string score : level_2_){
-		font_->draw_text(Vec2(Game::window_width-300-font_->compute_dimension(score).getX(), 350-40*i), score);
+		font_->draw_text(Vec2(Game::window_width-300-font_->computeDimension(score).getX(), 350-40*i), score);
 		++i;
 	}
 

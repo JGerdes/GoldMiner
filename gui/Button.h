@@ -81,7 +81,7 @@ public:
 private:
 
 	unsigned int id_;
-	bool isHovered_;
+	bool is_hovered_;
 	ButtonHandler* handler_;
 	Font* font_;
 	std::string text_;

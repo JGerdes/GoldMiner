@@ -14,7 +14,7 @@ class Player;
 class Block;
 
 /**
- * @author Chris Brockhoff, Jonathan Wiemers
+ * @author Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers
  */
 class World{
 public:

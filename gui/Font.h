@@ -52,7 +52,7 @@ public:
 	 * @param text Zu Messender Text
 	 * @return	Abmaﬂe des Textes in Pixeln
 	 */
-	Vec2 compute_dimension(std::string text) const;
+	Vec2 computeDimension(std::string text) const;
 
 private:
 	Sprite* sprite_;

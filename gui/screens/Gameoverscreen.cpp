@@ -42,11 +42,11 @@ void Gameoverscreen::draw()const{
 	}
 	font_->setColor(Color(1,1,1));
 	font_->setSize(4);
-	font_->draw_text(Vec2((Game::window_width-font_->compute_dimension(text_).getX())/2, 400), text_);
+	font_->draw_text(Vec2((Game::window_width-font_->computeDimension(text_).getX())/2, 400), text_);
 	stringstream scoreText;
 	scoreText << "Score: " << score_;
 	font_->setSize(2);
-	font_->draw_text(Vec2((Game::window_width-font_->compute_dimension(scoreText.str()).getX())/2, 350), scoreText.str());
+	font_->draw_text(Vec2((Game::window_width-font_->computeDimension(scoreText.str()).getX())/2, 350), scoreText.str());
 }
 
 void Gameoverscreen::setText(std::string text){

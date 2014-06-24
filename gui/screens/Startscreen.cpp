@@ -96,7 +96,7 @@ void Startscreen::draw() const {
 
 	font_->setSize(1.8);
 	string by = "by Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers";
-	font_->draw_text(Vec2((Game::window_width-font_->compute_dimension(by).getX())/2, 10), by);
+	font_->draw_text(Vec2((Game::window_width-font_->computeDimension(by).getX())/2, 10), by);
 }
 
 std::vector<Button*> Startscreen::getButtons(){
