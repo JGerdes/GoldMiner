@@ -45,10 +45,6 @@ Player* World::getPlayer() const{
 	return player_;
 }
 
-void World::resetGame() {
-
-		//TODO restMap
-}
 
 void World::testCollision() {
 

@@ -16,7 +16,6 @@ public:
 	Highscore(std::string path);
 	~Highscore();
 	void addScore(unsigned int score);
-	void setHighscore(int score);
 	std::vector<unsigned int> getTop(unsigned int amount);
 private:
 	std::string path_;
