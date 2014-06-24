@@ -26,15 +26,11 @@ public:
 			spriteManager_(spriteManager),
 			enabled_(enable),
 			font_(font),
-			bg_(bg){
-	}
+			bg_(bg){}
 
 	virtual ~Screen() {
 		if(font_ != nullptr){
 			delete font_;
-		}
-		if(bg_ != nullptr){
-			delete bg_;
 		}
 		std::vector<Button*>::iterator iter = buttons_.begin();
 		while(iter != buttons_.end()){

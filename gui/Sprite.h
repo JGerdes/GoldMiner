@@ -30,8 +30,7 @@ public:
 
 	Sprite(ImageBuffer* image_buffer);
 
-	virtual ~Sprite(){
-	}
+	virtual ~Sprite(){}
 
 	/**
 	 * Zeichent das Image aus dem ImageBuffer an einer bestimmten Position, in einer bestimmten größe in einem Quadratischen surface.
