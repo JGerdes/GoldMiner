@@ -1,10 +1,3 @@
-/*
- * Block.h
- *
- *  Created on: 18.06.2014
- *      Author: Jonas
- */
-
 #ifndef BLOCK_H_
 #define BLOCK_H_
 
@@ -14,9 +7,19 @@
 #include <vector>
 #include <string>
 
+/**
+ * @author Jonas Gerdes, Jonathan Wiemers
+ *
+ * Die Welt, in der sich der Spieler bewegen kann, besteht aus Objekten der Klasse Block.
+ * Jeder Block hat einen Typ der durch ein Enum abgebildet wird.
+ *
+ */
 class Block : public Entity {
 public:
 
+	/**
+	 * Enmu das den Zusammenhang zwischen dem Tüp des Blocks und dem Schaden den der Block erleiden kann her.
+	 */
 	enum Type{
 		dirt = 2,
 		grass = 3,
@@ -27,12 +30,16 @@ public:
 	Block(Type type, Vec2 position, Sprite* sprite);
 	virtual ~Block();
 
+
 	virtual void tick();
 
+	/**
+	 * Wird aufgerunfen um dem aktuellen Objekt +1 Schaden zuzufügen.
+	 */
 	void mine();
+
+
 	const bool isDestroyed();
-
-
 	const Type getType(){
 		return type_;
 	}

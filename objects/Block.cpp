@@ -1,10 +1,3 @@
-/*
- * Block.cpp
- *
- *  Created on: 18.06.2014
- *      Author: Jonas
- */
-
 #include "Block.h"
 #include "../Game.h"
 #include "../gui/Sprite.h"
@@ -23,13 +16,11 @@ Block::~Block() {
 }
 
 void Block::tick(){
-	//TODO: do stuff
+
 }
 
 void Block::mine(){
 	damage_ += 1;
-	std::cout << "Damage:" << damage_ << std::endl;
-
 }
 
 const bool Block::isDestroyed(){

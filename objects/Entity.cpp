@@ -1,10 +1,3 @@
-/*
- * Entity.cpp
- *
- *  Created on: 18.06.2014
- *      Author: Jonas
- */
-
 #include "Entity.h"
 #include "iostream"
 

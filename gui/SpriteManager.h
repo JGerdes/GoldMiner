@@ -1,10 +1,3 @@
-/*
- * SpriteManager.h
- *
- *  Created on: 18.06.2014
- *      Author: Jonas
- */
-
 #ifndef SPRITEMANAGER_H_
 #define SPRITEMANAGER_H_
 
@@ -13,12 +6,25 @@
 #include "Sprite.h"
 #include "ImageBuffer.h"
 
+
+/**
+ * @author Jonas Gerdes
+ *
+ * Verwaltet Spites und ImageBuffer
+ */
 class SpriteManager {
 public:
 
 	SpriteManager();
 	virtual ~SpriteManager();
 
+	/**
+	 * Läd ein eine neue PPM datei als ImageBuffer,
+	 * wenn sie vorher noch nicht geladen wurde.
+	 *
+	 * @param path Der Pfad zu dem zu landenden Sprite
+	 * @return Ein neues Sprite Objekt
+	 */
 	Sprite* getSprite(std::string path);
 
 private:

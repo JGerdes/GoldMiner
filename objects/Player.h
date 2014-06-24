@@ -1,4 +1,3 @@
-
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
@@ -45,9 +44,13 @@ public:
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
 
 	/**
-	 *
+	 * Fügt ein Punkt zum score_ hinzu.
 	 */
 	void addToScore();
+
+	/**
+	 * Fügt einen Block zu destroyed_blocks_ hinzu.
+	 */
 	void addToDestroyedBlocks();
 
 	int getAllDestroyedBlocks() const;
@@ -56,7 +59,7 @@ public:
 
 private:
 	unsigned int score_ = 0;
-	unsigned int destroyed_blocks = 0;
+	unsigned int destroyed_blocks_ = 0;
 
 	Block* top_, *left_, *right_, *bottom_;
 };

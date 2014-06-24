@@ -1,10 +1,3 @@
-/*
- * Game.cpp
- *
- *  Created on: 13.06.2014
- *      Author: Jonas
- */
-
 #include "Game.h"
 #include <stdlib.h>
 #include <iostream>

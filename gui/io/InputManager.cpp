@@ -101,7 +101,6 @@ void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_of
 void InputManager::onResizeImpl(GLFWwindow * window, int width, int height){
 	Game::window_width = width;
 	Game::window_height = height;
-	cout << "new width:" << Game::window_width << endl;
 }
 
 bool InputManager::isKeyDown(int key){
