@@ -2,8 +2,8 @@ g              g
 xgg    ggg   ggx
 xxxxx  xxx  xxxx
 xxx   p    xxxax
-xsxxxxxaxxxxxxxx
-xsxssxxsaxxsxsax
-sssaassxxsssssss
-ssssasasssasssss
-ssssssssssaaasss
+xsxsxxsaxxxxxxxx
+asxssxxsaxxsxsax
+sssaassxxssssass
+ssssasasssssasss
+asassssssssssass
