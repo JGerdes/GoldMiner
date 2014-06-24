@@ -1,10 +1,3 @@
-/*
- * ImageBuffer.cpp
- *
- *  Created on: 20.06.2014
- *      Author: Jonas
- */
-
 #include "ImageBuffer.h"
 #include <iostream>
 #include <fstream>
@@ -38,6 +31,10 @@ bool ImageBuffer::loadFromPPM(const string& filename){
 	getline(datei,s);
 	datei >> width_;
 	datei >> height_;
+	/**
+	 * Der höchste Wert den eine Farbe des Pixels erreichen kann.
+	 * Steht im header der PPM
+	 */
 	datei >> bitsPerPixel;
 
 
@@ -47,16 +44,21 @@ bool ImageBuffer::loadFromPPM(const string& filename){
 		float r;
 		float g;
 		float b;
-		//value = (datei.get()); //for binary (TODO ?)
 		datei >> r;
 		datei >> g;
 		datei >> b;
-
+		/*
+		 * Da in der einer PPM Datei normalerweise alle Farben mit werten von 0 bis 255 angegeben sind
+		 * und OpenGL nur Farben im bereich 0 - bis 1 verarbeitet
+		 * wird hier durch den höchstmöglichen Wert geteilt.
+		 */
 		buffer_temp[4*i+0] = r/bitsPerPixel;
 		buffer_temp[4*i+1] = g/bitsPerPixel;
 		buffer_temp[4*i+2] = b/bitsPerPixel;
 
-			//TODO: use other color for transparent pixel instead of black
+		/*
+		 * Wenn ein Pixel in der PPM schwarz ist, wird er Transparent dargestellt.
+		 */
 		if(r==0 && g==0 && b==0){
 			buffer_temp[4*i+3] =0;
 		}else{
@@ -69,15 +71,18 @@ bool ImageBuffer::loadFromPPM(const string& filename){
 	buffer_ = buffer_temp;
 	path_ = filename;
 
+	/*
+	 * Um mit OpenGL Texturen darzustellen muss man der textur zuerst einen "Namen" geben.
+	 * Dieser wird in dem eindimensionalen Array tex_handle_ gespeichert.
+	 * Um zu garantieren das dieser "Name" nicht mehr verwendet wird, muss das tex_handle_ an ein Ziel gebuden werden.
+	 * In diesem Fall als 2D Texture.
+	 * Sollte der "Name" vorher schon einmal an ein Ziel gebunden worden sein, wird die vorherige Verbindung durch ein erneutes binden zerstört.
+	 */
 	glGenTextures(1, &tex_handle_);
 	glBindTexture(GL_TEXTURE_2D, tex_handle_);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_FLOAT, buffer_);
 	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
 	glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-
-	cout << "load sprite :"<< path_ << endl;
-	cout << "TextHandle load: [" << tex_handle_<< "]" << endl;
-
 
 	return true;
 }

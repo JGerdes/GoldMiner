@@ -1,10 +1,3 @@
-/*
- * Sprite.cpp
- *
- *  Created on: 15.06.2014
- *      Author: Jonas
- */
-
 #include "Sprite.h"
 
 #include <fstream>
@@ -45,13 +38,9 @@ void Sprite::flip(bool flipped){
 	flipped_ = flipped;
 }
 
-void Sprite::draw(const Vec2& position, const Vec2& dimension) const{
 
-	draw(position,dimension, Vec2(0.0,0.0), Vec2(1.0,1.0));
 
-}
-
-void Sprite::draw(const Vec2& position, const Vec2& dimension, const Vec2& tex_start, const Vec2& tex_end) const{
+void Sprite::draw(const Vec2& position, const Vec2& dimension, const Vec2& tex_start, const Vec2& tex_end){
 
 
 	glEnable(GL_TEXTURE_2D);

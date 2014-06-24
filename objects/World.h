@@ -1,9 +1,3 @@
-/*
- * World.h
- *
- *  Created on: 06.06.2014
- *      Author: Jonathan Wiemers, Jonas Gerdes
- */
 
 #ifndef WORLD_H_
 #define WORLD_H_
@@ -19,6 +13,9 @@
 class Player;
 class Block;
 
+/**
+ * @author Chris Brockhoff, Jonathan Wiemers
+ */
 class World{
 public:
 	enum difficulty{

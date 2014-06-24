@@ -1,10 +1,3 @@
-/*
- * Game.cpp
- *
- *  Created on: 13.06.2014
- *      Author: Jonas
- */
-
 #include "Game.h"
 #include <stdlib.h>
 #include <iostream>
@@ -24,7 +17,7 @@ Game::Game(double width = 1280, double height = 720) :
 		current_world_(-1){
 	window_width = width;
 	window_height =height;
-	cout << "Game started" << endl;
+
 
 	if (!glfwInit()) {
 		cerr << "Couln't initiate GLFW!" << endl;
@@ -60,9 +53,6 @@ Game::~Game() {
 }
 
 void Game::init() {
-
-	cout << "init" << endl;
-
 	glViewport(0, 0, window_width, window_height);
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
@@ -108,7 +98,6 @@ void Game::init() {
 void Game::run() {
 	glfwSetTime(0);
 	static unsigned int i = 0;
-	cout << "run" << endl;
 	while (!glfwWindowShouldClose(window_)) {
 
 		current_screen_->tick();
@@ -128,9 +117,9 @@ void Game::run() {
 		glfwSwapBuffers(window_);
 		glfwPollEvents();
 	}
-
 	glfwTerminate();
 }
+
 
 void Game::render() const{
 
@@ -205,7 +194,6 @@ void Game::onButtonClick(unsigned int id) {
 			startWorld(current_world_);
 			break;
 		case Gameoverscreen::mainMenu:
-			cout << "GOS: MainMenu" << endl;
 			current_screen_->setEnabled(false);
 			current_screen_ = screens_.at(startscreen);
 			current_screen_->setEnabled(true);

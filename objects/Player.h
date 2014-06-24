@@ -1,4 +1,3 @@
-
 #ifndef PLAYER_H_
 #define PLAYER_H_
 
@@ -6,24 +5,52 @@
 #include "../gui/io/InputManager.h"
 #include "Block.h"
 
+
+/**
+ * @author Chris Brockhoff, Jonas Gerdes, Johann Luziv, Jonathan Wiemers
+ *
+ * Das Spielerobjekt von Goldminer.
+ * Hat alle Informationen vom Spieler. Verarbeitet Benutzereingaben wärend des Spiel.
+ *
+ */
 class Player: public Entity, public KeyListener {
 public:
-	Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
-			Entity(sprite, position, dimension),
-			top_(nullptr),
-			left_(nullptr),
-			right_(nullptr),
-			bottom_(nullptr){
-		InputManager::getInstance().addKeyListener(this);
-
-	}
+	/**
+	 * @param sprite
+	 * @param position
+	 * @param dimension
+	 */
+	Player(Sprite* sprite, Vec2 position, Vec2 dimension);
 	virtual ~Player();
 	virtual void tick();
 
+	/**
+	 * Implementierung des KeyListener
+	 *
+	 * @param key Die ID der Taste
+	 */
 	void onKeyUp(int key);
 	void onKeyDown(int key);
+
+	/**
+	 * Setzt, falls es einen gibt, einen Pointer auf den nächsten Block über,
+	 * rechts und links neben und unter dem Playerobjekt.
+	 *
+	 * @param top Der Block über dem Spieler.
+	 * @param left Der Block links neben dem Spieler.
+	 * @param right Der Block rechts neben dem Spieler.
+	 * @param bottom Der Block unter dem Spieler
+	 */
 	void setNearestBlocks(Block* top, Block* left, Block* right, Block* bottom);
+
+	/**
+	 * Fügt ein Punkt zum score_ hinzu.
+	 */
 	void addToScore();
+
+	/**
+	 * Fügt einen Block zu destroyed_blocks_ hinzu.
+	 */
 	void addToDestroyedBlocks();
 
 	int getAllDestroyedBlocks() const;
@@ -32,7 +59,7 @@ public:
 
 private:
 	unsigned int score_ = 0;
-	unsigned int destroyed_blocks = 0;
+	unsigned int destroyed_blocks_ = 0;
 
 	Block* top_, *left_, *right_, *bottom_;
 };

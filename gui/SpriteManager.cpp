@@ -1,22 +1,11 @@
-/*
- * SpriteManager.cpp
- *
- *  Created on: 18.06.2014
- *      Author: Jonas
- */
-
 #include "SpriteManager.h"
 #include <iostream>
 
 using namespace std;
 
-SpriteManager::SpriteManager() {
-	// TODO Auto-generated constructor stub
-
-}
+SpriteManager::SpriteManager() {}
 
 SpriteManager::~SpriteManager() {
-	cout << "Deleting " << image_buffers_.size() << " ImageBuffers" << endl;
 	for(ImageBuffer* sprite : image_buffers_){
 		delete sprite;
 	}

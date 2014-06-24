@@ -59,7 +59,6 @@ void Highscore::addScore(unsigned int score) {
 }
 
 vector<unsigned int> Highscore::getTop(unsigned int amount){
-	cout << "Highscore:: get top " << amount << endl;
 	vector<unsigned int> top;
 	for(int score : highscoreList_){
 		top.push_back(score);
@@ -68,7 +67,6 @@ vector<unsigned int> Highscore::getTop(unsigned int amount){
 	while (top.size() > amount) {
 		top.pop_back();
 	}
-	cout << "Highscore:: get top " << amount << "ready" <<endl;
 	return top;
 }
 

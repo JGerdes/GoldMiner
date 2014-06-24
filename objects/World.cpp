@@ -1,10 +1,3 @@
-/*
- * World.cpp
- *
- *  Created on: 02.06.2014
- *      Author: Chris
- */
-
 #include "World.h"
 #include "../Game.h"
 #include <vector>
@@ -106,7 +99,6 @@ void World::setDifficulty(difficulty d){
 }
 
 Block* World::createBlock(Block::Type type, Sprite* sprite, int i, int rowCount) {
-	cout << "createBlock" << endl;
  	return new Block(type ,Vec2((Game::window_width / 16) * i,Game::window_height - (Game::window_height / 9) * (rowCount + 1)) , sprite);
 }
 
@@ -181,11 +173,8 @@ void World::tick() {
 		if((*iter)->isDestroyed()){
 			if((*iter)->getType() == Block::gold){
 				this->player_->addToScore();
-				std::cout << "Picked up a gold" << std::endl;
-				std::cout << "Current Score: " << this->player_->getScore() << std::endl;
-			}else if((*iter)->getType() == Block::dirt){
+			}else {
 				this->player_->addToDestroyedBlocks();
-				std::cout << "Destroyed blocks: " << this->player_->getAllDestroyedBlocks() << std::endl;
 				if(this->player_->getAllDestroyedBlocks() == difficulty_){
 					listener_->onLose(player_->getScore(), player_->getAllDestroyedBlocks(), difficulty_);
 				}

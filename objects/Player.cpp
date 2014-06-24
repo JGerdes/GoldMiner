@@ -1,15 +1,18 @@
-/*
- * Player.cpp
- *
- *  Created on: 18.06.2014
- *      Author: Jonathan
- */
-
 #include "Player.h"
 #include "../Game.h"
 #include <iostream>
 
 using namespace std;
+
+Player::Player(Sprite* sprite, Vec2 position, Vec2 dimension) :
+	Entity(sprite, position, dimension),
+	top_(nullptr),
+	left_(nullptr),
+	right_(nullptr),
+	bottom_(nullptr){
+		InputManager::getInstance().addKeyListener(this);
+
+}
 
 Player::~Player() {
 	// TODO Auto-generated destructor stub
@@ -62,7 +65,7 @@ void Player::tick() {
 
 		sprite_->flip(false);
 		if(this->right_ == nullptr){
-			this->destination_.getX() += 3;
+			this->destination_.getX() += 5;
 		}
 
 	}
@@ -70,7 +73,7 @@ void Player::tick() {
 
 		sprite_->flip(true);
 		if(this->left_ == nullptr){
-			this->destination_.getX() -= 3;
+			this->destination_.getX() -= 5;
 		}
 	}
 
@@ -94,9 +97,9 @@ void Player::addToScore(){
 }
 
 int Player::getAllDestroyedBlocks() const{
-	return this->destroyed_blocks;
+	return this->destroyed_blocks_;
 }
 
 void Player::addToDestroyedBlocks(){
-	this->destroyed_blocks +=1;
+	this->destroyed_blocks_ +=1;
 }
