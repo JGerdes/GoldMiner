@@ -16,7 +16,7 @@ using namespace std;
 
 Startscreen::Startscreen(SpriteManager* spriteManager, bool enable, bool drawMenuButtons) :
 		Screen(spriteManager, new Font(spriteManager->getSprite("assets/fonts/consolas.ppm"),"assets/fonts/consolas.txt"), spriteManager->getSprite("assets/graphics/menue.ppm"), enable),
-		drawMenuButtons_(drawMenuButtons){
+		draw_menu_buttons_(drawMenuButtons){
 
 
 	//menu
@@ -84,7 +84,7 @@ void Startscreen::draw() const {
 	font_->setSize(3);
 	bg_->draw(Vec2(0,0), Vec2(Game::window_width,Game::window_height));
 
-	if(drawMenuButtons_){
+	if(draw_menu_buttons_){
 		for(Button* b : menu_buttons_){
 			b->draw();
 		}
@@ -124,7 +124,7 @@ void Startscreen::setDrawMenuButtons(bool b){
 		}
 
 	}
-	drawMenuButtons_ = b;
+	draw_menu_buttons_ = b;
 }
 
 void Startscreen::setEnabled(bool enable){

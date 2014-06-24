@@ -48,7 +48,7 @@ private:
 	std::vector<Button*> menu_buttons_;
 	std::vector<Button*> difficulty_buttons_;
 
-	bool drawMenuButtons_;
+	bool draw_menu_buttons_;
 };
 
 
