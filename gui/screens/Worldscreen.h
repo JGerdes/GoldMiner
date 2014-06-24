@@ -11,6 +11,11 @@
 #include "Screen.h"
 #include "../../objects/World.h"
 
+/**
+ * @author Jonathan Wiemers
+ *
+ * Zeigt eine Spielwelt an. Leitet Aufruf von tick und draw an die Welt weiter
+ */
 class Worldscreen: public Screen {
 public:
 	Worldscreen(SpriteManager* spriteManager, bool enable);
@@ -18,7 +23,12 @@ public:
 	virtual void tick();
 	virtual void draw() const ;
 
+	/**
+	 * Setzen der zu spielenden Welt
+	 * @param world
+	 */
 	void setWorld(World* world);
+
 	World* getWorld();
 
 

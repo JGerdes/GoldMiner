@@ -14,6 +14,13 @@
 #include <vector>
 #include <string>
 
+/**
+ * @author Chris Brockhoff, Jonas Gerdes, Jonathan Wiemers
+ *
+ * Screen der angezeigt wird, wenn der Spieler verloren oder gewonnen hat.
+ * Neben der Punktzahlt zeigt er je einen Button zum Hauptmenü und zur
+ * Schwierigkeitsauswahl an
+ */
 class Gameoverscreen : public Screen {
 public:
 	enum buttons{
@@ -21,8 +28,15 @@ public:
 			mainMenu = 11
 		};
 
+	/**
+	 *
+	 * @param spriteManager
+	 * @param enable
+	 * Siehe Screen.h
+	 */
 	Gameoverscreen(SpriteManager* spriteManager, bool enable);
 	~Gameoverscreen();
+
 
 	virtual void tick();
 	virtual void draw()const;

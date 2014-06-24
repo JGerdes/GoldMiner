@@ -1,10 +1,3 @@
-/*
- * Screen.h
- *
- *  Created on: 22.06.2014
- *      Author: Jonathan
- */
-
 #ifndef SCREEN_H_
 #define SCREEN_H_
 
@@ -14,9 +7,21 @@
 #include "../Button.h"
 #include <vector>
 
+/**
+ * @author Jonathan Wiemers
+ * Oberklasse für alle Screens. Kann deaktiviert werden, damit er nicht mehr
+ * gezeichnet wird.
+ */
 class Screen {
 public:
 
+	/**
+	 *
+	 * @param spriteManager SpriteManager, über den Sprites geladen werden können
+	 * @param font Schriftart, die standardmäßig genommen werden soll
+	 * @param bg Hintergrundsprite
+	 * @param enable Gibt an, ob Screen gezeichnet werden soll
+	 */
 	Screen(SpriteManager* spriteManager, Font* font, Sprite* bg, bool enable) :
 			spriteManager_(spriteManager),
 			enabled_(enable),
@@ -50,6 +55,10 @@ public:
 		}
 	}
 
+	/**
+	 * Gibt Vektor mit allen Buttons zurück, damit Listener gesetzt werden können
+	 * @return Vektor mit allen Buttons
+	 */
 	const std::vector<Button*>& getButtons() const{
 		return buttons_;
 	}

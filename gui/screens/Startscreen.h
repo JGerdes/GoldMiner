@@ -1,10 +1,3 @@
-/*
- * Startscreen.h
- *
- *  Created on: 20.06.2014
- *      Author: Chris
- */
-
 #ifndef STARTSCREEN_H_
 #define STARTSCREEN_H_
 
@@ -16,6 +9,14 @@
 #include "Screen.h"
 #include <vector>
 
+
+/**
+ * @author Chris Brockhoff, Jonas Gerdes, Jonathan Wiemers
+ *
+ * Hauptscreen des Spiels, zeigt Buttons zu anderen Screens und zum Beedenen an
+ * Besitzt Buttons für das Menü und für die Schwierigkeitsauswahl, die abwechselnd
+ * angezeigt werden können
+ */
 class Startscreen : public Screen{
 public:
 	enum button{
@@ -31,6 +32,14 @@ public:
 
 	};
 
+	/**
+	 *
+	 * @param spriteManager
+	 * @param enable
+	 * @param drawMenuButtons Wenn true, werden die Button für das Menü angezeigt, sonst jene
+	 * für die Schwierigkeitsauswahl
+	 * siese Screen.h
+	 */
 	Startscreen(SpriteManager* spriteManager, bool enable, bool drawMenuButtons);
 	~Startscreen();
 
@@ -40,6 +49,11 @@ public:
 	virtual void draw() const;
 	virtual void setEnabled(bool enable);
 
+	/**
+	 * Umschalten zwischen Menübutton und Schwierigkeitsauswahl
+	 * @param b Wenn wahr, werden Menübuttons angezeigt, sonst jene
+	 * für die Schwierigkeitsauswahl
+	 */
 	void setDrawMenuButtons(bool b);
 
 

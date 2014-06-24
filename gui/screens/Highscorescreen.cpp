@@ -25,7 +25,7 @@ Highscorescreen::Highscorescreen(SpriteManager* spriteManager, bool enable):
 Highscorescreen::~Highscorescreen() {
 }
 
-void Highscorescreen::setHighscores(std::vector<unsigned int> level_1, std::vector<unsigned int> level_2){
+void Highscorescreen::setHighscores(const std::vector<unsigned int>& level_1, const std::vector<unsigned int>& level_2){
 	level_1_.clear();
 	level_2_.clear();
 	stringstream s;

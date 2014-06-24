@@ -21,20 +21,20 @@ InputManager& InputManager::getInstance(){
 }
 
 void InputManager::onMouseMove(GLFWwindow *window, double x, double y){
-	InputManager::getInstance().onMouseMoveImpl(window, x, y);
+	InputManager::getInstance().onMouseMoveImpl(x, y);
 }
 
 void InputManager::onKey(GLFWwindow *window, int key, int scancode, int action, int mods){
-	InputManager::getInstance().onKeyImpl(window, key, scancode, action, mods);
+	InputManager::getInstance().onKeyImpl(key, action);
 }
 void InputManager::onButton(GLFWwindow *window, int button, int action, int mods){
-	InputManager::getInstance().onButtonImpl(window, button, action, mods);
+	InputManager::getInstance().onButtonImpl(button, action);
 }
 void InputManager::onScroll(GLFWwindow *window, double x_offset, double y_offset){
-	InputManager::getInstance().onScrollImpl(window, x_offset, y_offset);
+	InputManager::getInstance().onScrollImpl(x_offset, y_offset);
 }
 void InputManager::onResize(GLFWwindow * window, int width, int height){
-	InputManager::getInstance().onResizeImpl(window, width, height);
+	InputManager::getInstance().onResizeImpl(width, height);
 }
 
 
@@ -44,7 +44,7 @@ InputManager::InputManager():
 
 }
 
-void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
+void InputManager::onMouseMoveImpl(double x, double y){
 	y = Game::window_height-y;
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onMouseMove(Vec2(x, y), Vec2(last_x, last_y));
@@ -53,7 +53,7 @@ void InputManager::onMouseMoveImpl(GLFWwindow *window, double x, double y){
 	last_y = y;
 }
 
-void InputManager::onKeyImpl(GLFWwindow *window, int key, int scancode, int action, int mods){
+void InputManager::onKeyImpl(int key, int action){
 	if(action == GLFW_PRESS || action == GLFW_REPEAT){
 		keys_[key] = true;
 	}else{
@@ -69,7 +69,7 @@ void InputManager::onKeyImpl(GLFWwindow *window, int key, int scancode, int acti
 	}
 }
 
-void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int mods){
+void InputManager::onButtonImpl(int button, int action){
 	if(action == GLFW_PRESS || action == GLFW_REPEAT){
 		mouse_buttons_[button] = true;
 	}else{
@@ -92,13 +92,13 @@ void InputManager::onButtonImpl(GLFWwindow *window, int button, int action, int 
 
 }
 
-void InputManager::onScrollImpl(GLFWwindow *window, double x_offset, double y_offset){
+void InputManager::onScrollImpl(double x_offset, double y_offset){
 	for(MouseListener* listener : mouse_listeners_){
 		listener->onScroll(Vec2(x_offset, y_offset));
 	}
 }
 
-void InputManager::onResizeImpl(GLFWwindow * window, int width, int height){
+void InputManager::onResizeImpl(int width, int height){
 	Game::window_width = width;
 	Game::window_height = height;
 	cout << "new width:" << Game::window_width << endl;
