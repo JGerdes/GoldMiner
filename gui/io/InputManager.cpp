@@ -79,12 +79,10 @@ void InputManager::onButtonImpl(int button, int action){
 	for(MouseListener* listener : mouse_listeners_){
 		if(action == GLFW_PRESS){
 			if(listener->onButtonDown(button, Vec2(last_x, last_y))){
-				cout<< "listener: " << i <<endl;
 				return;
 			}
 		}
 		if(action == GLFW_RELEASE){
-			//TODO: genauso wie bei buttton down
 			listener->onButtonUp(button, Vec2(last_x, last_y));
 		}
 		++i;
