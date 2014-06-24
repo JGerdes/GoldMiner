@@ -28,12 +28,7 @@ class Sprite {
 
 public:
 
-	Sprite(ImageBuffer* image_buffer):
-		image_buffer_(image_buffer),
-		debug_(false),
-		color_(Color(1,1,1)),
-		flipped_(false){
-	}
+	Sprite(ImageBuffer* image_buffer);
 
 	virtual ~Sprite(){
 	}

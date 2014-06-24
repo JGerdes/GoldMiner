@@ -13,6 +13,14 @@
 
 using namespace std;
 
+Sprite::Sprite(ImageBuffer* image_buffer):
+				image_buffer_(image_buffer),
+				debug_(false),
+				color_(Color(1,1,1)),
+				flipped_(false){
+
+}
+
 unsigned int Sprite::getWidth() const{
 	return image_buffer_->getWidth();
 }

@@ -1,10 +1,3 @@
-/*
- * WorldEventListener.h
- *
- *  Created on: 22.06.2014
- *      Author: Jonathan
- */
-
 #ifndef WORLDEVENTLISTENER_H_
 #define WORLDEVENTLISTENER_H_
 
