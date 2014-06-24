@@ -29,7 +29,6 @@ public:
 	void testCollision();
 	void onKeyUp(int key);
 	void onKeyDown(int key);
-	void resetGame();
 	void setDifficulty(difficulty d);
 	void setWorldEventListener(WorldEventListener* listener);
 
