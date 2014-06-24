@@ -6,8 +6,13 @@ using namespace std;
 SpriteManager::SpriteManager() {}
 
 SpriteManager::~SpriteManager() {
-	for(ImageBuffer* sprite : image_buffers_){
-		delete sprite;
+	vector<ImageBuffer*>::iterator iter = image_buffers_.begin();
+	while(iter != image_buffers_.end()){
+		delete (*iter++);
+	}
+	vector<Sprite*>::iterator ator = sprites_.begin();
+	while(ator != sprites_.end()){
+		delete (*ator++);
 	}
 }
 

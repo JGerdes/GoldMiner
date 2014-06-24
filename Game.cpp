@@ -50,6 +50,7 @@ Game::~Game() {
 	while (score_iter != scores_.end()) {
 		delete (*score_iter++);
 	}
+	delete sprite_manager_;
 }
 
 void Game::init() {

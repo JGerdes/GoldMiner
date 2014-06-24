@@ -28,8 +28,16 @@ World::~World() {
 	while(iter != map_->end()){
 		delete (*iter++);
 	}
+	delete map_;
+	vector<Block*>::iterator ator = bg_map_->begin();
+	while(ator != bg_map_->end()){
+		delete (*ator++);
+	}
+	delete bg_map_;
 	delete player_;
 	delete font_;
+
+
 }
 
 
